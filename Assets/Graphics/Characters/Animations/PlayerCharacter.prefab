@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 622977460826604082}
   - component: {fileID: 6702706318646211813}
-  - component: {fileID: 4516152563852485982}
+  - component: {fileID: 7184937468603755216}
   m_Layer: 0
   m_Name: antenne2_000
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4516152563852485982
+--- !u!114 &7184937468603755216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4286707518873080848}
   - component: {fileID: 1011481177661773616}
-  - component: {fileID: 933132202451620322}
+  - component: {fileID: 8547493561622028353}
   m_Layer: 0
   m_Name: beinL_000
   m_TagString: Untagged
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &933132202451620322
+--- !u!114 &8547493561622028353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -987,7 +987,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7466244076068581403}
   - component: {fileID: 3919917889216397061}
-  - component: {fileID: 3373575890039241129}
+  - component: {fileID: 906807970929389665}
   m_Layer: 0
   m_Name: armR_000
   m_TagString: Untagged
@@ -1062,7 +1062,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3373575890039241129
+--- !u!114 &906807970929389665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1088,7 +1088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4030769004190975939}
   - component: {fileID: 1763494943074445679}
-  - component: {fileID: 7756662031611289321}
+  - component: {fileID: 3843565263971292877}
   m_Layer: 0
   m_Name: beinR_000
   m_TagString: Untagged
@@ -1163,7 +1163,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7756662031611289321
+--- !u!114 &3843565263971292877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1831,7 +1831,7 @@ Transform:
   - {fileID: 8016502944594041017}
   - {fileID: 6449724226904584766}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7423666300761858334
 Animator:
@@ -2164,7 +2164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2617540244314519176}
   - component: {fileID: 406708495393292046}
-  - component: {fileID: 375012200978858375}
+  - component: {fileID: 3897707941266893430}
   m_Layer: 0
   m_Name: head
   m_TagString: Untagged
@@ -2239,7 +2239,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &375012200978858375
+--- !u!114 &3897707941266893430
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2394,7 +2394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398388224983263462}
   - component: {fileID: 4079896586363585566}
-  - component: {fileID: 8765105221528625749}
+  - component: {fileID: 6229874677738827236}
   m_Layer: 0
   m_Name: auge_001
   m_TagString: Untagged
@@ -2469,7 +2469,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8765105221528625749
+--- !u!114 &6229874677738827236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2697,7 +2697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3132091719221228443}
   - component: {fileID: 6870119583038873037}
-  - component: {fileID: 3340978024365399803}
+  - component: {fileID: 1493486463436930594}
   m_Layer: 0
   m_Name: auge_002
   m_TagString: Untagged
@@ -2772,7 +2772,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3340978024365399803
+--- !u!114 &1493486463436930594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
