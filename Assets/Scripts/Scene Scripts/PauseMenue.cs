@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenue : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject PauseMenueUI;
+
+    public GameObject firstMenuButton;
 
     // Update is called once per frame
     private void Start()
@@ -38,7 +41,9 @@ public class PauseMenue : MonoBehaviour
         PauseMenueUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(firstMenuButton);
     }
 
     void Pause()
