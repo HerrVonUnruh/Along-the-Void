@@ -85,14 +85,14 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Jump "",
+            ""name"": ""Dash "",
             ""id"": ""ef5663f3-e441-4a7b-b297-7404172b2adf"",
             ""actions"": [
                 {
-                    ""name"": ""Jump "",
-                    ""type"": ""Button"",
+                    ""name"": ""Dash"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""e48e69c2-e69d-4b84-89b9-56b00381bef1"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -102,11 +102,11 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""46dabdaa-a756-4cbc-8379-785e9018b098"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump "",
+                    ""action"": ""Dash"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -117,7 +117,7 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Xbox controller "",
-                    ""action"": ""Jump "",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -135,9 +135,9 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
-        // Jump 
-        m_Jump = asset.FindActionMap("Jump ", throwIfNotFound: true);
-        m_Jump_Jump = m_Jump.FindAction("Jump ", throwIfNotFound: true);
+        // Dash 
+        m_Dash = asset.FindActionMap("Dash ", throwIfNotFound: true);
+        m_Dash_Dash = m_Dash.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -194,7 +194,6 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-
     // Movement
     private readonly InputActionMap m_Movement;
     private IMovementActions m_MovementActionsCallbackInterface;
@@ -228,40 +227,38 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
     }
     public MovementActions @Movement => new MovementActions(this);
 
-
-
-    // Jump 
-    private readonly InputActionMap m_Jump;
-    private IJumpActions m_JumpActionsCallbackInterface;
-    private readonly InputAction m_Jump_Jump;
-    public struct JumpActions
+    // Dash 
+    private readonly InputActionMap m_Dash;
+    private IDashActions m_DashActionsCallbackInterface;
+    private readonly InputAction m_Dash_Dash;
+    public struct DashActions
     {
         private @ControlsSteuerkz m_Wrapper;
-        public JumpActions(@ControlsSteuerkz wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_Jump_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_Jump; }
+        public DashActions(@ControlsSteuerkz wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Dash => m_Wrapper.m_Dash_Dash;
+        public InputActionMap Get() { return m_Wrapper.m_Dash; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(JumpActions set) { return set.Get(); }
-        public void SetCallbacks(IJumpActions instance)
+        public static implicit operator InputActionMap(DashActions set) { return set.Get(); }
+        public void SetCallbacks(IDashActions instance)
         {
-            if (m_Wrapper.m_JumpActionsCallbackInterface != null)
+            if (m_Wrapper.m_DashActionsCallbackInterface != null)
             {
-                @Jump.started -= m_Wrapper.m_JumpActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_JumpActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_JumpActionsCallbackInterface.OnJump;
+                @Dash.started -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
             }
-            m_Wrapper.m_JumpActionsCallbackInterface = instance;
+            m_Wrapper.m_DashActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
-    public JumpActions @Jump => new JumpActions(this);
+    public DashActions @Dash => new DashActions(this);
     private int m_XboxcontrollerSchemeIndex = -1;
     public InputControlScheme XboxcontrollerScheme
     {
@@ -275,8 +272,8 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
     }
-    public interface IJumpActions
+    public interface IDashActions
     {
-        void OnJump(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
