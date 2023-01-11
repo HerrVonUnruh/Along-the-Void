@@ -63,14 +63,14 @@
             ]
         },
         {
-            "name": "Jump ",
+            "name": "Dash ",
             "id": "ef5663f3-e441-4a7b-b297-7404172b2adf",
             "actions": [
                 {
-                    "name": "Jump ",
-                    "type": "Button",
+                    "name": "Dash",
+                    "type": "PassThrough",
                     "id": "e48e69c2-e69d-4b84-89b9-56b00381bef1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -80,11 +80,11 @@
                 {
                     "name": "2D Vector",
                     "id": "46dabdaa-a756-4cbc-8379-785e9018b098",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=1)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump ",
+                    "action": "Dash",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -95,7 +95,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox controller ",
-                    "action": "Jump ",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

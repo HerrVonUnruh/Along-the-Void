@@ -299,6 +299,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void StartWallPause()
+    {
+        StartCoroutine(WallPause());
+    }
+
+    public IEnumerator WallPause()
+    {
+        Player.velocity = Vector2.zero;
+        yield return new WaitForSeconds(3);
+    }
+
     //private void Movement()
 
     //{
