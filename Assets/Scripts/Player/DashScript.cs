@@ -9,7 +9,7 @@ public class DashScript : MonoBehaviour
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
     public float DirectionVertical = 0f; // erstellt einen privaten Float für namens "DirectionVertical" auf 0
     private PlayerController DashControll;
-    public bool isFacingRight = true;
+    //public bool isFacingRight = true;
 
     public bool canDash = true;
     public bool isDashing;
@@ -178,16 +178,16 @@ public class DashScript : MonoBehaviour
     }
 
 
-    private void Flip()
-    {
-        if (isFacingRight && Direction < 0f || !isFacingRight && Direction > 0f)
-        {
-            Vector3 localScale = transform.localScale;
-            isFacingRight = !isFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
+    //private void Flip()
+    //{
+    //    if (isFacingRight && Direction < 0f || !isFacingRight && Direction > 0f)
+    //    {
+    //        Vector3 localScale = transform.localScale;
+    //        isFacingRight = !isFacingRight;
+    //        localScale.x *= -1f;
+    //        transform.localScale = localScale;
+    //    }
+    //}
     private void Update()
     {
         if (isDashing)
@@ -198,7 +198,7 @@ public class DashScript : MonoBehaviour
         Direction = Input.GetAxisRaw("Horizontal");
         DirectionVertical = Input.GetAxisRaw("Vertical");
 
-        Flip();
+        //Flip();
 
         //if (Input.GetButtonDown("Jump") && IsGrounded())
         //{

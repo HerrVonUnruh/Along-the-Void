@@ -44,11 +44,25 @@ public class CameraController : MonoBehaviour
             playerPosition = new Vector3(playerPosition.x - offset_x, playerPosition.y - offset_y, playerPosition.z);
         }
 
-        CameraZoom.orthographicSize = 15f;
-       
-        
+        //CameraZoom.orthographicSize = 15f;
 
-        if(KameraZoom.Geschwindigkeit > 20f)
+        if (Input.GetKey("v"))
+        {
+            CameraZoom.orthographicSize += VariableKameraZoom * 15f * Time.deltaTime;
+
+           
+        }
+        if(Input.GetKeyUp("v"))
+        {
+            
+            CameraZoom.orthographicSize = 15f;
+            
+        }
+
+
+
+
+        if (KameraZoom.Geschwindigkeit > 20f)
         {
             
             CameraZoom.orthographicSize = KameraZoom.Geschwindigkeit * VariableKameraZoom;

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.Tilemaps;
 
 public class GruenerSkill : MonoBehaviour
 {
     private PolygonCollider2D GreenColliderSkill;
     public float bounce = 20f;
     private SpriteRenderer GreenSkill;
+    private UnityEngine.U2D.SpriteShapeRenderer GreenColliderSkill2;
+    private EdgeCollider2D GreenColliderSkill3;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,8 +21,11 @@ public class GruenerSkill : MonoBehaviour
 
     void Start()
     {
-        GreenColliderSkill = GetComponent<PolygonCollider2D>();
         GreenSkill = GetComponent<SpriteRenderer>();
+        GreenColliderSkill = GetComponent<PolygonCollider2D>();
+        GreenColliderSkill2 = GetComponent<UnityEngine.U2D.SpriteShapeRenderer>();
+        GreenColliderSkill3 = GetComponent<EdgeCollider2D>();
+        //GreenColliderSkill4 = GetComponent<TilemapCollider2D>();
 
     }
 
@@ -27,15 +33,44 @@ public class GruenerSkill : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.J) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
-            GreenColliderSkill.enabled = true;
-            GreenSkill.enabled = true;
-            
+            if (GreenSkill != null)
+            {
+                GreenSkill.enabled = true;
+            }
+            if (GreenColliderSkill != null)
+            {
+                GreenColliderSkill.enabled = true;
+            }
+            if (GreenColliderSkill2 != null)
+            {
+                GreenColliderSkill2.enabled = true;
+            }
+            if (GreenColliderSkill3 != null)
+            {
+                GreenColliderSkill3.enabled = true;
+            }
+
+
         }
         
             if (Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1) || (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2)) )
         {
-            GreenColliderSkill.enabled = false;
-            GreenSkill.enabled = false;
+            if (GreenSkill != null)
+            {
+                GreenSkill.enabled = false;
+            }
+            if (GreenColliderSkill != null)
+            {
+                GreenColliderSkill.enabled = false;
+            }
+            if (GreenColliderSkill2 != null)
+            {
+                GreenColliderSkill2.enabled = false;
+            }
+            if (GreenColliderSkill3 != null)
+            {
+                GreenColliderSkill3.enabled = false;
+            }
         }
     }
 }
