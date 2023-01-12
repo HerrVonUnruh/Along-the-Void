@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     //public float dashingCooldown = 1f;
 
     public KillPlayer killSpawn;
+    public bool isDead; 
     public float waitAtSpawn = 2f;
 
     public Material[] material;

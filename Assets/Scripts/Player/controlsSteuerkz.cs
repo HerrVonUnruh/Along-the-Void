@@ -39,7 +39,7 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""2D Vector "",
                     ""id"": ""63e44113-7b25-4530-b574-570a497c5640"",
                     ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
@@ -81,18 +81,73 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Movement D-Pad [Xbox Controller]"",
+                    ""id"": ""def80a18-6328-42d4-ad0a-0733f445b878"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a1fef618-6429-4256-bc7f-7fc67e4a4573"",
+                    ""path"": ""<XInputController>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox controller "",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""786c5d83-c16f-4bf2-a133-87ba05ee90be"",
+                    ""path"": ""<XInputController>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox controller "",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""57b2eace-4bfd-401f-9907-581230fcf015"",
+                    ""path"": ""<XInputController>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox controller "",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""008be6d7-d76f-4352-acbe-85229190a29a"",
+                    ""path"": ""<XInputController>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox controller "",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
         {
-            ""name"": ""Dash "",
-            ""id"": ""ef5663f3-e441-4a7b-b297-7404172b2adf"",
+            ""name"": ""Dash"",
+            ""id"": ""83991bbb-6253-4046-8948-3188d3008008"",
             ""actions"": [
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""e48e69c2-e69d-4b84-89b9-56b00381bef1"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""85d79afd-0e08-42f9-b850-d9a702d6dc41"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -100,26 +155,15 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""46dabdaa-a756-4cbc-8379-785e9018b098"",
-                    ""path"": ""2DVector(mode=1)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""8ecc3602-f34a-407c-ad32-db32f71468d7"",
+                    ""name"": """",
+                    ""id"": ""d5e4f343-0264-430c-afe4-df0001004caf"",
                     ""path"": ""<XInputController>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Xbox controller "",
-                    ""action"": ""Dash"",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -135,9 +179,9 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
-        // Dash 
-        m_Dash = asset.FindActionMap("Dash ", throwIfNotFound: true);
-        m_Dash_Dash = m_Dash.FindAction("Dash", throwIfNotFound: true);
+        // Dash
+        m_Dash = asset.FindActionMap("Dash", throwIfNotFound: true);
+        m_Dash_Newaction = m_Dash.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,15 +271,15 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
     }
     public MovementActions @Movement => new MovementActions(this);
 
-    // Dash 
+    // Dash
     private readonly InputActionMap m_Dash;
     private IDashActions m_DashActionsCallbackInterface;
-    private readonly InputAction m_Dash_Dash;
+    private readonly InputAction m_Dash_Newaction;
     public struct DashActions
     {
         private @ControlsSteuerkz m_Wrapper;
         public DashActions(@ControlsSteuerkz wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Dash => m_Wrapper.m_Dash_Dash;
+        public InputAction @Newaction => m_Wrapper.m_Dash_Newaction;
         public InputActionMap Get() { return m_Wrapper.m_Dash; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -245,16 +289,16 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_DashActionsCallbackInterface != null)
             {
-                @Dash.started -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
+                @Newaction.started -= m_Wrapper.m_DashActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_DashActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_DashActionsCallbackInterface.OnNewaction;
             }
             m_Wrapper.m_DashActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
             }
         }
     }
@@ -274,6 +318,6 @@ public partial class @ControlsSteuerkz : IInputActionCollection2, IDisposable
     }
     public interface IDashActions
     {
-        void OnDash(InputAction.CallbackContext context);
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
