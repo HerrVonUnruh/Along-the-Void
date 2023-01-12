@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
     public float DirectionVertical = 0f; // erstellt einen privaten Float für namens "DirectionVertical" auf 0
 
-    [SerializeField] private Vector3 blueSize = new Vector3(0.1f,0.1f,1f);
+    [SerializeField] private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
     
 
     private Vector3 startSize;
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             rend.sharedMaterial = material[1];
-            ChangeSize(startSize);
+            ChangeSize(redSize);
 
         }
 
@@ -158,18 +158,20 @@ public class PlayerController : MonoBehaviour
 
 
         //Blaue Fähigkeit
-        if (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))
-        {
-            rend.sharedMaterial = material[2];
-            ChangeSize(blueSize);
-        }
+        //if (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+        //{
+        //    rend.sharedMaterial = material[2];
+        //    ChangeSize(startSize);
+        //}
 
         //Gelbe Fähigkeit
-        if (Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3))
-        {
-            rend.sharedMaterial = material[3];
-            ChangeSize(startSize);
-        }
+        //if (Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3))
+        //{
+        //    rend.sharedMaterial = material[3];
+        //    ChangeSize(startSize);
+        //}
+
+
         //__________________________________________________________________________________________________________
 
         //Dash
