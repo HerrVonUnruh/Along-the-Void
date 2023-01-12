@@ -7,7 +7,7 @@ public class DashScript : MonoBehaviour
 
 
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
-    public float DirectionVertical = 0f; // erstellt einen privaten Float für namens "DirectionVertical" auf 0
+    public float DirectionVertical = 0f; // erstellt einen privaten Float fï¿½r namens "DirectionVertical" auf 0
     private PlayerController DashControll;
     //public bool isFacingRight = true;
 
@@ -16,6 +16,8 @@ public class DashScript : MonoBehaviour
     public float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
+
+    public Animator animator;
 
     [SerializeField] private Rigidbody2D rb;
     //[SerializeField] private Transform groundCheck;
@@ -36,7 +38,13 @@ public class DashScript : MonoBehaviour
         if (isDashing)
         {
             DashControll.Geschwindigkeit = 60f;
+            animator.SetBool("IsDashing", true);
             return;
+        }
+
+        if (canDash)
+        {
+            animator.SetBool("IsDashing", false);
         }
 
         //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash)
@@ -267,7 +275,7 @@ public class DashScript : MonoBehaviour
 //public class DashScript : MonoBehaviour
 //{
 
-//    private bool canDash = true; // Bool für "Kann Dashen" ist auf "Start" - wahr
+//    private bool canDash = true; // Bool fï¿½r "Kann Dashen" ist auf "Start" - wahr
 //    private bool isDashing;
 //    public float dashingPower = 24f;
 //    public float dashingTime = 0.2f;
