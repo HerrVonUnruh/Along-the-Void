@@ -5,33 +5,32 @@ using UnityEngine.EventSystems;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public GameObject firstMenuButton;
-    public MainMenu menu;
-    public PauseMenue pauseMenue;
+    public GameObject optionsMenu;
+    public GameObject pauseMenu;
 
-    public bool solle = false;
+    public GameObject optionsButton;
+    public GameObject pauseButton;  
 
-  
     void Update()
     {
-        ChangeScene();
-    }
-
-    public void ChangeScene()
-    {
-        if (solle == true)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(firstMenuButton);
-            solle = false;
-            menu.selle = true;
-
-        }
         
     }
 
-    public void OptionsOpen()
+   public void ActivateOptions()
     {
+        optionsMenu.gameObject.SetActive(true);
+        pauseMenu.gameObject.SetActive(false);
+        
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsButton);
+    }
 
+    public void ActivatePause()
+    {
+        optionsMenu.gameObject.SetActive(false);
+        pauseMenu.gameObject.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseButton);
     }
 }
