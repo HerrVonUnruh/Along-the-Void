@@ -15,7 +15,10 @@ public class PlayerController : MonoBehaviour
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
     public float DirectionVertical = 0f; // erstellt einen privaten Float für namens "DirectionVertical" auf 0
 
+    [SerializeField] private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
+    
 
+    private Vector3 startSize;
     //private bool canDash = true; // Bool für "Kann Dashen" ist auf "Start" - wahr
     //private bool isDashing;
     //public float dashingPower = 24f;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     //public float dashingCooldown = 1f;
 
     public KillPlayer killSpawn;
+    public bool isDead; 
     public float waitAtSpawn = 2f;
 
     public Material[] material;
@@ -31,7 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] private bool onSpawn = false;
 
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D Player; // Bezug zu Rigidbody2D namens Player
     //[SerializeField] public Transform groundCheck;
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
         rend = GetComponent<Renderer>();
         rend.enabled = true;
         rend.sharedMaterial = material[0];
+        startSize = transform.localScale;
        
 
     }
@@ -117,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        //Flip(); // HIER IST DIE FUNKTION FÜR DIE STEIGERUNG FUER DIE GESCHWINDIGKEIT PRO SEKUNDE!!!!!!
+        Flip(); // HIER IST DIE FUNKTION FÜR DIE STEIGERUNG FUER DIE GESCHWINDIGKEIT PRO SEKUNDE!!!!!!
 
         //__________________________________________________________________________________________________________
 
@@ -141,26 +146,33 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             rend.sharedMaterial = material[1];
+            ChangeSize(redSize);
+
         }
 
         //Grüne Fähigkeit
         if (Input.GetKeyUp(KeyCode.J) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             rend.sharedMaterial = material[0];
+            ChangeSize(startSize);
         }
 
 
         //Blaue Fähigkeit
-        if (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))
-        {
-            rend.sharedMaterial = material[2];
-        }
+        //if (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+        //{
+        //    rend.sharedMaterial = material[2];
+        //    ChangeSize(startSize);
+        //}
 
         //Gelbe Fähigkeit
-        if (Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3))
-        {
-            rend.sharedMaterial = material[3];
-        }
+        //if (Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3))
+        //{
+        //    rend.sharedMaterial = material[3];
+        //    ChangeSize(startSize);
+        //}
+
+
         //__________________________________________________________________________________________________________
 
         //Dash
@@ -257,16 +269,16 @@ public class PlayerController : MonoBehaviour
 
     //}
 
-    //private void Flip()
-    //{
-    //    if (isFacingRight && Direction < 0f || !isFacingRight && Direction > 0f)
-    //    {
-    //        isFacingRight = !isFacingRight;
-    //        Vector3 localScale = transform.localScale;
-    //        localScale.x *= -1f;
-    //        transform.localScale = localScale;
-    //    }
-    //}
+    private void Flip()
+    {
+        if (isFacingRight && Direction < 0f || !isFacingRight && Direction > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
+    }
 
     public void Spawn()
     { //SPAWN mit eigener Tastenbelegung
@@ -307,6 +319,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator WallPause()
     {
         Player.velocity = Vector2.zero;
+        Geschwindigkeit = 0f;
         yield return new WaitForSeconds(3);
     }
 
@@ -365,32 +378,17 @@ public class PlayerController : MonoBehaviour
 
 
 
+    private void ChangeSize(Vector3 groesseAendern)
+    {
+        if(isFacingRight)
+        {
+            Player.gameObject.transform.localScale = groesseAendern;
+        }
+       
+        else
+        {
+            Player.gameObject.transform.localScale = new Vector3(-groesseAendern.x, groesseAendern.y, groesseAendern.z);
+        }
+    }
 
-
-
-
-
-
-    //public void OnTriggerEnter2D(PolygonCollider2D collision)
-    //{
-
-
-
-    //    if (collision.tag == "Objects" && triggerCounter <= 0)
-    //    {
-
-    //        transform.Translate(new Vector3(0, dashingCooldown, 0) * Time.deltaTime * dashingCooldown);
-    //        triggerCounter = triggerLength;
-
-    //        {
-    //            if (collision.tag == "Objects")
-    //            {
-
-    //                transform.Translate(new Vector3(0, dashingCooldown, 0) * Time.deltaTime * dashingCooldown);
-
-    //            }
-    //        }
-    //        Debug.Log("GameObject2 collided with " + collision.name);
-    //    }
-    //}
 }
