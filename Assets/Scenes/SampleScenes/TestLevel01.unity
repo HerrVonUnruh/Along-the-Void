@@ -160,6 +160,7 @@ Transform:
   - {fileID: 595953446}
   - {fileID: 1414678066}
   - {fileID: 421818894}
+  - {fileID: 1954648833}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29785,6 +29786,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1707645777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1128643600146875948, guid: eb9fc2a1b6da30742911300550161668, type: 3}
+  m_PrefabInstance: {fileID: 5241732056217317779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!68 &1707645782
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707645777}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.07158886, y: -1.4812578}
+  - {x: -3.7051332, y: 1.2020185}
+  - {x: -3.316617, y: 1.3777018}
+  - {x: 0.0064803064, y: 1.5167202}
+  - {x: 2.8538084, y: 1.448666}
+  - {x: 3.5100508, y: 1.475674}
+  - {x: 3.9262671, y: 1.4009823}
+  - {x: 4.107607, y: 1.3515002}
+  - {x: 4.201165, y: 1.2322636}
+  - {x: 4.2217045, y: 1.1579096}
+  - {x: 0.052615643, y: -1.4905657}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1713758550
 GameObject:
   m_ObjectHideFlags: 0
@@ -35115,6 +35152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502d5182306998e448d889582a94d21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeScript: {fileID: 0}
   spawnPoint: {fileID: 389885552}
   spawning: {fileID: 238158032}
   willSpawn: 0
@@ -36050,6 +36088,10 @@ PrefabInstance:
       propertyPath: killSpawn
       value: 
       objectReference: {fileID: 2090992711}
+    - target: {fileID: 3255447123952163979, guid: 63fddc43083a30848bedfbe0ec597b97, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3255447123952163979, guid: 63fddc43083a30848bedfbe0ec597b97, type: 3}
       propertyPath: spawnPoint
       value: 
