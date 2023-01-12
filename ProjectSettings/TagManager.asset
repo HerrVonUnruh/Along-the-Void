@@ -44,3 +44,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Farthest Background
+    uniqueID: 1046794921
+    locked: 0
+  - name: Farther Background
+    uniqueID: 3529694667
+    locked: 0
+  - name: Background
+    uniqueID: 1707476995
+    locked: 0
+  - name: Level
+    uniqueID: 813942151
+    locked: 0
+  - name: Foreground
+    uniqueID: 2565774957
+    locked: 0
