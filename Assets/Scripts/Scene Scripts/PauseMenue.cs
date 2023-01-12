@@ -10,7 +10,7 @@ public class PauseMenue : MonoBehaviour
     public GameObject PauseMenueUI;
 
     public GameObject firstMenuButton;
-    public OptionsMenu optionsMenu;
+    public GameObject optionsMenu;
     
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class PauseMenue : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(firstMenuButton);
-        optionsMenu.ActivatePause();
+        optionsMenu.SetActive(false);
         PauseMenueUI.SetActive(false);
     }
 
