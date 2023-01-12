@@ -7,6 +7,7 @@ public class OptionsMenu : MonoBehaviour
 {
     public GameObject firstMenuButton;
     public MainMenu menu;
+    public PauseMenue pauseMenue;
 
     public bool solle = false;
 
@@ -27,5 +28,10 @@ public class OptionsMenu : MonoBehaviour
 
         }
         
+    }
+
+    public void OptionsOpen()
+    {
+
     }
 }

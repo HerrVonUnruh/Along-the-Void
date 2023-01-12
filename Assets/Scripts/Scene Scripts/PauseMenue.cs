@@ -10,6 +10,7 @@ public class PauseMenue : MonoBehaviour
     public GameObject PauseMenueUI;
 
     public GameObject firstMenuButton;
+    public OptionsMenu optionsMenu;
 
     // Update is called once per frame
     private void Start()
@@ -62,5 +63,10 @@ public class PauseMenue : MonoBehaviour
     {
         Debug.Log("Quitting Game...");
         Application.Quit();
+    }
+
+    public void optionsOpen()
+    {
+        optionsMenu.ChangeScene();
     }
 }
