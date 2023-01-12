@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float Geschwindigkeit = 20f;// Erstellt einen öffentlichen Float namens "Geschwindigkeit"
     public float GeschwindigkeitsAbfall = 40f;
     public float StandartGeschwindigkeit = 50f;
@@ -14,6 +14,17 @@ public class PlayerController : MonoBehaviour
 
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
     public float DirectionVertical = 0f; // erstellt einen privaten Float für namens "DirectionVertical" auf 0
+
+    public float GroundCheckRadius = 0.2f;
+    public float ShroomCheckRadius = 0.2f;
+    [SerializeField]LayerMask groundLayer;
+    [SerializeField]LayerMask shroomLayer;
+
+    public bool isGrounded = false;
+    [SerializeField]Transform GroundCheckCollider;
+
+    public bool isJumping = false;
+    [SerializeField]Transform ShroomCheckCollider;
 
     [SerializeField] private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
     
@@ -46,7 +57,29 @@ public class PlayerController : MonoBehaviour
     //private float triggerLength = 2f;
     //private float triggerCounter;
 
-    
+    public Animator animator;
+
+    [Header("Events")]
+    [Space]
+
+    public UnityEvent OnJumpEvent;
+
+    [System.Serializable]
+    public class BoolEvent : UnityEvent<bool> { }
+
+    public BoolEvent OnGravityEvent;
+    private bool GravityControl = false;
+
+    private void Awake()
+    {
+        Player = GetComponent<Rigidbody2D>();
+
+        if (OnJumpEvent == null)
+            OnJumpEvent = new UnityEvent();
+
+        if (OnGravityEvent == null)
+            OnGravityEvent = new BoolEvent();
+    }
 
 
     void Start()
@@ -83,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
 
 
+
         if (Direction > 0f) // wenn die Richtung der gedrückten Tasten ( a oder d ) auf der Y Achse über 0 sind
         {
             Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
@@ -108,14 +142,19 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (DirectionVertical == 0f && Input.GetKeyDown(KeyCode.S) || DirectionVertical < 0f && Input.GetKey(KeyCode.Joystick1Button4))
+        if (/*DirectionVertical == 0f &&*/ Input.GetKeyDown(KeyCode.S) && !isGrounded || /*DirectionVertical < 0f &&*/ Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded)
         {
             Player.gravityScale = 5f + Player.gravityScale + 1f * Time.deltaTime;
-
+            GravityControl = true;
         }
         if (Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
             Player.gravityScale = 7f;
+            GravityControl = false;
+        }
+        if (GravityControl = true)
+        {
+            animator.SetBool("IsGravityControl", true);
         }
 
 
@@ -224,7 +263,44 @@ public class PlayerController : MonoBehaviour
         //    Player.velocity = new Vector2(transform.localScale.x * dashingPower, transform.localScale.y);
         //}
 
+        
+        animator.SetFloat("Speed", (Geschwindigkeit));
+        Debug.Log("Fischgesicht");
 
+        if (isGrounded)
+        {
+             animator.SetBool("IsGrounded", true);
+             animator.SetBool("IsJumping", false);
+        }
+
+        if (isJumping)
+        {
+            animator.SetBool("IsJumping", true);
+        }
+    }
+
+    public void FixedUpdate()
+    {
+        GroundCheck();
+        ShroomCheck();
+    }
+
+    public void GroundCheck()
+    {
+        isGrounded = false;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(GroundCheckCollider.position, GroundCheckRadius, groundLayer);
+        if (colliders.Length > 0)
+        isGrounded = true;
+        
+    }
+
+    public void ShroomCheck()
+    {
+       isJumping = false;
+       Collider2D[] colliders = Physics2D.OverlapCircleAll(ShroomCheckCollider.position, ShroomCheckRadius, shroomLayer);
+       if (colliders.Length > 0)
+        isJumping = true;
+        
     }
 
     //__________________________________________________________________________________________________________________________________________
