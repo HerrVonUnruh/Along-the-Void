@@ -17,14 +17,20 @@ public class PlayerController : MonoBehaviour
 
     public float GroundCheckRadius = 0.2f;
     public float ShroomCheckRadius = 0.2f;
+    public float RedGroundCheckRadius = 0.2f;
+
     [SerializeField]LayerMask groundLayer;
     [SerializeField]LayerMask shroomLayer;
+    [SerializeField]LayerMask redgroundLayer;
 
     public bool isGrounded = false;
     [SerializeField]Transform GroundCheckCollider;
 
     public bool isJumping = false;
     [SerializeField]Transform ShroomCheckCollider;
+
+    public bool isRedGrounded = false;
+    [SerializeField]Transform RedGroundCheckCollider;
 
     [SerializeField] private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
     
@@ -182,17 +188,29 @@ public class PlayerController : MonoBehaviour
 
 
         //Rote Fähigkeit
-        if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (isRedGrounded && Input.GetKeyUp(KeyCode.K) || isRedGrounded && Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             rend.sharedMaterial = material[1];
             ChangeSize(redSize);
 
         }
+        
+        if (!isRedGrounded && isGrounded && Input.GetKeyUp(KeyCode.K) || !isRedGrounded && isGrounded && Input.GetKeyDown(KeyCode.Joystick1Button1))
+        {
+            rend.sharedMaterial = material[1];
+            ChangeSize(startSize);
+
+        }
 
         //Grüne Fähigkeit
-        if (Input.GetKeyUp(KeyCode.J) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        if (!isRedGrounded && (Input.GetKeyUp(KeyCode.J)) || !isRedGrounded && Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
+            ChangeSize(startSize);
             rend.sharedMaterial = material[0];
+        }
+
+        if (!isRedGrounded)
+        {
             ChangeSize(startSize);
         }
 
@@ -283,6 +301,7 @@ public class PlayerController : MonoBehaviour
     {
         GroundCheck();
         ShroomCheck();
+        RedGroundCheck();
     }
 
     public void GroundCheck()
@@ -300,6 +319,15 @@ public class PlayerController : MonoBehaviour
        Collider2D[] colliders = Physics2D.OverlapCircleAll(ShroomCheckCollider.position, ShroomCheckRadius, shroomLayer);
        if (colliders.Length > 0)
         isJumping = true;
+        
+    }
+
+    public void RedGroundCheck()
+    {
+        isRedGrounded = false;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(RedGroundCheckCollider.position, RedGroundCheckRadius, redgroundLayer);
+        if (colliders.Length > 0)
+        isRedGrounded = true;
         
     }
 
