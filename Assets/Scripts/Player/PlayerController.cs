@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public bool isJumping = false;
     [SerializeField]Transform ShroomCheckCollider;
 
-    public bool isRedGrounded = false;
+  
     [SerializeField]Transform RedGroundCheckCollider;
 
     [SerializeField] private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
@@ -322,14 +322,6 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void RedCheck()
-    {
-        isRedGrounded = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(RedGroundCheckCollider.position, RedGroundCheckRadius, redGroundLayer);
-        if (colliders.Length > 0)
-           isRedGrounded = true;
-
-    }
 
     public void ShroomCheck()
     {
