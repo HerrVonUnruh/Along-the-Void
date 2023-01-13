@@ -12,12 +12,12 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        ChangeScene();
+        //ChangeScene();
     }
 
     public void Update()
     {
-        ChangeScene();
+        //ChangeScene();
     }
 
     public void PlayGame ()
@@ -30,18 +30,18 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void ChangeScene()
-    {
-        if (selle == true)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(firstMenuButton);
-            selle = false;
-            optionsMenu.solle = true;
-        }
+    //public void ChangeScene()
+    //{
+    //    if (selle == true)
+    //    {
+    //        EventSystem.current.SetSelectedGameObject(null);
+    //        EventSystem.current.SetSelectedGameObject(firstMenuButton);
+    //        selle = false;
+    //        optionsMenu.solle = true;
+    //    }
 
 
-    }
+    //}
 
     
 }

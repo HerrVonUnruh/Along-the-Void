@@ -16,4 +16,9 @@ public class EndScreen : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene("TestLevel02");
+    }
 }
