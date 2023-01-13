@@ -14,11 +14,12 @@ public class PlayerColorSwitch : MonoBehaviour
     private Vector3 startSize;
     
     public Material[] material;
-    Renderer rend;
+    public Renderer rend;
 
     public bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D Player;
+    ControllColorController controllColorController;
 
     void Start()
     {
@@ -55,5 +56,9 @@ public class PlayerColorSwitch : MonoBehaviour
             rend.sharedMaterial = material[0];
             //ChangeSize(startSize);
         }
+        //if(controllColorController.rend2.sharedMaterial = material[0])
+        //{ rend.sharedMaterial = material[0]; }
+        //if (controllColorController.rend2.sharedMaterial = material[1])
+        //{ rend.sharedMaterial = material[1]; }
     }
 }

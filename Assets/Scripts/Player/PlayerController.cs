@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]LayerMask shroomLayer;
     [SerializeField]LayerMask redgroundLayer;
 
+
+    public bool isRedGrounded = false;
     public bool isGrounded = false;
     [SerializeField]Transform GroundCheckCollider;
 
@@ -202,6 +204,13 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (Input.GetKeyUp(KeyCode.K) && !isRedGrounded && isGrounded || Input.GetKeyDown(KeyCode.Joystick1Button1) && !isRedGrounded && isGrounded )
+        {
+            rend.sharedMaterial = material[1];
+            ChangeSize(startSize);
+
+        }
+
         //Grüne Fähigkeit
         if (!isRedGrounded && (Input.GetKeyUp(KeyCode.J)) || !isRedGrounded && Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
@@ -311,6 +320,15 @@ public class PlayerController : MonoBehaviour
         if (colliders.Length > 0)
         isGrounded = true;
         
+    }
+
+    public void RedCheck()
+    {
+        isRedGrounded = false;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(RedGroundCheckCollider.position, RedGroundCheckRadius, redGroundLayer);
+        if (colliders.Length > 0)
+           isRedGrounded = true;
+
     }
 
     public void ShroomCheck()
