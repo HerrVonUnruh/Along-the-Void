@@ -17,14 +17,20 @@ public class PlayerController : MonoBehaviour
 
     public float GroundCheckRadius = 0.2f;
     public float ShroomCheckRadius = 0.2f;
+    public float RedGroundCheckRadius = 0.2f;
     [SerializeField]LayerMask groundLayer;
     [SerializeField]LayerMask shroomLayer;
+    [SerializeField] LayerMask redGroundLayer;
 
+
+    public bool isRedGrounded = false;
     public bool isGrounded = false;
     [SerializeField]Transform GroundCheckCollider;
 
     public bool isJumping = false;
     [SerializeField]Transform ShroomCheckCollider;
+
+    [SerializeField] Transform RedGroundCheckCollider;
 
     [SerializeField] private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
     
@@ -182,15 +188,22 @@ public class PlayerController : MonoBehaviour
 
 
         //Rote Fähigkeit
-        if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (Input.GetKeyUp(KeyCode.K) && isRedGrounded || Input.GetKeyDown(KeyCode.Joystick1Button1) && isRedGrounded)
         {
             rend.sharedMaterial = material[1];
             ChangeSize(redSize);
 
         }
 
+        if (Input.GetKeyUp(KeyCode.K) && !isRedGrounded && isGrounded || Input.GetKeyDown(KeyCode.Joystick1Button1) && !isRedGrounded && isGrounded )
+        {
+            rend.sharedMaterial = material[1];
+            ChangeSize(startSize);
+
+        }
+
         //Grüne Fähigkeit
-        if (Input.GetKeyUp(KeyCode.J) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        if (!isRedGrounded && Input.GetKeyUp(KeyCode.J)  || !isRedGrounded && Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             rend.sharedMaterial = material[0];
             ChangeSize(startSize);
@@ -283,6 +296,7 @@ public class PlayerController : MonoBehaviour
     {
         GroundCheck();
         ShroomCheck();
+        RedCheck();
     }
 
     public void GroundCheck()
@@ -292,6 +306,15 @@ public class PlayerController : MonoBehaviour
         if (colliders.Length > 0)
         isGrounded = true;
         
+    }
+
+    public void RedCheck()
+    {
+        isRedGrounded = false;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(RedGroundCheckCollider.position, RedGroundCheckRadius, redGroundLayer);
+        if (colliders.Length > 0)
+           isRedGrounded = true;
+
     }
 
     public void ShroomCheck()
