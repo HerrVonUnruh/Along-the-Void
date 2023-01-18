@@ -38,14 +38,14 @@ public class DashScript : MonoBehaviour
         if (isDashing)
         {
             DashControll.Geschwindigkeit = 60f;
-            animator.SetBool("IsDashing", true);
-            return;
+            //animator.SetTrigger("IsDashingAnimation");
+            //return;
         }
 
-        if (canDash)
-        {
-            animator.SetBool("IsDashing", false);
-        }
+   //    if (!isDashing)
+   //     {
+   //         animator.SetTrigger("IsDashingAnimation", false);
+   //     }
 
         //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash)
         //{
@@ -83,7 +83,7 @@ public class DashScript : MonoBehaviour
     }
     private IEnumerator Dash()
     {
-
+        animator.SetTrigger("IsDashingAnimation");
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
@@ -218,7 +218,8 @@ public class DashScript : MonoBehaviour
         //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         //}
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction > 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction > 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction < 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction < 0f && DirectionVertical == 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction > 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction > 0f && DirectionVertical == 0f || 
+            Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction < 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction < 0f && DirectionVertical == 0f)
         {
             DashControll.Geschwindigkeit = DashControll.StandartGeschwindigkeit;
             StartCoroutine(Dash());
