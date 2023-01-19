@@ -42,6 +42,7 @@ public class DashScript : MonoBehaviour
             //return;
         }
 
+
    //    if (!isDashing)
    //     {
    //         animator.SetTrigger("IsDashingAnimation", false);

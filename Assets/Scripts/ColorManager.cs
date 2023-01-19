@@ -48,7 +48,7 @@ public class ColorManager : MonoBehaviour
     }
     public void Green()
     {
-        if (Input.GetKey("j") && !Size.isRedGrounded)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded || Input.GetKey("j") && !Size.isRedGrounded)
         {
             redIsActive = false;
             blueIsActive = false;
@@ -58,7 +58,7 @@ public class ColorManager : MonoBehaviour
     }
     public void Red()
     {
-        if (Input.GetKey("k"))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1)  || Input.GetKey("k"))
         {
             greenIsActive = false;
             blueIsActive = false;
@@ -68,7 +68,7 @@ public class ColorManager : MonoBehaviour
     }
     public void Blue()
     {
-        if (Input.GetKey("h") && !Size.isRedGrounded)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2) && !Size.isRedGrounded || Input.GetKey("h") && !Size.isRedGrounded)
         {
             greenIsActive = false;
             redIsActive = false;
@@ -78,7 +78,7 @@ public class ColorManager : MonoBehaviour
     }
     public void Yellow()
     {
-        if (Input.GetKey("u") && !Size.isRedGrounded)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button3) && !Size.isRedGrounded || Input.GetKey("u") && !Size.isRedGrounded)
         {
             greenIsActive = false;
             redIsActive = false;
