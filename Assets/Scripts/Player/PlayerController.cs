@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     public BoolEvent OnGravityEvent;
     private bool GravityControl = false;
+    private bool GravityControlAnimation = false;
     public ColorManager colorManager;
 
     //public Material[] material;
@@ -159,9 +160,14 @@ public class PlayerController : MonoBehaviour
             Player.gravityScale = 7f;
             GravityControl = false;
         }
-        if (GravityControl = true)
+        if (GravityControl == true)
         {
             animator.SetBool("IsGravityControl", true);
+            //GravityControlAnimation = false;
+        }
+        if (isGrounded == true)
+        {
+            animator.SetBool("IsGravityControl", false);
         }
 
 
@@ -236,7 +242,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        // JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!JUMP!!!
+        // JUMP
         // ______________________________________________________________________________________________________
         //if (Input.GetButtonDown("Jump") && IsGrounded())
         //{
@@ -262,6 +268,11 @@ public class PlayerController : MonoBehaviour
              animator.SetBool("IsGrounded", true);
              animator.SetBool("IsJumping", false);
         }
+            else
+        {
+            animator.SetBool("IsGrounded", false);
+        }
+
 
         if (isJumping)
         {
@@ -281,7 +292,10 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(GroundCheckCollider.position, GroundCheckRadius, groundLayer);
         if (colliders.Length > 0)
-        isGrounded = true;
+        {
+            isGrounded = true;
+            //GravityControlAnimation = true;
+        }
         
     }
 

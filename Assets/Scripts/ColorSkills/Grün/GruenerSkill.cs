@@ -10,18 +10,28 @@ public class GruenerSkill : MonoBehaviour
     private SpriteRenderer GreenSkill;
     private UnityEngine.U2D.SpriteShapeRenderer GreenColliderSkill2;
     private EdgeCollider2D GreenColliderSkill3;
-    public PlayerController Jump;
+    public Rigidbody2D Player; 
+    //public PlayerController Jump;
 
 
     public ColorManager Green;
 
     public Animator animator;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && Green.greenIsActive)
+        if (collision.gameObject.CompareTag("Player") /*&& Green.greenIsActive*/)
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * bounce, ForceMode2D.Impulse);
+            animator.SetBool("PlayerIsJumping", false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") /*&& Green.greenIsActive*/)
+        {
+            Debug.Log("BOING");
+            Player.AddForce(Vector2.up * bounce, ForceMode2D.Impulse);
             animator.SetBool("PlayerIsJumping", true);
             // isJumping = true;
             //Jump.ShroomCheck();

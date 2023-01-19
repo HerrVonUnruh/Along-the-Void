@@ -15,7 +15,7 @@ public class ColorManager : MonoBehaviour
     public bool redIsActive = false;
     public bool blueIsActive = false;
     public bool yellowIsActive = false;
-    private Vector3 redSize = new Vector3(0.1f, 0.1f, 1f);
+    public Vector3 redSize = new Vector3(0.1f, 0.1f, 1f);
     private Vector3 startSize = new Vector3(0.4f, 0.4f, 1f);
 
     public GameObject Object;
