@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private TrailRenderer tr;
     //private float triggerLength = 2f;
     //private float triggerCounter;
-    //public float SprungGeschwindigkeit = 50f; // Erstellt öffentlichen Float namens "SprungGeschwindigkeit"
+    public float SprungGeschwindigkeit = 50f; // Erstellt öffentlichen Float namens "SprungGeschwindigkeit"
     private void Awake()
     {
         Player = GetComponent<Rigidbody2D>();
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
         //Movement
         //__________________________________________________________________________________________________________
 
-        Direction = Input.GetAxisRaw("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
-        DirectionVertical = Input.GetAxisRaw("Vertical");
+        Direction = Input.GetAxis("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
+        DirectionVertical = Input.GetAxis("Vertical");
 
         if (Direction == 0f)
         {
@@ -244,15 +244,15 @@ public class PlayerController : MonoBehaviour
 
         // JUMP
         // ______________________________________________________________________________________________________
-        //if (Input.GetButtonDown("Jump") && IsGrounded())
-        //{
-        //    Player.velocity = new Vector2(Player.velocity.x, SprungGeschwindigkeit);
-        //}
+        if (Input.GetAxis("Left Trigger") > 0f)
+        {
+            Player.velocity = new Vector2(Player.velocity.x, SprungGeschwindigkeit);
+        }
 
-        //if (Input.GetButtonUp("Jump") && Player.velocity.y > 0f)
-        //{
-        //    Player.velocity = new Vector2(Player.velocity.x, Player.velocity.y * 0.5f);
-        //}
+        if (Input.GetAxis("Left Trigger") > 0f && Player.velocity.y > 0f)
+        {
+            Player.velocity = new Vector2(Player.velocity.x, Player.velocity.y * 0.5f);
+        }
         //_________________________________________________________________________________________________________
         //if (isDashing && (Input.GetKeyDown(KeyCode.LeftShift) &&  Input.GetKey("a")) || Input.GetKeyDown(KeyCode.Joystick1Button5) && Input.GetKeyDown("Horizontal")|| Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey("d"))
         //{

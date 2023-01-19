@@ -64,7 +64,7 @@ public class GruenerSkill : MonoBehaviour
 
         if (/*Input.GetKeyUp(KeyCode.J) && */Green.greenIsActive /*|| Input.GetKeyDown(KeyCode.Joystick1Button0) && Green.greenIsActive*/)
         {
-            if (GreenSkill != null)
+            if (GreenSkill != null )
             {
                 GreenSkill.enabled = true;
             }

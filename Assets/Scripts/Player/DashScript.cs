@@ -90,7 +90,7 @@ public class DashScript : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         //rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        rb.AddForce(new Vector3(transform.localScale.x * dashingPower, 0f, 0f), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(transform.localScale.x * dashingPower, 0f), ForceMode2D.Impulse);
         //rb.AddForce(transform.right * dashingPower, ForceMode2D.Impulse);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -204,8 +204,8 @@ public class DashScript : MonoBehaviour
             return;
         }
 
-        Direction = Input.GetAxisRaw("Horizontal");
-        DirectionVertical = Input.GetAxisRaw("Vertical");
+        Direction = Input.GetAxis("Horizontal");
+        DirectionVertical = Input.GetAxis("Vertical");
 
         //Flip();
 
@@ -219,8 +219,7 @@ public class DashScript : MonoBehaviour
         //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         //}
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction > 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction > 0f && DirectionVertical == 0f || 
-            Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction < 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction < 0f && DirectionVertical == 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction  !=0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction != 0f && DirectionVertical == 0f)
         {
             DashControll.Geschwindigkeit = DashControll.StandartGeschwindigkeit;
             StartCoroutine(Dash());
