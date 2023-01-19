@@ -7,16 +7,19 @@ public class GruenerSkill : MonoBehaviour
 {
     private PolygonCollider2D GreenColliderSkill;
     public float bounce = 20f;
-    // private SpriteRenderer GreenSkill;
+    private SpriteRenderer GreenSkill;
     private UnityEngine.U2D.SpriteShapeRenderer GreenColliderSkill2;
     private EdgeCollider2D GreenColliderSkill3;
     public PlayerController Jump;
+
+
+    public ColorManager Green;
 
     public Animator animator;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && Green.greenIsActive)
         {
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * bounce, ForceMode2D.Impulse);
             animator.SetBool("PlayerIsJumping", true);
@@ -32,7 +35,7 @@ public class GruenerSkill : MonoBehaviour
 
     void Start()
     {
-    //    GreenSkill = GetComponent<SpriteRenderer>();
+        GreenSkill = GetComponent<SpriteRenderer>();
         GreenColliderSkill = GetComponent<PolygonCollider2D>();
         GreenColliderSkill2 = GetComponent<UnityEngine.U2D.SpriteShapeRenderer>();
         GreenColliderSkill3 = GetComponent<EdgeCollider2D>();
@@ -42,12 +45,19 @@ public class GruenerSkill : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.J) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        Green.Green();
+        Green.Red();
+        Green.Blue();
+        Green.Yellow();
+
+
+
+        if (/*Input.GetKeyUp(KeyCode.J) && */Green.greenIsActive /*|| Input.GetKeyDown(KeyCode.Joystick1Button0) && Green.greenIsActive*/)
         {
-        //    if (GreenSkill != null)
-        //    {
-        //        GreenSkill.enabled = true;
-        //    }
+            if (GreenSkill != null)
+            {
+                GreenSkill.enabled = true;
+            }
             if (GreenColliderSkill != null)
             {
                 GreenColliderSkill.enabled = true;
@@ -64,13 +74,14 @@ public class GruenerSkill : MonoBehaviour
             animator.SetBool("GreenIsActivated", true);
         }
 
-            if (/*Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3) ||*/Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1)/* || (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))*/ )
+            //if (/*Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3) ||*/Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1)/* || (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))*/ )
             
+        if(!Green.greenIsActive)
         {
-            // if (GreenSkill != null)
-            // {
-            //     GreenSkill.enabled = false;
-            // }
+            if (GreenSkill != null)
+            {
+                GreenSkill.enabled = false;
+            }
             if (GreenColliderSkill != null)
             {
                 GreenColliderSkill.enabled = false;

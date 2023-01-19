@@ -75,7 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5906551106668512280}
   - component: {fileID: 5979089369398796028}
-  - component: {fileID: 8038496289000021007}
+  - component: {fileID: 6639788827585256380}
   m_Layer: 0
   m_Name: captilt4
   m_TagString: Untagged
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8038496289000021007
+--- !u!114 &6639788827585256380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 590623109683147351}
   - component: {fileID: 3801420906904583358}
-  - component: {fileID: 2664047147868741003}
+  - component: {fileID: 1415889650790503087}
   m_Layer: 0
   m_Name: stem4
   m_TagString: Untagged
@@ -321,7 +321,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2664047147868741003
+--- !u!114 &1415889650790503087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

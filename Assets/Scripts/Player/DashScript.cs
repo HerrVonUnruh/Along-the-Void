@@ -37,7 +37,7 @@ public class DashScript : MonoBehaviour
     {
         if (isDashing)
         {
-            DashControll.Geschwindigkeit = 60f;
+            DashControll.Geschwindigkeit = 90f;
             //animator.SetTrigger("IsDashingAnimation");
             //return;
         }

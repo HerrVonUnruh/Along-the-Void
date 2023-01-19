@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public float Geschwindigkeit = 20f;// Erstellt einen öffentlichen Float namens "Geschwindigkeit"
     public float GeschwindigkeitsAbfall = 40f;
     public float StandartGeschwindigkeit = 50f;
-    //public float SprungGeschwindigkeit = 50f; // Erstellt öffentlichen Float namens "SprungGeschwindigkeit"
     public float maxSpeed = 150f; // Erstellt einen öffentlichen Float für die Maximalgeschwindigkeit
     public float flipSteigerung = 10f;
 
@@ -34,36 +33,26 @@ public class PlayerController : MonoBehaviour
   
     [SerializeField]Transform RedGroundCheckCollider;
 
-    [SerializeField] private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
-    
+    //private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
+    //private Vector3 startSizze = new Vector3(0.4f, 0.4f, 1f);
 
-    private Vector3 startSize;
-    //private bool canDash = true; // Bool für "Kann Dashen" ist auf "Start" - wahr
-    //private bool isDashing;
-    //public float dashingPower = 24f;
-    //public float dashingTime = 0.2f;
-    //public float dashingCooldown = 1f;
+
+    //private Vector3 startSize;
+
 
     public KillPlayer killSpawn;
     public bool isDead; 
     public float waitAtSpawn = 2f;
 
-    public Material[] material;
-    Renderer rend;
 
     [SerializeField] Transform spawnPoint;
     [SerializeField] private bool onSpawn = false;
 
     public bool isFacingRight = true;
 
-    [SerializeField] private Rigidbody2D Player; // Bezug zu Rigidbody2D namens Player
-    //[SerializeField] public Transform groundCheck;
-    //[SerializeField] private LayerMask groundLayer;
-    //[SerializeField] private TrailRenderer tr;
+    [SerializeField] public Rigidbody2D Player; // Bezug zu Rigidbody2D namens Player
 
 
-    //private float triggerLength = 2f;
-    //private float triggerCounter;
 
     public Animator animator;
 
@@ -77,7 +66,16 @@ public class PlayerController : MonoBehaviour
 
     public BoolEvent OnGravityEvent;
     private bool GravityControl = false;
+    public ColorManager colorManager;
 
+    //public Material[] material;
+    //Renderer rend;
+    //[SerializeField] public Transform groundCheck;
+    //[SerializeField] private LayerMask groundLayer;
+    //[SerializeField] private TrailRenderer tr;
+    //private float triggerLength = 2f;
+    //private float triggerCounter;
+    //public float SprungGeschwindigkeit = 50f; // Erstellt öffentlichen Float namens "SprungGeschwindigkeit"
     private void Awake()
     {
         Player = GetComponent<Rigidbody2D>();
@@ -93,11 +91,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Player = GetComponent<Rigidbody2D>(); // Erstellt am Anfang des Games einen Bezug zum Rigidbody namens "Player"
-        rend = GetComponent<Renderer>();
-        rend.enabled = true;
-        rend.sharedMaterial = material[0];
-        startSize = transform.localScale;
-       
+        //rend = GetComponent<Renderer>();
+        //rend.enabled = true;
+        //rend.sharedMaterial = material[0];
+        
+
 
     }
 
@@ -105,7 +103,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        
+        
 
         //Movement
         //__________________________________________________________________________________________________________
@@ -152,10 +151,10 @@ public class PlayerController : MonoBehaviour
 
         if (/*DirectionVertical == 0f &&*/ Input.GetKeyDown(KeyCode.S) && !isGrounded || /*DirectionVertical < 0f &&*/ Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded)
         {
-            Player.gravityScale = 5f + Player.gravityScale + 1f * Time.deltaTime;
+            Player.gravityScale = 70f; ;
             GravityControl = true;
         }
-        if (Input.GetKeyUp(KeyCode.Joystick1Button4))
+        if (Input.GetKeyUp(KeyCode.Joystick1Button4) || Input.GetKeyUp("s"))
         {
             Player.gravityScale = 7f;
             GravityControl = false;
@@ -172,7 +171,7 @@ public class PlayerController : MonoBehaviour
         Flip(); // HIER IST DIE FUNKTION FÜR DIE STEIGERUNG FUER DIE GESCHWINDIGKEIT PRO SEKUNDE!!!!!!
 
         //__________________________________________________________________________________________________________
-
+        
 
         //RESPAWN
         //__________________________________________________________________________________________________________
@@ -190,52 +189,16 @@ public class PlayerController : MonoBehaviour
 
 
         //Rote Fähigkeit
-        if (isRedGrounded && Input.GetKeyUp(KeyCode.K) || isRedGrounded && Input.GetKeyDown(KeyCode.Joystick1Button1))
-        {
-            rend.sharedMaterial = material[1];
-            ChangeSize(redSize);
-
-        }
-        
-        if (!isRedGrounded && isGrounded && Input.GetKeyUp(KeyCode.K) || !isRedGrounded && isGrounded && Input.GetKeyDown(KeyCode.Joystick1Button1))
-        {
-            rend.sharedMaterial = material[1];
-            ChangeSize(startSize);
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.K) && !isRedGrounded && isGrounded || Input.GetKeyDown(KeyCode.Joystick1Button1) && !isRedGrounded && isGrounded )
-        {
-            rend.sharedMaterial = material[1];
-            ChangeSize(startSize);
-
-        }
-
-        //Grüne Fähigkeit
-        if (!isRedGrounded && (Input.GetKeyUp(KeyCode.J)) || !isRedGrounded && Input.GetKeyDown(KeyCode.Joystick1Button0))
-        {
-            ChangeSize(startSize);
-            rend.sharedMaterial = material[0];
-        }
-
-        if (!isRedGrounded)
-        {
-            ChangeSize(startSize);
-        }
-
-
-        //Blaue Fähigkeit
-        //if (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+        //if (isRedGrounded && colorManager.redIsActive)
         //{
-        //    rend.sharedMaterial = material[2];
-        //    ChangeSize(startSize);
+        //    //rend.sharedMaterial = material[1];
+        //    ChangeSize(redSize);
+
         //}
 
-        //Gelbe Fähigkeit
-        //if (Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3))
+        //else
         //{
-        //    rend.sharedMaterial = material[3];
-        //    ChangeSize(startSize);
+        //    ChangeSize(startSizze);
         //}
 
 
@@ -290,7 +253,7 @@ public class PlayerController : MonoBehaviour
         //    Player.velocity = new Vector2(transform.localScale.x * dashingPower, transform.localScale.y);
         //}
 
-        
+
         animator.SetFloat("Speed", (Geschwindigkeit));
         Debug.Log("Fischgesicht");
 
@@ -383,7 +346,7 @@ public class PlayerController : MonoBehaviour
 
     //}
 
-    private void Flip()
+    public void Flip()
     {
         if (isFacingRight && Direction < 0f || !isFacingRight && Direction > 0f)
         {

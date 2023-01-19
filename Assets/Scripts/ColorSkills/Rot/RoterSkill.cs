@@ -11,7 +11,8 @@ public class RoterSkill : MonoBehaviour
     private SpriteRenderer REDSkill2;
     private UnityEngine.U2D.SpriteShapeRenderer REDSkill4;
 
-
+    public ColorManager Red;
+    
 
 
     void Start()
@@ -25,7 +26,16 @@ public class RoterSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+        Red.Green();
+        Red.Blue();
+        Red.Yellow();
+        Red.Red();
+
+
+
+
+
+        if (Red.redIsActive)
         {
             if (REDSkill != null)
             {
@@ -48,7 +58,7 @@ public class RoterSkill : MonoBehaviour
 
         }
 
-        if (/*Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3) ||*/ Input.GetKeyUp(KeyCode.J) || Input.GetKeyDown(KeyCode.Joystick1Button0)/* || (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))*/)
+        if (!Red.redIsActive)
         {
             if (REDSkill != null)
             {
@@ -66,6 +76,7 @@ public class RoterSkill : MonoBehaviour
             {
                 REDSkill4.enabled = false;
             }
+            
 
         }
     }
