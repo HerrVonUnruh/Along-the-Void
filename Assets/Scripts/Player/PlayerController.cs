@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float StandartGeschwindigkeit = 50f;
     public float maxSpeed = 150f; // Erstellt einen öffentlichen Float für die Maximalgeschwindigkeit
     public float flipSteigerung = 10f;
+    public float yellowRocket = 120f;
 
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
     public float DirectionVertical = 0f; // erstellt einen privaten Float für namens "DirectionVertical" auf 0
@@ -17,27 +18,27 @@ public class PlayerController : MonoBehaviour
     public float GroundCheckRadius = 0.2f;
     public float ShroomCheckRadius = 0.2f;
     public float RedGroundCheckRadius = 0.2f;
+    
 
     [SerializeField]LayerMask groundLayer;
     [SerializeField]LayerMask shroomLayer;
     [SerializeField]LayerMask redgroundLayer;
-
+    [SerializeField]LayerMask blueWallLayer;
 
     public bool isRedGrounded = false;
     public bool isGrounded = false;
     [SerializeField]Transform GroundCheckCollider;
+
+    public bool isWallSliding;
+    public float wallSlidingSpeed;
+    [SerializeField]Transform blueWallCheck;
+    
 
     public bool isJumping = false;
     [SerializeField]Transform ShroomCheckCollider;
 
   
     [SerializeField]Transform RedGroundCheckCollider;
-
-    //private Vector3 redSize = new Vector3(0.1f,0.1f,1f);
-    //private Vector3 startSizze = new Vector3(0.4f, 0.4f, 1f);
-
-
-    //private Vector3 startSize;
 
 
     public KillPlayer killSpawn;
@@ -68,15 +69,14 @@ public class PlayerController : MonoBehaviour
     private bool GravityControl = false;
     private bool GravityControlAnimation = false;
     public ColorManager colorManager;
+    public DashScript dash;
 
-    //public Material[] material;
-    //Renderer rend;
-    //[SerializeField] public Transform groundCheck;
-    //[SerializeField] private LayerMask groundLayer;
-    //[SerializeField] private TrailRenderer tr;
-    //private float triggerLength = 2f;
-    //private float triggerCounter;
+
     public float SprungGeschwindigkeit = 50f; // Erstellt öffentlichen Float namens "SprungGeschwindigkeit"
+
+
+    public bool WandRennen;
+
     private void Awake()
     {
         Player = GetComponent<Rigidbody2D>();
@@ -92,23 +92,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Player = GetComponent<Rigidbody2D>(); // Erstellt am Anfang des Games einen Bezug zum Rigidbody namens "Player"
-        //rend = GetComponent<Renderer>();
-        //rend.enabled = true;
-        //rend.sharedMaterial = material[0];
-        
-
-
     }
 
 
 
     void Update()
     {
-        
-        
-
-        //Movement
-        //__________________________________________________________________________________________________________
+     //Movement
+     //__________________________________________________________________________________________________________
 
         Direction = Input.GetAxis("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
         DirectionVertical = Input.GetAxis("Vertical");
@@ -150,7 +141,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (/*DirectionVertical == 0f &&*/ Input.GetKeyDown(KeyCode.S) && !isGrounded || /*DirectionVertical < 0f &&*/ Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded)
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive || Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive)
         {
             Player.gravityScale = 70f; ;
             GravityControl = true;
@@ -170,14 +161,29 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGravityControl", false);
         }
 
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f|| Input.GetKeyDown(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction > 0f)
+        {
 
-
+            Player.gravityScale = 0f;
+            Player.velocity = new Vector2(yellowRocket, 0f);
+        }
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction < 0f || Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction < 0f)
+        {
+            Player.gravityScale = 0f;
+            Player.velocity = new Vector2(-yellowRocket, 0f);
+        }
+        if((Input.GetKeyUp(KeyCode.S) && isGrounded && colorManager.yellowIsActive|| Input.GetKeyUp(KeyCode.Joystick1Button4) && isGrounded && colorManager.yellowIsActive))
+        {
+            Player.gravityScale = 7f;
+        }
 
 
         Flip(); // HIER IST DIE FUNKTION FÜR DIE STEIGERUNG FUER DIE GESCHWINDIGKEIT PRO SEKUNDE!!!!!!
 
+        WallSlide();
+
         //__________________________________________________________________________________________________________
-        
+
 
         //RESPAWN
         //__________________________________________________________________________________________________________
@@ -185,59 +191,10 @@ public class PlayerController : MonoBehaviour
         Spawn();
         if (onSpawn == true)
         { Geschwindigkeit = 0f;
-            //canDash = false;
+            //dash.canDash = false;
         }
-        // Spawn natürlich
-        //__________________________________________________________________________________________________________
-
-        //SKILLS
-        //__________________________________________________________________________________________________________
-
-
-        //Rote Fähigkeit
-        //if (isRedGrounded && colorManager.redIsActive)
-        //{
-        //    //rend.sharedMaterial = material[1];
-        //    ChangeSize(redSize);
-
-        //}
-
-        //else
-        //{
-        //    ChangeSize(startSizze);
-        //}
-
-
-        //__________________________________________________________________________________________________________
-
-        //Dash
-        //__________________________________________________________________________________________________________
-        //if (isDashing)
-        //{
-        //    Geschwindigkeit = StandartGeschwindigkeit;
-        //    return;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.LeftShift) && canDash && Input.GetKeyUp("a") ||  Input.GetKey(KeyCode.Joystick1Button5) && canDash || (Input.GetKeyUp(KeyCode.LeftShift) && canDash && Input.GetKeyUp("d")) || (Input.GetKeyUp("s") && Input.GetKeyUp(KeyCode.LeftShift)) && canDash || Input.GetKeyUp(KeyCode.LeftShift) && (Input.GetKeyUp("w")) && canDash)
-
-        //{
-        //    StartCoroutine(Dash());
-
-
-        //}
-
-        //Debug.Log (Player.transform.localScale.x);
-        //Debug.Log(Direction);
-        //Debug.Log(DirectionVertical);
-
-
-        //__________________________________________________________________________________________________________
-
-
-        //if (triggerCounter > 0)
-        //{
-        //    triggerCounter -= Time.deltaTime;
-        //}
+       
+  
 
 
 
@@ -253,15 +210,11 @@ public class PlayerController : MonoBehaviour
         {
             Player.velocity = new Vector2(Player.velocity.x, Player.velocity.y * 0.5f);
         }
-        //_________________________________________________________________________________________________________
-        //if (isDashing && (Input.GetKeyDown(KeyCode.LeftShift) &&  Input.GetKey("a")) || Input.GetKeyDown(KeyCode.Joystick1Button5) && Input.GetKeyDown("Horizontal")|| Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey("d"))
-        //{
-        //    Player.velocity = new Vector2(transform.localScale.x * dashingPower, transform.localScale.y);
-        //}
+    
 
 
         animator.SetFloat("Speed", (Geschwindigkeit));
-        Debug.Log("Fischgesicht");
+        
 
         if (isGrounded)
         {
@@ -318,47 +271,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    //__________________________________________________________________________________________________________________________________________
-    //private void FixedUpdate()
-    //{
-    //    if (Input.GetKeyUp(KeyCode.Joystick1Button5) && Direction > 0f && canDash)
-    //    {
-    //        Player.velocity = new Vector2(transform.localScale.x * dashingPower, transform.localScale.y);
-    //    }
-    //    if (Input.GetKeyUp(KeyCode.Joystick1Button5) && Direction < 0f && canDash)
-    //    {
-    //        Player.velocity = new Vector2(-transform.localScale.x * -dashingPower, -transform.localScale.y);
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.Joystick1Button5) && DirectionVertical > 0f && canDash)
-    //    {
-    //        Player.velocity = new Vector2(transform.localScale.x, transform.localScale.y * dashingPower);
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.Joystick1Button5) && DirectionVertical < 0f && canDash && Input.GetKey("Horizontal"))
-    //    {
-    //        Player.velocity = new Vector2(transform.localScale.x, transform.localScale.y * -dashingPower);
-    //    }
-    //    __________________________________
-    //    if (Input.GetKey(KeyCode.Joystick1Button5) && Direction == 0f && canDash && DirectionVertical == 0f)
-    //    {
-    //        Player.velocity = new Vector2(transform.localScale.x * dashingPower * 10, transform.localScale.y);
-    //    }
-    //}
 
-    //private IEnumerator Dash()
-    //{
-    //    canDash = false;
-    //    isDashing = true;
-    //    float originalGravity = Player.gravityScale;
-    //    Player.gravityScale = 0f;
-    //    tr.emitting = true;
-    //    yield return new WaitForSeconds(dashingTime);
-    //    tr.emitting = false;
-    //    Player.gravityScale = originalGravity;
-    //    isDashing = false;
-    //    yield return new WaitForSeconds(dashingCooldown);
-    //    canDash = true;
-
-    //}
 
     public void Flip()
     {
@@ -414,6 +327,53 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3);
     }
 
+
+
+
+
+
+    private void ChangeSize(Vector3 groesseAendern)
+    {
+        if(isFacingRight)
+        {
+            Player.gameObject.transform.localScale = groesseAendern;
+        }
+       
+        else
+        {
+            Player.gameObject.transform.localScale = new Vector3(-groesseAendern.x, groesseAendern.y, groesseAendern.z);
+        }
+    }
+
+    public bool IsBlueWalled()
+    {
+        return Physics2D.OverlapCircle(blueWallCheck.position, 1f, blueWallLayer);
+    }
+
+    private void WallSlide()
+    {
+        if (IsBlueWalled() && !isGrounded && Direction != 0f && colorManager.blueIsActive && Input.GetKey(KeyCode.Joystick1Button4) ||
+            IsBlueWalled() && !isGrounded && Direction != 0f && colorManager.blueIsActive && Input.GetKey("s"))
+        {
+            isWallSliding = true;
+            Player.velocity = new Vector2(Player.velocity.x, Mathf.Clamp(Player.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+}
     //private void Movement()
 
     //{
@@ -464,22 +424,3 @@ public class PlayerController : MonoBehaviour
     //{
     //    return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     //}
-
-
-
-
-
-    private void ChangeSize(Vector3 groesseAendern)
-    {
-        if(isFacingRight)
-        {
-            Player.gameObject.transform.localScale = groesseAendern;
-        }
-       
-        else
-        {
-            Player.gameObject.transform.localScale = new Vector3(-groesseAendern.x, groesseAendern.y, groesseAendern.z);
-        }
-    }
-
-}
