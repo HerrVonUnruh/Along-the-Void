@@ -18,31 +18,31 @@ public class PlayerController : MonoBehaviour
     public float GroundCheckRadius = 0.2f;
     public float ShroomCheckRadius = 0.2f;
     public float RedGroundCheckRadius = 0.2f;
-    
 
-    [SerializeField]LayerMask groundLayer;
-    [SerializeField]LayerMask shroomLayer;
-    [SerializeField]LayerMask redgroundLayer;
-    [SerializeField]LayerMask blueWallLayer;
+
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask shroomLayer;
+    [SerializeField] LayerMask redgroundLayer;
+    [SerializeField] LayerMask blueWallLayer;
 
     public bool isRedGrounded = false;
     public bool isGrounded = false;
-    [SerializeField]Transform GroundCheckCollider;
+    [SerializeField] Transform GroundCheckCollider;
 
     public bool isWallSliding;
     public float wallSlidingSpeed;
-    [SerializeField]Transform blueWallCheck;
-    
+    [SerializeField] Transform blueWallCheck;
+
 
     public bool isJumping = false;
-    [SerializeField]Transform ShroomCheckCollider;
+    [SerializeField] Transform ShroomCheckCollider;
 
-  
-    [SerializeField]Transform RedGroundCheckCollider;
+
+    [SerializeField] Transform RedGroundCheckCollider;
 
 
     public KillPlayer killSpawn;
-    public bool isDead; 
+    public bool isDead;
     public float waitAtSpawn = 2f;
 
 
@@ -77,6 +77,11 @@ public class PlayerController : MonoBehaviour
 
     public bool WandRennen;
 
+
+
+ 
+    
+
     private void Awake()
     {
         Player = GetComponent<Rigidbody2D>();
@@ -98,8 +103,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-     //Movement
-     //__________________________________________________________________________________________________________
+        //Movement
+        //__________________________________________________________________________________________________________
 
         Direction = Input.GetAxis("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
         DirectionVertical = Input.GetAxis("Vertical");
@@ -141,9 +146,10 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive || Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive)
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive ||
+            Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive)
         {
-            Player.gravityScale = 70f; ;
+            Player.gravityScale = 70f;
             GravityControl = true;
         }
         if (Input.GetKeyUp(KeyCode.Joystick1Button4) || Input.GetKeyUp("s"))
@@ -161,22 +167,30 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGravityControl", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f|| Input.GetKeyDown(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction > 0f)
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f ||
+            Input.GetKeyDown(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction > 0f)
         {
 
             Player.gravityScale = 0f;
             Player.velocity = new Vector2(yellowRocket, 0f);
         }
-        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction < 0f || Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction < 0f)
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction < 0f ||
+            Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction < 0f)
         {
             Player.gravityScale = 0f;
             Player.velocity = new Vector2(-yellowRocket, 0f);
         }
-        if((Input.GetKeyUp(KeyCode.S) && isGrounded && colorManager.yellowIsActive|| Input.GetKeyUp(KeyCode.Joystick1Button4) && isGrounded && colorManager.yellowIsActive))
+        if ((Input.GetKeyUp(KeyCode.S) && isGrounded && colorManager.yellowIsActive ||
+            Input.GetKeyUp(KeyCode.Joystick1Button4) && isGrounded && colorManager.yellowIsActive)
+            || colorManager.blueIsActive || colorManager.redIsActive)
         {
             Player.gravityScale = 7f;
+
         }
 
+       
+
+      
 
         Flip(); // HIER IST DIE FUNKTION FÜR DIE STEIGERUNG FUER DIE GESCHWINDIGKEIT PRO SEKUNDE!!!!!!
 
@@ -193,8 +207,8 @@ public class PlayerController : MonoBehaviour
         { Geschwindigkeit = 0f;
             //dash.canDash = false;
         }
-       
-  
+
+
 
 
 
@@ -210,18 +224,18 @@ public class PlayerController : MonoBehaviour
         {
             Player.velocity = new Vector2(Player.velocity.x, Player.velocity.y * 0.5f);
         }
-    
+
 
 
         animator.SetFloat("Speed", (Geschwindigkeit));
-        
+
 
         if (isGrounded)
         {
-             animator.SetBool("IsGrounded", true);
-             animator.SetBool("IsJumping", false);
+            animator.SetBool("IsGrounded", true);
+            animator.SetBool("IsJumping", false);
         }
-            else
+        else
         {
             animator.SetBool("IsGrounded", false);
         }
@@ -249,17 +263,17 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             //GravityControlAnimation = true;
         }
-        
+
     }
 
 
     public void ShroomCheck()
     {
-       isJumping = false;
-       Collider2D[] colliders = Physics2D.OverlapCircleAll(ShroomCheckCollider.position, ShroomCheckRadius, shroomLayer);
-       if (colliders.Length > 0)
-        isJumping = true;
-        
+        isJumping = false;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(ShroomCheckCollider.position, ShroomCheckRadius, shroomLayer);
+        if (colliders.Length > 0)
+            isJumping = true;
+
     }
 
     public void RedGroundCheck()
@@ -267,11 +281,11 @@ public class PlayerController : MonoBehaviour
         isRedGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(RedGroundCheckCollider.position, RedGroundCheckRadius, redgroundLayer);
         if (colliders.Length > 0)
-        isRedGrounded = true;
-        
+            isRedGrounded = true;
+
     }
 
-
+  
 
     public void Flip()
     {
@@ -283,7 +297,8 @@ public class PlayerController : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
+  
+      
     public void Spawn()
     { //SPAWN mit eigener Tastenbelegung
         //______________________________________________________       
@@ -345,7 +360,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsBlueWalled()
+        
+
+        public bool IsBlueWalled()
     {
         return Physics2D.OverlapCircle(blueWallCheck.position, 1f, blueWallLayer);
     }
@@ -362,7 +379,9 @@ public class PlayerController : MonoBehaviour
         {
             isWallSliding = false;
         }
-    }
+
+
+}
 
 
 
