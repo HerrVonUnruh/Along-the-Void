@@ -202,6 +202,7 @@ MonoBehaviour:
   dashingPower: 60
   dashingTime: 0.2
   dashingCooldown: 1
+  animator: {fileID: 0}
   rb: {fileID: 3255447123952163987}
   tr: {fileID: 3255447123952163989}
 --- !u!50 &3255447123952163987
@@ -296,23 +297,41 @@ MonoBehaviour:
   flipSteigerung: 10
   Direction: 0
   DirectionVertical: 0
-  Xgroesse: 0.2
-  Ygroesse: 0.2
-  Zgroesse: 0.2
-  XgroesseNormal: 0.25
-  XgroesseNormalReverse: -0.25
-  YgroesseNormal: 0.25
-  ZgroesseNormal: 1
+  GroundCheckRadius: 0.2
+  ShroomCheckRadius: 0.2
+  RedGroundCheckRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  shroomLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  redgroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isRedGrounded: 0
+  isGrounded: 0
+  GroundCheckCollider: {fileID: 0}
+  isJumping: 0
+  ShroomCheckCollider: {fileID: 0}
+  RedGroundCheckCollider: {fileID: 0}
   killSpawn: {fileID: 0}
+  isDead: 0
   waitAtSpawn: 2
-  material:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: -876546973899608171, guid: 2a25a1ad266a9644eb9f21c6931b697e, type: 3}
-  - {fileID: -876546973899608171, guid: 5e6e07cb6a3307549be46d9671a0b0b1, type: 3}
-  - {fileID: -876546973899608171, guid: 8e5816c14b7c26e4394a9a0551833288, type: 3}
   spawnPoint: {fileID: 0}
   onSpawn: 0
+  isFacingRight: 1
   Player: {fileID: 3255447123952163987}
+  animator: {fileID: 0}
+  OnJumpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGravityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  colorManager: {fileID: 0}
+  dash: {fileID: 0}
+  SprungGeschwindigkeit: 50
 --- !u!96 &3255447123952163989
 TrailRenderer:
   serializedVersion: 3
