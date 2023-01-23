@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567651512106765490}
   - component: {fileID: 1686549239116269295}
-  - component: {fileID: 7084057701147424181}
+  - component: {fileID: 3830308153105330690}
   m_Layer: 0
   m_Name: beinL_000
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7084057701147424181
+--- !u!114 &3830308153105330690
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7254595382565749218}
   - component: {fileID: 995550938743657320}
-  - component: {fileID: 2688083288932411028}
+  - component: {fileID: 5938459342522080569}
   m_Layer: 0
   m_Name: Dash_00
   m_TagString: Untagged
@@ -534,7 +534,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2688083288932411028
+--- !u!114 &5938459342522080569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -666,7 +666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3447144714827805638}
   - component: {fileID: 2773086896162678579}
-  - component: {fileID: 1381458903650372800}
+  - component: {fileID: 7671196788110004155}
   m_Layer: 0
   m_Name: auge_001
   m_TagString: Untagged
@@ -741,7 +741,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1381458903650372800
+--- !u!114 &7671196788110004155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1149,7 +1149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466155156536621159}
   - component: {fileID: 8161794396822051283}
-  - component: {fileID: 2620868442268796166}
+  - component: {fileID: 5800538187518165009}
   m_Layer: 0
   m_Name: armR_000
   m_TagString: Untagged
@@ -1224,7 +1224,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2620868442268796166
+--- !u!114 &5800538187518165009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1314,7 +1314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2408561668411268419}
   - component: {fileID: 1472306880683413558}
-  - component: {fileID: 8564919547094768}
+  - component: {fileID: 2458813548908618186}
   m_Layer: 0
   m_Name: antenne2_000
   m_TagString: Untagged
@@ -1389,7 +1389,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8564919547094768
+--- !u!114 &2458813548908618186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1790,7 +1790,7 @@ Transform:
   - {fileID: 7254595382565749218}
   - {fileID: 4051812466937324148}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &3790391421121837034
 SpriteRenderer:
@@ -2159,7 +2159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 138400439590423628}
   - component: {fileID: 1597386434100257293}
-  - component: {fileID: 2605328423611381285}
+  - component: {fileID: 9155327911046853261}
   m_Layer: 0
   m_Name: auge_002
   m_TagString: Untagged
@@ -2234,7 +2234,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2605328423611381285
+--- !u!114 &9155327911046853261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2644,7 +2644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 808165715794843910}
   - component: {fileID: 658373359367290250}
-  - component: {fileID: 2377162993113288577}
+  - component: {fileID: 4183609383449549191}
   m_Layer: 0
   m_Name: head
   m_TagString: Untagged
@@ -2719,7 +2719,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2377162993113288577
+--- !u!114 &4183609383449549191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2830,7 +2830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7798055549204452602}
   - component: {fileID: 6320296345706940368}
-  - component: {fileID: 6939593382960075984}
+  - component: {fileID: 272242546699100166}
   m_Layer: 0
   m_Name: beinR_000
   m_TagString: Untagged
@@ -2905,7 +2905,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6939593382960075984
+--- !u!114 &272242546699100166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2963,7 +2963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4051812466937324148}
   - component: {fileID: 7219936455251054526}
-  - component: {fileID: 3338288924312501543}
+  - component: {fileID: 5456151691734618527}
   m_Layer: 0
   m_Name: fastrun_uebergang_fbf_000
   m_TagString: Untagged
@@ -3038,7 +3038,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3338288924312501543
+--- !u!114 &5456151691734618527
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

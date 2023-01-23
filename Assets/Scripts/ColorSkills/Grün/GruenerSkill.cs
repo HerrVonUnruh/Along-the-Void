@@ -5,27 +5,23 @@ using UnityEngine;
 
 public class GruenerSkill : MonoBehaviour
 {
-    private PolygonCollider2D GreenColliderSkill;
     public float bounce = 20f;
+    private PolygonCollider2D GreenColliderSkill;
     private SpriteRenderer GreenSkill;
-    private UnityEngine.U2D.SpriteShapeRenderer GreenColliderSkill2;
-    private EdgeCollider2D GreenColliderSkill3;
-    public Rigidbody2D Player; 
+    //private UnityEngine.U2D.SpriteShapeRenderer GreenColliderSkill2;
+    //private EdgeCollider2D GreenColliderSkill3;
+    public Rigidbody2D Player;
     //public PlayerController Jump;
 
 
     public ColorManager Green;
+    public Sprite greySprite;
+    public Sprite greenSprite;
+    public Material[] material;
+    public bool isGreenShining;
 
     public Animator animator;
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") /*&& Green.greenIsActive*/)
-        {
-            animator.SetBool("PlayerIsJumping", false);
-        }
-    }
-
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") /*&& Green.greenIsActive*/)
@@ -36,19 +32,41 @@ public class GruenerSkill : MonoBehaviour
             // isJumping = true;
             //Jump.ShroomCheck();
         }
+        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
+            collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
+        {
+
+            isGreenShining = true;
+
+        }
         // else
         // {
         //     isJumping = false;
         // }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") /*&& Green.greenIsActive*/)
+        {
+            animator.SetBool("PlayerIsJumping", false);
+        }
+        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
+          collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
+        {
+            
+            isGreenShining = false;
+            
+        }
+    }
+
 
 
     void Start()
     {
         GreenSkill = GetComponent<SpriteRenderer>();
         GreenColliderSkill = GetComponent<PolygonCollider2D>();
-        GreenColliderSkill2 = GetComponent<UnityEngine.U2D.SpriteShapeRenderer>();
-        GreenColliderSkill3 = GetComponent<EdgeCollider2D>();
+        //GreenColliderSkill2 = GetComponent<UnityEngine.U2D.SpriteShapeRenderer>();
+        //GreenColliderSkill3 = GetComponent<EdgeCollider2D>();
         //GreenColliderSkill4 = GetComponent<TilemapCollider2D>();
 
     }
@@ -62,50 +80,82 @@ public class GruenerSkill : MonoBehaviour
 
 
 
-        if (/*Input.GetKeyUp(KeyCode.J) && */Green.greenIsActive /*|| Input.GetKeyDown(KeyCode.Joystick1Button0) && Green.greenIsActive*/)
+        if (Green.greenIsActive && isGreenShining)
         {
+            this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             if (GreenSkill != null )
             {
-                GreenSkill.enabled = true;
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = greenSprite;
             }
             if (GreenColliderSkill != null)
             {
                 GreenColliderSkill.enabled = true;
             }
-            if (GreenColliderSkill2 != null)
-            {
-                GreenColliderSkill2.enabled = true;
-            }
-            if (GreenColliderSkill3 != null)
-            {
-                GreenColliderSkill3.enabled = true;
-            }
+            //if (GreenColliderSkill2 != null)
+            //{
+            //    GreenColliderSkill2.enabled = true;
+            //}
+            //if (GreenColliderSkill3 != null)
+            //{
+            //    GreenColliderSkill3.enabled = true;
+            //}
 
             animator.SetBool("GreenIsActivated", true);
         }
 
-            //if (/*Input.GetKeyUp(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button3) ||*/Input.GetKeyUp(KeyCode.K) || Input.GetKeyDown(KeyCode.Joystick1Button1)/* || (Input.GetKeyUp(KeyCode.H) || Input.GetKeyDown(KeyCode.Joystick1Button2))*/ )
-            
-        if(!Green.greenIsActive)
+        if (Green.greenIsActive && !isGreenShining)
         {
+            this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             if (GreenSkill != null)
             {
-                GreenSkill.enabled = false;
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = greySprite;
             }
             if (GreenColliderSkill != null)
             {
                 GreenColliderSkill.enabled = false;
             }
-            if (GreenColliderSkill2 != null)
+
+            animator.SetBool("GreenIsActivated", true);
+        }
+
+
+
+        if (!isGreenShining)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
+            if (GreenSkill != null)
             {
-                GreenColliderSkill2.enabled = false;
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = greySprite;
             }
-            if (GreenColliderSkill3 != null)
+            if (GreenColliderSkill != null)
             {
-                GreenColliderSkill3.enabled = false;
+                GreenColliderSkill.enabled = false;
             }
+            //if (GreenColliderSkill2 != null)
+            //{
+            //    GreenColliderSkill2.enabled = false;
+            //}
+            //if (GreenColliderSkill3 != null)
+            //{
+            //    GreenColliderSkill3.enabled = false;
+            //}
             
             animator.SetBool("GreenIsActivated", false);
+        }
+        if (!Green.greenIsActive && isGreenShining)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().material = material[0];
+            
+            if (GreenSkill != null)
+            {
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = greySprite;
+            }
+            if (GreenColliderSkill != null)
+            {
+                GreenColliderSkill.enabled = false;
+            }
+
+            animator.SetBool("GreenIsActivated", true);
         }
     }
 
