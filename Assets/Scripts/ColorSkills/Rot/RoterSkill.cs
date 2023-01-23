@@ -27,8 +27,8 @@ public class RoterSkill : MonoBehaviour
     void Update()
     {
         Red.Green();
-        Red.Blue();
-        Red.Yellow();
+        //Red.Blue();
+        //Red.Yellow();
         Red.Red();
 
 

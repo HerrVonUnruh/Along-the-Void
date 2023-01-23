@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float StandartGeschwindigkeit = 50f;
     public float maxSpeed = 150f; // Erstellt einen öffentlichen Float für die Maximalgeschwindigkeit
     public float flipSteigerung = 10f;
-    public float yellowRocket = 120f;
+    //public float yellowRocket = 120f;
 
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
     public float DirectionVertical = 0f; // erstellt einen privaten Float für namens "DirectionVertical" auf 0
@@ -23,15 +23,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask shroomLayer;
     [SerializeField] LayerMask redgroundLayer;
-    [SerializeField] LayerMask blueWallLayer;
+    //[SerializeField] LayerMask blueWallLayer;
 
     public bool isRedGrounded = false;
     public bool isGrounded = false;
     [SerializeField] Transform GroundCheckCollider;
 
-    public bool isWallSliding;
-    public float wallSlidingSpeed;
-    [SerializeField] Transform blueWallCheck;
+    //public bool isWallSliding;
+    //public float wallSlidingSpeed;
+    //[SerializeField] Transform blueWallCheck;
 
 
     public bool isJumping = false;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     public float SprungGeschwindigkeit = 50f; // Erstellt öffentlichen Float namens "SprungGeschwindigkeit"
 
 
-    public bool WandRennen;
+    //public bool WandRennen;
 
 
 
@@ -146,8 +146,8 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive ||
-            Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive)
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded/* && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive */||
+            Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded/* && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive*/)
         {
             Player.gravityScale = 70f;
             GravityControl = true;
@@ -167,26 +167,26 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGravityControl", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f ||
-            Input.GetKeyDown(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction > 0f)
-        {
+        //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f ||
+        //    Input.GetKeyDown(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction > 0f)
+        //{
 
-            Player.gravityScale = 0f;
-            Player.velocity = new Vector2(yellowRocket, 0f);
-        }
-        if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction < 0f ||
-            Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction < 0f)
-        {
-            Player.gravityScale = 0f;
-            Player.velocity = new Vector2(-yellowRocket, 0f);
-        }
-        if ((Input.GetKeyUp(KeyCode.S) && isGrounded && colorManager.yellowIsActive ||
-            Input.GetKeyUp(KeyCode.Joystick1Button4) && isGrounded && colorManager.yellowIsActive)
-            || colorManager.blueIsActive || colorManager.redIsActive)
-        {
-            Player.gravityScale = 7f;
+        //    Player.gravityScale = 0f;
+        //    Player.velocity = new Vector2(yellowRocket, 0f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction < 0f ||
+        //    Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction < 0f)
+        //{
+        //    Player.gravityScale = 0f;
+        //    Player.velocity = new Vector2(-yellowRocket, 0f);
+        //}
+        //if ((Input.GetKeyUp(KeyCode.S) && isGrounded && colorManager.yellowIsActive ||
+        //    Input.GetKeyUp(KeyCode.Joystick1Button4) && isGrounded && colorManager.yellowIsActive)
+        //    || colorManager.blueIsActive || colorManager.redIsActive)
+        //{
+        //    Player.gravityScale = 7f;
 
-        }
+        //}
 
        
 
@@ -194,7 +194,13 @@ public class PlayerController : MonoBehaviour
 
         Flip(); // HIER IST DIE FUNKTION FÜR DIE STEIGERUNG FUER DIE GESCHWINDIGKEIT PRO SEKUNDE!!!!!!
 
-        WallSlide();
+
+
+
+        //WallSlide();
+
+
+
 
         //__________________________________________________________________________________________________________
 
@@ -362,26 +368,26 @@ public class PlayerController : MonoBehaviour
 
         
 
-        public bool IsBlueWalled()
-    {
-        return Physics2D.OverlapCircle(blueWallCheck.position, 1f, blueWallLayer);
-    }
+    //    public bool IsBlueWalled()
+    //{
+    //    return Physics2D.OverlapCircle(blueWallCheck.position, 1f, blueWallLayer);
+    //}
 
-    private void WallSlide()
-    {
-        if (IsBlueWalled() && !isGrounded && Direction != 0f && colorManager.blueIsActive && Input.GetKey(KeyCode.Joystick1Button4) ||
-            IsBlueWalled() && !isGrounded && Direction != 0f && colorManager.blueIsActive && Input.GetKey("s"))
-        {
-            isWallSliding = true;
-            Player.velocity = new Vector2(Player.velocity.x, Mathf.Clamp(Player.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
-        else
-        {
-            isWallSliding = false;
-        }
+    //private void WallSlide()
+    //{
+    //    if (IsBlueWalled() && !isGrounded && Direction != 0f && colorManager.blueIsActive && Input.GetKey(KeyCode.Joystick1Button4) ||
+    //        IsBlueWalled() && !isGrounded && Direction != 0f && colorManager.blueIsActive && Input.GetKey("s"))
+    //    {
+    //        isWallSliding = true;
+    //        Player.velocity = new Vector2(Player.velocity.x, Mathf.Clamp(Player.velocity.y, -wallSlidingSpeed, float.MaxValue));
+    //    }
+    //    else
+    //    {
+    //        isWallSliding = false;
+    //    }
 
 
-}
+//}
 
 
 

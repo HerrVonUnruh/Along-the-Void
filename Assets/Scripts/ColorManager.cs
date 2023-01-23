@@ -13,8 +13,8 @@ public class ColorManager : MonoBehaviour
 
     public bool greenIsActive = false;
     public bool redIsActive = false;
-    public bool blueIsActive = false;
-    public bool yellowIsActive = false;
+    //public bool blueIsActive = false;
+    //public bool yellowIsActive = false;
     public Vector3 redSize = new Vector3(0.1f, 0.1f, 1f);
     private Vector3 startSize = new Vector3(0.4f, 0.4f, 1f);
 
@@ -51,8 +51,8 @@ public class ColorManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded || Input.GetKey("j") && !Size.isRedGrounded)
         {
             redIsActive = false;
-            blueIsActive = false;
-            yellowIsActive = false;
+            //blueIsActive = false;
+            //yellowIsActive = false;
             greenIsActive = true;
         }
     }
@@ -61,39 +61,39 @@ public class ColorManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1)  || Input.GetKey("k"))
         {
             greenIsActive = false;
-            blueIsActive = false;
-            yellowIsActive = false;
+            //blueIsActive = false;
+            //yellowIsActive = false;
             redIsActive = true;
         }
     }
-    public void Blue()
-    {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) && !Size.isRedGrounded || Input.GetKey("h") && !Size.isRedGrounded)
-        {
-            greenIsActive = false;
-            redIsActive = false;
-            yellowIsActive = false;
-            blueIsActive = true;
-        }
-    }
-    public void Yellow()
-    {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button3) && !Size.isRedGrounded || Input.GetKey("u") && !Size.isRedGrounded)
-        {
-            greenIsActive = false;
-            redIsActive = false;
-            blueIsActive = false;
-            yellowIsActive = true;
-        }
-    }
+    //public void Blue()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Joystick1Button2) && !Size.isRedGrounded || Input.GetKey("h") && !Size.isRedGrounded)
+    //    {
+    //        greenIsActive = false;
+    //        redIsActive = false;
+    //        yellowIsActive = false;
+    //        blueIsActive = true;
+    //    }
+    //}
+    //public void Yellow()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Joystick1Button3) && !Size.isRedGrounded || Input.GetKey("u") && !Size.isRedGrounded)
+    //    {
+    //        greenIsActive = false;
+    //        redIsActive = false;
+    //        blueIsActive = false;
+    //        yellowIsActive = true;
+    //    }
+    //}
 
 
     private void Update()
     {
         Green();
         Red();
-        Blue();
-        Yellow();
+        //Blue();
+        //Yellow();
 
    
 
@@ -151,60 +151,60 @@ public class ColorManager : MonoBehaviour
             Object22.GetComponent<Renderer>().material = Material[1];
 
         }
-        if (blueIsActive)
-        {
-            Object.GetComponent<Renderer>().material = Material[2];
-            Object1.GetComponent<Renderer>().material = Material[2];
-            Object2.GetComponent<Renderer>().material = Material[2];
-            Object3.GetComponent<Renderer>().material = Material[2];
-            Object4.GetComponent<Renderer>().material = Material[2];
-            Object5.GetComponent<Renderer>().material = Material[2];
-            Object6.GetComponent<Renderer>().material = Material[2];
-            Object7.GetComponent<Renderer>().material = Material[2];
-            Object8.GetComponent<Renderer>().material = Material[2];
-            Object9.GetComponent<Renderer>().material = Material[2];
-            Object10.GetComponent<Renderer>().material = Material[2];
-            Object11.GetComponent<Renderer>().material = Material[2];
-            Object12.GetComponent<Renderer>().material = Material[2];
-            Object13.GetComponent<Renderer>().material = Material[2];
-            Object14.GetComponent<Renderer>().material = Material[2];
-            Object15.GetComponent<Renderer>().material = Material[2];
-            Object16.GetComponent<Renderer>().material = Material[2];
-            Object17.GetComponent<Renderer>().material = Material[2];
-            Object18.GetComponent<Renderer>().material = Material[2];
-            Object19.GetComponent<Renderer>().material = Material[2];
-            Object20.GetComponent<Renderer>().material = Material[2];
-            Object21.GetComponent<Renderer>().material = Material[2];
-            Object22.GetComponent<Renderer>().material = Material[2];
+        //if (blueIsActive)
+        //{
+        //    Object.GetComponent<Renderer>().material = Material[2];
+        //    Object1.GetComponent<Renderer>().material = Material[2];
+        //    Object2.GetComponent<Renderer>().material = Material[2];
+        //    Object3.GetComponent<Renderer>().material = Material[2];
+        //    Object4.GetComponent<Renderer>().material = Material[2];
+        //    Object5.GetComponent<Renderer>().material = Material[2];
+        //    Object6.GetComponent<Renderer>().material = Material[2];
+        //    Object7.GetComponent<Renderer>().material = Material[2];
+        //    Object8.GetComponent<Renderer>().material = Material[2];
+        //    Object9.GetComponent<Renderer>().material = Material[2];
+        //    Object10.GetComponent<Renderer>().material = Material[2];
+        //    Object11.GetComponent<Renderer>().material = Material[2];
+        //    Object12.GetComponent<Renderer>().material = Material[2];
+        //    Object13.GetComponent<Renderer>().material = Material[2];
+        //    Object14.GetComponent<Renderer>().material = Material[2];
+        //    Object15.GetComponent<Renderer>().material = Material[2];
+        //    Object16.GetComponent<Renderer>().material = Material[2];
+        //    Object17.GetComponent<Renderer>().material = Material[2];
+        //    Object18.GetComponent<Renderer>().material = Material[2];
+        //    Object19.GetComponent<Renderer>().material = Material[2];
+        //    Object20.GetComponent<Renderer>().material = Material[2];
+        //    Object21.GetComponent<Renderer>().material = Material[2];
+        //    Object22.GetComponent<Renderer>().material = Material[2];
 
-        }
-        if (yellowIsActive)
-        {
-            Object.GetComponent<Renderer>().material = Material[3];
-            Object1.GetComponent<Renderer>().material = Material[3];
-            Object2.GetComponent<Renderer>().material = Material[3];
-            Object3.GetComponent<Renderer>().material = Material[3];
-            Object4.GetComponent<Renderer>().material = Material[3];
-            Object5.GetComponent<Renderer>().material = Material[3];
-            Object6.GetComponent<Renderer>().material = Material[3];
-            Object7.GetComponent<Renderer>().material = Material[3];
-            Object8.GetComponent<Renderer>().material = Material[3];
-            Object9.GetComponent<Renderer>().material = Material[3];
-            Object10.GetComponent<Renderer>().material = Material[3];
-            Object11.GetComponent<Renderer>().material = Material[3];
-            Object12.GetComponent<Renderer>().material = Material[3];
-            Object13.GetComponent<Renderer>().material = Material[3];
-            Object14.GetComponent<Renderer>().material = Material[3];
-            Object15.GetComponent<Renderer>().material = Material[3];
-            Object16.GetComponent<Renderer>().material = Material[3];
-            Object17.GetComponent<Renderer>().material = Material[3];
-            Object18.GetComponent<Renderer>().material = Material[3];
-            Object19.GetComponent<Renderer>().material = Material[3];
-            Object20.GetComponent<Renderer>().material = Material[3];
-            Object21.GetComponent<Renderer>().material = Material[3];
-            Object22.GetComponent<Renderer>().material = Material[3];
+        //}
+        //if (yellowIsActive)
+        //{
+        //    Object.GetComponent<Renderer>().material = Material[3];
+        //    Object1.GetComponent<Renderer>().material = Material[3];
+        //    Object2.GetComponent<Renderer>().material = Material[3];
+        //    Object3.GetComponent<Renderer>().material = Material[3];
+        //    Object4.GetComponent<Renderer>().material = Material[3];
+        //    Object5.GetComponent<Renderer>().material = Material[3];
+        //    Object6.GetComponent<Renderer>().material = Material[3];
+        //    Object7.GetComponent<Renderer>().material = Material[3];
+        //    Object8.GetComponent<Renderer>().material = Material[3];
+        //    Object9.GetComponent<Renderer>().material = Material[3];
+        //    Object10.GetComponent<Renderer>().material = Material[3];
+        //    Object11.GetComponent<Renderer>().material = Material[3];
+        //    Object12.GetComponent<Renderer>().material = Material[3];
+        //    Object13.GetComponent<Renderer>().material = Material[3];
+        //    Object14.GetComponent<Renderer>().material = Material[3];
+        //    Object15.GetComponent<Renderer>().material = Material[3];
+        //    Object16.GetComponent<Renderer>().material = Material[3];
+        //    Object17.GetComponent<Renderer>().material = Material[3];
+        //    Object18.GetComponent<Renderer>().material = Material[3];
+        //    Object19.GetComponent<Renderer>().material = Material[3];
+        //    Object20.GetComponent<Renderer>().material = Material[3];
+        //    Object21.GetComponent<Renderer>().material = Material[3];
+        //    Object22.GetComponent<Renderer>().material = Material[3];
 
-        }
+        //}
 
 
         if (Size.isRedGrounded && redIsActive)

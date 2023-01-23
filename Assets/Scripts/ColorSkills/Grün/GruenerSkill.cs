@@ -57,8 +57,8 @@ public class GruenerSkill : MonoBehaviour
     {
         Green.Green();
         Green.Red();
-        Green.Blue();
-        Green.Yellow();
+        //Green.Blue();
+        //Green.Yellow();
 
 
 
