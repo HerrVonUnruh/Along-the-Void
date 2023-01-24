@@ -62,6 +62,7 @@ public class DashScript : MonoBehaviour
     private IEnumerator DashVertical()
     {
 
+        animator.SetTrigger("IsDashingAnimation");
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
@@ -79,6 +80,7 @@ public class DashScript : MonoBehaviour
     private IEnumerator DashVerticalRechtsHoch()
     {
 
+        animator.SetTrigger("IsDashingAnimation");
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
@@ -96,6 +98,7 @@ public class DashScript : MonoBehaviour
     private IEnumerator DashVerticalRechtsRunter()
     {
 
+        animator.SetTrigger("IsDashingAnimation");
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
@@ -113,6 +116,7 @@ public class DashScript : MonoBehaviour
     private IEnumerator DashVerticalLinksHoch()
     {
 
+        animator.SetTrigger("IsDashingAnimation");
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
@@ -130,6 +134,7 @@ public class DashScript : MonoBehaviour
     private IEnumerator DashVerticalLinksRunter()
     {
 
+        animator.SetTrigger("IsDashingAnimation");
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
