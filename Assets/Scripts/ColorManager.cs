@@ -10,6 +10,8 @@ public class ColorManager : MonoBehaviour
     public Material[] Material;
 
     public PlayerController Size;
+    public NotColorSwitch ncs;
+    public NotColourManager ncm;
 
     public bool greenIsActive = false;
     public bool redIsActive = false;
@@ -41,14 +43,14 @@ public class ColorManager : MonoBehaviour
     public GameObject Object20;
     public GameObject Object21;
     public GameObject Object22;
-    
+
     void Start()
     {
         greenIsActive = true;
     }
     public void Green()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded || Input.GetKey("j") && !Size.isRedGrounded)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded && !ncm.ncsIsTrue || Input.GetKey("j") && !Size.isRedGrounded && !ncm.ncsIsTrue)
         {
             redIsActive = false;
             //blueIsActive = false;
@@ -58,7 +60,7 @@ public class ColorManager : MonoBehaviour
     }
     public void Red()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1)  || Input.GetKey("k"))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !ncm.ncsIsTrue || Input.GetKey("k") && !ncm.ncsIsTrue)
         {
             greenIsActive = false;
             //blueIsActive = false;
@@ -95,7 +97,7 @@ public class ColorManager : MonoBehaviour
         //Blue();
         //Yellow();
 
-   
+
 
         if (greenIsActive)
         {
