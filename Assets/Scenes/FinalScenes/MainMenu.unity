@@ -259,6 +259,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -341
       objectReference: {fileID: 0}
+    - target: {fileID: 6199316694130203598, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: efd884df555d2bb438015667343026fc, type: 3}
+    - target: {fileID: 6199316694130203599, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ae2e83f4c0d79f144bd0dd5106190cbb, type: 3}
+    - target: {fileID: 6199316694130203599, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ae2e83f4c0d79f144bd0dd5106190cbb, type: 3}
     - target: {fileID: 6199316694130203599, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -295,6 +307,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 162
       objectReference: {fileID: 0}
+    - target: {fileID: 6199316694161228744, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b84d8cb93b8abff45b523080fea93252, type: 3}
+    - target: {fileID: 6199316694161228745, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0fd626fd3b428a948882accecc500e6f, type: 3}
+    - target: {fileID: 6199316694161228745, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0fd626fd3b428a948882accecc500e6f, type: 3}
     - target: {fileID: 6199316694171734981, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -305,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6199316694171734983, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
       propertyPath: m_MatchWidthOrHeight
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6199316694171734983, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
       propertyPath: m_ReferenceResolution.x
@@ -411,6 +435,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -142.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6199316694383661898, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 329ed5a1f6e138b47bd653121714a0d5, type: 3}
+    - target: {fileID: 6199316694383661899, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 862a4f95f76663c4abc46108eea0f1dc, type: 3}
+    - target: {fileID: 6199316694383661899, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 862a4f95f76663c4abc46108eea0f1dc, type: 3}
+    - target: {fileID: 6199316695417507070, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02b477418a7e7b04ab854709188f1fc9, type: 3}
     - target: {fileID: 6199316695417507071, guid: c1bbbc5372ed70b40b11c44387fc479c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
