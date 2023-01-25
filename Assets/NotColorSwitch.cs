@@ -6,6 +6,10 @@ public class NotColorSwitch : MonoBehaviour
 {
     public bool isTriggerd;
 
+    public ColorManager colorManager;
+    public PlayerController playerController;
+    public NotColourManager notColourManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,13 +25,17 @@ public class NotColorSwitch : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
         isTriggerd = false;
+        notColourManager.ncsIsTrue = false;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("NotColorSwitch"))
         {
+            Debug.Log("Fisch");
             isTriggerd = true;
+            notColourManager.ncsIsTrue = true;
+            notColourManager.ColourTrigger();
         }
     }
 }
