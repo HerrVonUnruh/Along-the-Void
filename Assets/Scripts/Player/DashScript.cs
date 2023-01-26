@@ -23,7 +23,7 @@ public class DashScript : MonoBehaviour
 
     [SerializeField] public TrailRenderer tr;
 
-
+    [SerializeField] PauseMenue pauseMenue;
 
 
     private void Start()
@@ -159,6 +159,12 @@ public class DashScript : MonoBehaviour
 
     private void Update()
     {
+        if (pauseMenue.GameIsPaused)
+        {
+            return;
+        }
+
+
         if (isDashing)
         {
             return;

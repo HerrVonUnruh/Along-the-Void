@@ -12,20 +12,20 @@ public class GruenerPilz : MonoBehaviour
     public ColorManager Green;
     public Material[] material;
     public bool isGreenShining;
-
+    public PilzDetector shine;
     public Animator animator;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         
 
-        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive && Green.redIsActive||
-            collision.gameObject.tag == "ColorDetector" && Green.greenIsActive && !Green.redIsActive)
-        {
+        //if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive && Green.redIsActive||
+        //    collision.gameObject.tag == "ColorDetector" && Green.greenIsActive && !Green.redIsActive)
+        //{
 
-            isGreenShining = true;
+        //    isGreenShining = true;
 
-        }
+        //}
         if (collision.gameObject.CompareTag("Player") /*&& Green.greenIsActive*/)
         {
             Debug.Log("BOING");
@@ -36,12 +36,12 @@ public class GruenerPilz : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
-          collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
+        //if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
+        //  collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
 
-        {
-            isGreenShining = false;
-        }
+        //{
+        //    isGreenShining = false;
+        //}
         if (collision.gameObject.CompareTag("Player") /*&& Green.greenIsActive*/)
         {
             SoundManager.sndMan.PlaySprungSound();
@@ -59,6 +59,15 @@ public class GruenerPilz : MonoBehaviour
 
     void Update()
     {
+
+        if(shine.isGreenShining == true)
+        {
+            isGreenShining = true;
+        }
+        else
+        {
+            isGreenShining = false;
+        }
         Green.Green();
         Green.Red();
         //Green.Blue();
@@ -66,6 +75,19 @@ public class GruenerPilz : MonoBehaviour
 
 
 
+        if (Green.redIsActive)
+        {
+
+            this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
+            if (GreenSkill != null)
+
+            if (GreenColliderSkill != null)
+            {
+                GreenColliderSkill.enabled = false;
+            }
+            animator.SetBool("GreenIsActivated", false);
+
+        }
         if (Green.greenIsActive && isGreenShining)
         {
             animator.SetBool("GreenIsActivated", true);
@@ -80,7 +102,7 @@ public class GruenerPilz : MonoBehaviour
 
         if (Green.greenIsActive && !isGreenShining)
         {
-            animator.SetBool("GreenIsActivated", true);
+            animator.SetBool("GreenIsActivated", false) ;
             this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
   
             if (GreenColliderSkill != null)
@@ -92,19 +114,6 @@ public class GruenerPilz : MonoBehaviour
 
 
 
-        if (!isGreenShining || Green.redIsActive)
-        {
-
-            this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
-            if (GreenSkill != null)
-
-            if (GreenColliderSkill != null)
-            {
-                GreenColliderSkill.enabled = false;
-            }
-            animator.SetBool("GreenIsActivated", false);
-
-        }
         if (!Green.greenIsActive && isGreenShining)
         {
             this.gameObject.GetComponent<SpriteRenderer>().material = material[0];

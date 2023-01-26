@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     public ColorManager colorManager;
     public DashScript dash;
 
+    [SerializeField] PauseMenue pauseMenue;
 
 
 
@@ -108,8 +109,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-
+        // return if gameIsPaused();
+        if (pauseMenue.GameIsPaused)
+        {
+            return;
+        }
 
 
         //Movement
@@ -301,7 +305,7 @@ public class PlayerController : MonoBehaviour
     {
         isJumping = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(ShroomCheckCollider.position, ShroomCheckRadius, shroomLayer);
-        if (colliders.Length > 0)
+        if (colliders.Length > 0 && colorManager.greenIsActive)
             isJumping = true;
 
     }

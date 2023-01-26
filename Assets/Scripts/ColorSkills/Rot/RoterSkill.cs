@@ -16,11 +16,13 @@ public class RoterSkill : MonoBehaviour
     public bool isRedShining;
     public ColorManager Red;
     public Material[] material;
-    
+    [SerializeField] PauseMenue pauseMenue;
+
 
 
     void Start()
     {
+        pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
         REDSkill = GetComponent<PolygonCollider2D>();
         REDSkill2 = GetComponent<SpriteRenderer>();
         //REDSkill3 = GetComponent<EdgeCollider2D>();
@@ -30,6 +32,12 @@ public class RoterSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (pauseMenue.GameIsPaused)
+        {
+            return;
+        }
+
         Red.Green();
         //Red.Blue();
         //Red.Yellow();
@@ -115,6 +123,17 @@ public class RoterSkill : MonoBehaviour
             
             isRedShining = true;
             
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "ColorDetector" && !Red.redIsActive ||
+            collision.gameObject.tag == "ColorDetector" && Red.redIsActive)
+        {
+
+            isRedShining = true;
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

@@ -14,6 +14,7 @@ public class GruenerSkill : MonoBehaviour
     public Sprite greenSprite;
     public Material[] material;
     public bool isGreenShining;
+    [SerializeField] PauseMenue pauseMenue;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -27,6 +28,7 @@ public class GruenerSkill : MonoBehaviour
         }
        
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
   
@@ -43,12 +45,18 @@ public class GruenerSkill : MonoBehaviour
 
     void Start()
     {
+        pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
         GreenSkill = GetComponent<SpriteRenderer>();
         GreenColliderSkill = GetComponent<PolygonCollider2D>();
     }
 
     void Update()
     {
+
+        if (pauseMenue.GameIsPaused)
+        {
+            return;
+        }
         Green.Green();
         Green.Red();
         //Green.Blue();

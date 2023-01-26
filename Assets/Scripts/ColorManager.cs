@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class ColorManager : MonoBehaviour
 {
-
+    [SerializeField ] PauseMenue pauseMenue;
     public Material[] Material;
 
     public PlayerController Size;
@@ -46,7 +46,10 @@ public class ColorManager : MonoBehaviour
 
     void Start()
     {
-        greenIsActive = true;
+        pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
+        greenIsActive = true;      
+
+
     }
     public void Green()
     {
@@ -92,6 +95,11 @@ public class ColorManager : MonoBehaviour
 
     private void Update()
     {
+        if (pauseMenue.GameIsPaused)
+        {
+            return;
+        }
+
         Green();
         Red();
         //Blue();
