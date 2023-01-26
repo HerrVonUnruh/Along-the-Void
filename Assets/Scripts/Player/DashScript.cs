@@ -38,7 +38,7 @@ public class DashScript : MonoBehaviour
         if (isDashing)
         {
 
-            DashControll.Geschwindigkeit = 90f;
+            DashControll.Geschwindigkeit = DashControll.maxSpeed;
 
         }
     }
