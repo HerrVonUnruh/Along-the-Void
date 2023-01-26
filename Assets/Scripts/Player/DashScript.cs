@@ -69,6 +69,7 @@ public class DashScript : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        SoundManager.sndMan.PlayDashSound();
         rb.velocity = new Vector2(0f, transform.localScale.y * DashControll.Geschwindigkeit * 5f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -87,6 +88,7 @@ public class DashScript : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        SoundManager.sndMan.PlayDashSound();
         rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -105,6 +107,7 @@ public class DashScript : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        SoundManager.sndMan.PlayDashSound();
         rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -123,6 +126,7 @@ public class DashScript : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        SoundManager.sndMan.PlayDashSound();
         rb.velocity = new Vector2(transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -141,6 +145,7 @@ public class DashScript : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        SoundManager.sndMan.PlayDashSound();
         rb.velocity = new Vector2(-transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
