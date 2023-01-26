@@ -7,7 +7,7 @@ public class DashScript : MonoBehaviour
 
 
     public float Direction = 0f;// erstellt einen privaten Float namens "Direction" auf 0
-    public float DirectionVertical = 0f; // erstellt einen privaten Float f�r namens "DirectionVertical" auf 0
+    public float DirectionVertical = 0f; // erstellt einen privaten Float f r namens "DirectionVertical" auf 0
     private PlayerController DashControll;
 
 
@@ -16,6 +16,7 @@ public class DashScript : MonoBehaviour
     public float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
+    public bool notGroundDash = true;
 
     public Animator animator;
 
@@ -23,7 +24,7 @@ public class DashScript : MonoBehaviour
 
     [SerializeField] public TrailRenderer tr;
 
-    [SerializeField] PauseMenue pauseMenue;
+
 
 
     private void Start()
@@ -59,6 +60,7 @@ public class DashScript : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        notGroundDash = false;
     }
 
     private IEnumerator DashVertical()
@@ -70,7 +72,8 @@ public class DashScript : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         SoundManager.sndMan.PlayDashSound();
-        rb.velocity = new Vector2(0f, transform.localScale.y * DashControll.Geschwindigkeit * 5f);
+        rb.AddForce(new Vector2(0f, transform.localScale.y * dashingPower), ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(0f, transform.localScale.y * DashControll.Geschwindigkeit * 5f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
@@ -78,6 +81,7 @@ public class DashScript : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        notGroundDash = false;
     }
 
     private IEnumerator DashVerticalRechtsHoch()
@@ -89,7 +93,8 @@ public class DashScript : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         SoundManager.sndMan.PlayDashSound();
-        rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
+        rb.AddForce(new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * dashingPower), ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
@@ -97,6 +102,7 @@ public class DashScript : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        notGroundDash = false;
     }
 
     private IEnumerator DashVerticalRechtsRunter()
@@ -108,7 +114,8 @@ public class DashScript : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         SoundManager.sndMan.PlayDashSound();
-        rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
+        rb.AddForce(new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * -dashingPower), ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
@@ -116,6 +123,7 @@ public class DashScript : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        notGroundDash = false;
     }
 
     private IEnumerator DashVerticalLinksHoch()
@@ -127,7 +135,8 @@ public class DashScript : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         SoundManager.sndMan.PlayDashSound();
-        rb.velocity = new Vector2(transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
+        rb.AddForce(new Vector2(transform.localScale.x * -dashingPower, transform.localScale.y * dashingPower), ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
@@ -135,6 +144,7 @@ public class DashScript : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        notGroundDash = false;
     }
 
     private IEnumerator DashVerticalLinksRunter()
@@ -146,7 +156,8 @@ public class DashScript : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         SoundManager.sndMan.PlayDashSound();
-        rb.velocity = new Vector2(-transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
+        rb.AddForce(new Vector2(-transform.localScale.x * -dashingPower, transform.localScale.y * -dashingPower), ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(-transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
@@ -154,20 +165,20 @@ public class DashScript : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        notGroundDash = false;
     }
 
 
     private void Update()
     {
-        if (pauseMenue.GameIsPaused)
+        if (isDashing)
         {
             return;
         }
 
-
-        if (isDashing)
+        if (DashControll.isGrounded)
         {
-            return;
+            notGroundDash = true;
         }
 
         Direction = Input.GetAxis("Horizontal");
@@ -175,7 +186,7 @@ public class DashScript : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction != 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction != 0f && DirectionVertical == 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction != 0f && DirectionVertical == 0f && notGroundDash || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction != 0f && DirectionVertical == 0f && notGroundDash)
         {
             DashControll.Geschwindigkeit = DashControll.StandartGeschwindigkeit;
             StartCoroutine(Dash());
@@ -183,26 +194,26 @@ public class DashScript : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction == 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction == 0f /*|| Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction == 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction == 0f*/)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction == 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction == 0f && notGroundDash/*|| Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction == 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction == 0f*/)
         {
             StartCoroutine(DashVertical());
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction > 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction > 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction > 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction > 0f && notGroundDash)
         {
             StartCoroutine(DashVerticalRechtsHoch());
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction > 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction > 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction > 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction > 0f && notGroundDash)
         {
             StartCoroutine(DashVerticalRechtsRunter());
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction < 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction < 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction < 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction < 0f && notGroundDash)
         {
             StartCoroutine(DashVerticalLinksHoch());
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction < 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction < 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction < 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction < 0f && notGroundDash)
         {
             StartCoroutine(DashVerticalLinksRunter());
         }

@@ -7,6 +7,7 @@ public class GruenerSkill : MonoBehaviour
 {
     
     private PolygonCollider2D GreenColliderSkill;
+    private CapsuleCollider2D GreenCapsuleColliderSkill;
     private SpriteRenderer GreenSkill;
     public Rigidbody2D Player;
     public ColorManager Green;
@@ -48,6 +49,7 @@ public class GruenerSkill : MonoBehaviour
         pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
         GreenSkill = GetComponent<SpriteRenderer>();
         GreenColliderSkill = GetComponent<PolygonCollider2D>();
+        GreenCapsuleColliderSkill = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -75,6 +77,10 @@ public class GruenerSkill : MonoBehaviour
             {
                 GreenColliderSkill.enabled = true;
             }
+            if (GreenCapsuleColliderSkill != null)
+            {
+                GreenCapsuleColliderSkill.enabled = true;
+            }
         }
 
         if (Green.greenIsActive && !isGreenShining)
@@ -88,7 +94,10 @@ public class GruenerSkill : MonoBehaviour
             {
                 GreenColliderSkill.enabled = false;
             }
-
+            if (GreenCapsuleColliderSkill != null)
+            {
+                GreenCapsuleColliderSkill.enabled = false;
+            }
         }
 
 
@@ -104,7 +113,10 @@ public class GruenerSkill : MonoBehaviour
             {
                 GreenColliderSkill.enabled = false;
             }
-
+            if (GreenCapsuleColliderSkill != null)
+            {
+                GreenCapsuleColliderSkill.enabled = false;
+            }
         }
         if (!Green.greenIsActive && isGreenShining)
         {
@@ -117,6 +129,10 @@ public class GruenerSkill : MonoBehaviour
             if (GreenColliderSkill != null)
             {
                 GreenColliderSkill.enabled = false;
+            }
+            if (GreenCapsuleColliderSkill != null)
+            {
+                GreenCapsuleColliderSkill.enabled = false;
             }
         }
     }
