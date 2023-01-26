@@ -19,7 +19,7 @@ public class Star : MonoBehaviour, ICollectible
     }
     public void Collect()
     {
-        
+        SoundManager.sndMan.PlayCollectedSound();
         Debug.Log("Star Collected");
         Destroy(gameObject);
         OnStarCollected?.Invoke();

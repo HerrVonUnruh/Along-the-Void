@@ -14,6 +14,7 @@ public class KillPlayer : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player")) 
         {
+            SoundManager.sndMan.PlayDeathSound();
             collision.transform.position = spawnPoint.position;
             willSpawn = true;
             spawning.Spawn();

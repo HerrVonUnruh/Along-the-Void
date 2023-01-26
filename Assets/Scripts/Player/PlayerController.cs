@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
     public DashScript dash;
 
 
+
+
     public float SprungGeschwindigkeit = 50f; // Erstellt öffentlichen Float namens "SprungGeschwindigkeit"
 
 
@@ -79,8 +81,10 @@ public class PlayerController : MonoBehaviour
 
 
 
- 
-    
+    [SerializeField] private AudioSource walkingSound;
+    [SerializeField] private AudioSource anlaufSound;
+
+
 
     private void Awake()
     {
@@ -96,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
         Player = GetComponent<Rigidbody2D>(); // Erstellt am Anfang des Games einen Bezug zum Rigidbody namens "Player"
     }
 
@@ -103,6 +108,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+
+
+
         //Movement
         //__________________________________________________________________________________________________________
 
@@ -127,6 +136,12 @@ public class PlayerController : MonoBehaviour
             if (Geschwindigkeit < maxSpeed)
             {
                 Geschwindigkeit += flipSteigerung * Time.deltaTime;
+
+
+                if (Geschwindigkeit > 20f && Geschwindigkeit < 21f && dash.isDashing == false && dash.canDash == true)
+                {
+                    anlaufSound.Play();
+                }
             }
         }
 
@@ -136,6 +151,13 @@ public class PlayerController : MonoBehaviour
             if (Geschwindigkeit < maxSpeed)
             {
                 Geschwindigkeit += flipSteigerung * Time.deltaTime;
+
+              
+
+                if (Geschwindigkeit > 20f && Geschwindigkeit < 21f && dash.isDashing == false && dash.canDash == true)
+                {
+                    anlaufSound.Play();
+                }
             }
         }
         else // "Andernfalls", also wenn gar keine Taste A oder D gedrückt wird, dann bedeutet das, dass auf der X Achse 0 Bewegung stattfindet!
@@ -188,9 +210,9 @@ public class PlayerController : MonoBehaviour
 
         //}
 
-       
 
-      
+
+
 
         Flip(); // HIER IST DIE FUNKTION FÜR DIE STEIGERUNG FUER DIE GESCHWINDIGKEIT PRO SEKUNDE!!!!!!
 
@@ -210,7 +232,9 @@ public class PlayerController : MonoBehaviour
 
         Spawn();
         if (onSpawn == true)
-        { Geschwindigkeit = 0f;
+        {
+            
+            Geschwindigkeit = 0f;
             //dash.canDash = false;
         }
 
@@ -291,7 +315,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-  
+
 
     public void Flip()
     {
@@ -303,8 +327,8 @@ public class PlayerController : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-  
-      
+
+
     public void Spawn()
     { //SPAWN mit eigener Tastenbelegung
         //______________________________________________________       
@@ -329,6 +353,7 @@ public class PlayerController : MonoBehaviour
         transform.position = spawnPoint.position;
         onSpawn = true;
         Player.velocity = Vector2.zero;
+        //SoundManager.sndMan.PlayRespawnSound();
         yield return new WaitForSeconds(waitAtSpawn);
         onSpawn = false;
         killSpawn.willSpawn = false;
@@ -355,18 +380,18 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeSize(Vector3 groesseAendern)
     {
-        if(isFacingRight)
+        if (isFacingRight)
         {
             Player.gameObject.transform.localScale = groesseAendern;
         }
-       
+
         else
         {
             Player.gameObject.transform.localScale = new Vector3(-groesseAendern.x, groesseAendern.y, groesseAendern.z);
         }
     }
 
-        
+
 
     //    public bool IsBlueWalled()
     //{
@@ -387,7 +412,7 @@ public class PlayerController : MonoBehaviour
     //    }
 
 
-//}
+    //}
 
 
 
@@ -399,53 +424,53 @@ public class PlayerController : MonoBehaviour
 
 
 }
-    //private void Movement()
+//private void Movement()
 
-    //{
+//{
 
-    //    Direction = Input.GetAxisRaw("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
-    //    DirectionVertical = Input.GetAxisRaw("Vertical");
+//    Direction = Input.GetAxisRaw("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
+//    DirectionVertical = Input.GetAxisRaw("Vertical");
 
-    //    if (Direction == 0f)
-    //    {
-    //        Geschwindigkeit = Geschwindigkeit - GeschwindigkeitsAbfall * Time.deltaTime;
+//    if (Direction == 0f)
+//    {
+//        Geschwindigkeit = Geschwindigkeit - GeschwindigkeitsAbfall * Time.deltaTime;
 
-    //        if (Geschwindigkeit <= 20f)
-    //        { Geschwindigkeit = StandartGeschwindigkeit; }
+//        if (Geschwindigkeit <= 20f)
+//        { Geschwindigkeit = StandartGeschwindigkeit; }
 
-    //    }
-
-
-
-    //    if (Direction > 0f) // wenn die Richtung der gedrückten Tasten ( a oder d ) auf der Y Achse über 0 sind
-    //    {
-    //        Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
-    //        if (Geschwindigkeit < maxSpeed)
-    //        {
-    //            Geschwindigkeit += flipSteigerung * Time.deltaTime;
-    //        }
-    //    }
-
-    //    else if (Direction < 0f) // wenn die Richtung der gedrückten Tasten(a oder d ) auf der Y Achse unter 0 sind
-    //    {
-    //        Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
-    //        if (Geschwindigkeit < maxSpeed)
-    //        {
-    //            Geschwindigkeit += flipSteigerung * Time.deltaTime;
-    //        }
-    //    }
-    //    else // "Andernfalls", also wenn gar keine Taste A oder D gedrückt wird, dann bedeutet das, dass auf der X Achse 0 Bewegung stattfindet!
-    //    {
-    //        Player.velocity = new Vector2(0, Player.velocity.y);
-    //    }
-    //}
-
-    //________________________________________________________________
-    // AUTOMATIC SPAWN
+//    }
 
 
 
-    //private bool IsGrounded()
-    //{
-    //    return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    //}
+//    if (Direction > 0f) // wenn die Richtung der gedrückten Tasten ( a oder d ) auf der Y Achse über 0 sind
+//    {
+//        Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
+//        if (Geschwindigkeit < maxSpeed)
+//        {
+//            Geschwindigkeit += flipSteigerung * Time.deltaTime;
+//        }
+//    }
+
+//    else if (Direction < 0f) // wenn die Richtung der gedrückten Tasten(a oder d ) auf der Y Achse unter 0 sind
+//    {
+//        Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
+//        if (Geschwindigkeit < maxSpeed)
+//        {
+//            Geschwindigkeit += flipSteigerung * Time.deltaTime;
+//        }
+//    }
+//    else // "Andernfalls", also wenn gar keine Taste A oder D gedrückt wird, dann bedeutet das, dass auf der X Achse 0 Bewegung stattfindet!
+//    {
+//        Player.velocity = new Vector2(0, Player.velocity.y);
+//    }
+//}
+
+//________________________________________________________________
+// AUTOMATIC SPAWN
+
+
+
+//private bool IsGrounded()
+//{
+//    return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+//}

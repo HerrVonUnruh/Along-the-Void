@@ -20,7 +20,7 @@ public class DashScript : MonoBehaviour
     public Animator animator;
 
     [SerializeField] private Rigidbody2D rb;
-  
+
     [SerializeField] public TrailRenderer tr;
 
 
@@ -36,8 +36,9 @@ public class DashScript : MonoBehaviour
     {
         if (isDashing)
         {
+
             DashControll.Geschwindigkeit = 90f;
-    
+
         }
     }
     private IEnumerator Dash()
@@ -47,6 +48,7 @@ public class DashScript : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        SoundManager.sndMan.PlayDashSound();
         //rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         rb.AddForce(new Vector2(transform.localScale.x * dashingPower, 0f), ForceMode2D.Impulse);
         //rb.AddForce(transform.right * dashingPower, ForceMode2D.Impulse);
@@ -162,7 +164,7 @@ public class DashScript : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction  !=0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction != 0f && DirectionVertical == 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction != 0f && DirectionVertical == 0f || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction != 0f && DirectionVertical == 0f)
         {
             DashControll.Geschwindigkeit = DashControll.StandartGeschwindigkeit;
             StartCoroutine(Dash());
@@ -189,7 +191,7 @@ public class DashScript : MonoBehaviour
         {
             StartCoroutine(DashVerticalLinksHoch());
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction < 0f|| Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction < 0f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction < 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction < 0f)
         {
             StartCoroutine(DashVerticalLinksRunter());
         }
