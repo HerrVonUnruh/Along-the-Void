@@ -12,23 +12,25 @@ public class VFXManager : MonoBehaviour
 
     public void Green()
     {
-          if (Input.GetKey(KeyCode.Joystick1Button0) && !colorVFXAnimator.greenIsActive && colorVFXAnimator.redIsActive)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
        {
             animator.SetBool("GreenIsActive", true);
-       }
-        if (Input.GetKeyUp(KeyCode.Joystick1Button0))
+           
+        }
+        if (colorVFXAnimator.redIsActive)
         {
             animator.SetBool("GreenIsActive", false);
         }
+        
     }
 
     public void Red()
     {
-             if (Input.GetKey(KeyCode.Joystick1Button1) && colorVFXAnimator.greenIsActive && !colorVFXAnimator.redIsActive)
+             if (Input.GetKey(KeyCode.Joystick1Button1) && colorVFXAnimator.greenIsActive  /*&& !colorVFXAnimator.redIsActive && !Input.GetKey(KeyCode.Joystick1Button0)*/)
        {
             animator.SetBool("RedIsActive", true);
        }
-        if (Input.GetKeyUp(KeyCode.Joystick1Button1))
+        if (Input.GetKeyUp(KeyCode.Joystick1Button1)/* || colorVFXAnimator.greenIsActive*/)
         {
             animator.SetBool("RedIsActive", false);
         }

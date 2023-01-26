@@ -7,6 +7,7 @@ public class PilzDetector : MonoBehaviour
 {
     public ColorManager Green;
     public bool isGreenShining;
+    [SerializeField] PauseMenue pauseMenue;
 
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -35,11 +36,15 @@ public class PilzDetector : MonoBehaviour
 
     void Start()
     {
-
+        pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
     }
 
     void Update()
     {
+        if (pauseMenue.GameIsPaused)
+        {
+            return;
+        }
         Green.Green();
         Green.Red();
         //Green.Blue();

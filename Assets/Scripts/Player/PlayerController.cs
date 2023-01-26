@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
     public ColorManager colorManager;
     public DashScript dash;
 
-    [SerializeField] PauseMenue pauseMenue;
+    //[SerializeField] PauseMenue pauseMenue;
 
 
 
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource walkingSound;
     [SerializeField] private AudioSource anlaufSound;
 
-
+    [SerializeField] PauseMenue pauseMenue;
 
     private void Awake()
     {
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
         Player = GetComponent<Rigidbody2D>(); // Erstellt am Anfang des Games einen Bezug zum Rigidbody namens "Player"
     }
 
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // return if gameIsPaused();
+       
         if (pauseMenue.GameIsPaused)
         {
             return;

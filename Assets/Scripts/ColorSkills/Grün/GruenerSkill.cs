@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GruenerSkill : MonoBehaviour
 {
-    
+
     private PolygonCollider2D GreenColliderSkill;
     private CapsuleCollider2D GreenCapsuleColliderSkill;
     private SpriteRenderer GreenSkill;
@@ -19,7 +19,11 @@ public class GruenerSkill : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-       
+        if (collision.CompareTag("NotColorSwitch"))
+        {
+            isGreenShining = false;
+        }
+
         if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
             collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
         {
@@ -27,12 +31,12 @@ public class GruenerSkill : MonoBehaviour
             isGreenShining = true;
 
         }
-       
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-  
+
         if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
           collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
         {

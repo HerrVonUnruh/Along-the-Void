@@ -15,6 +15,7 @@ public class GruenerPilz : MonoBehaviour
     public PilzDetector shine;
     public Animator animator;
 
+    [SerializeField] PauseMenue pauseMenue;
     private void OnTriggerStay2D(Collider2D collision)
     {
         
@@ -53,14 +54,18 @@ public class GruenerPilz : MonoBehaviour
 
     void Start()
     {
+        pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
         GreenSkill = GetComponent<SpriteRenderer>();
         GreenColliderSkill = GetComponent<PolygonCollider2D>();
     }
 
     void Update()
     {
-
-        if(shine.isGreenShining == true)
+        if (pauseMenue.GameIsPaused)
+        {
+            return;
+        }
+        if (shine.isGreenShining == true)
         {
             isGreenShining = true;
         }
