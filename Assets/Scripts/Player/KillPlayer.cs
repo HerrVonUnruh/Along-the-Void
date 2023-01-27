@@ -15,13 +15,18 @@ public class KillPlayer : MonoBehaviour
         if (collision.transform.CompareTag("Player")) 
         {
             SoundManager.sndMan.PlayDeathSound();
-            collision.transform.position = spawnPoint.position;
-            willSpawn = true;
-            spawning.Spawn();
+            spawning.isDead = true;
             if (spawning.isDead)
             {
-                fadeScript.FadeScreen(true);
+                fadeScript.FadeScreen(true,spawning);
             }
+
+            willSpawn = true;
+            spawning.Spawn();
+            //collision.transform.position = spawnPoint.position;
+            spawning.isDead = false;
+
+
             
         }
             

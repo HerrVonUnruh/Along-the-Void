@@ -353,12 +353,12 @@ public class PlayerController : MonoBehaviour
     public IEnumerator SpawnPause()
     {
         Debug.Log("Start");
-        transform.CompareTag("Player");
-        transform.position = spawnPoint.position;
         onSpawn = true;
         Player.velocity = Vector2.zero;
         //SoundManager.sndMan.PlayRespawnSound();
         yield return new WaitForSeconds(waitAtSpawn);
+        transform.CompareTag("Player");
+        transform.position = spawnPoint.position;
         onSpawn = false;
         killSpawn.willSpawn = false;
         Debug.Log("Ende");
