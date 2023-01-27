@@ -8,31 +8,35 @@ public class VFXManager : MonoBehaviour
     public ColorManager colorVFXAnimator;
     public PlayerController speedVFXAnimator;
     public DashScript dashVFXAnimator;
+    public float waitTime = 0.5f;
+    public bool hasCoolDownGreen = true;
+    public bool hasCoolDownRed;
+
     //public GameManager starVFXAnimator;
+
+
 
     public void Green()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
-       {
-            animator.SetBool("GreenIsActive", true);
-           
-        }
-        if (colorVFXAnimator.redIsActive)
+        if (colorVFXAnimator.greenIsActive)
         {
-            animator.SetBool("GreenIsActive", false);
+            hasCoolDownRed = false;
         }
-        
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && hasCoolDownGreen == false)
+        {
+            StartCoroutine("WaitGreen");
+        }
     }
 
     public void Red()
     {
-             if (Input.GetKey(KeyCode.Joystick1Button1) && colorVFXAnimator.greenIsActive  /*&& !colorVFXAnimator.redIsActive && !Input.GetKey(KeyCode.Joystick1Button0)*/)
-       {
-            animator.SetBool("RedIsActive", true);
-       }
-        if (Input.GetKeyUp(KeyCode.Joystick1Button1)/* || colorVFXAnimator.greenIsActive*/)
+        if (colorVFXAnimator.redIsActive)
         {
-            animator.SetBool("RedIsActive", false);
+            hasCoolDownGreen = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && hasCoolDownRed == false)
+        {
+            StartCoroutine("WaitRed");
         }
     }
 
@@ -50,11 +54,32 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    //public void Stars()
-    //{
-    //    animator.SetBool("StarIsCollected", true);
-    //}
+    public void Gravity()
+    {
+        animator.SetBool("IsGravityControlVFX", true);
+    }
 
+    public IEnumerator WaitGreen()
+    {
+
+        animator.SetBool("GreenIsActive", true);
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("GreenIsActive", false);
+        hasCoolDownGreen = true;
+
+
+    }
+
+    public IEnumerator WaitRed()
+    {
+
+        animator.SetBool("RedIsActive", true);
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("RedIsActive", false);
+        hasCoolDownRed = true;
+
+
+    }
     private void Update()
     {
         Speed();

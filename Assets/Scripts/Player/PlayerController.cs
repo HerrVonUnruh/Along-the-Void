@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
     private bool GravityControlAnimation = false;
     public ColorManager colorManager;
     public DashScript dash;
+    public VFXManager gravityVFX;
 
     //[SerializeField] PauseMenue pauseMenue;
 
@@ -186,11 +187,13 @@ public class PlayerController : MonoBehaviour
         if (GravityControl == true)
         {
             animator.SetBool("IsGravityControl", true);
-            //GravityControlAnimation = false;
+            gravityVFX.Gravity();
+
         }
         if (isGrounded == true)
         {
             animator.SetBool("IsGravityControl", false);
+            gravityVFX.animator.SetBool("IsGravityControlVFX", false);
         }
 
         //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f ||

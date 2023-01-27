@@ -13,6 +13,6 @@ public class StarText : MonoBehaviour
     public void IncrementStarCount(int starTotal) 
     {
        
-        starText.text = $"Stars: {starTotal}";
+        starText.text = $"{starTotal}";
     }
 }
