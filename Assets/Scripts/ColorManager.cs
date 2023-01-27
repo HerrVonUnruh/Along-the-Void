@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class ColorManager : MonoBehaviour
 {
-    [SerializeField ] PauseMenue pauseMenue;
+    [SerializeField] PauseMenue pauseMenue;
     public Material[] Material;
 
     public PlayerController Size;

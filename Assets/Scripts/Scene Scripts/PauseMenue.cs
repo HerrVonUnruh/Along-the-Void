@@ -11,9 +11,14 @@ public class PauseMenue : MonoBehaviour
 
     public GameObject firstMenuButton;
     public GameObject optionsMenu;
-    
 
-    // Update is called once per frame
+
+    //private void Awake()
+    //{
+    //    PauseMenueUI.SetActive(false);
+    //    Time.timeScale = 1f;
+    //    GameIsPaused = false;
+    //}
     private void Start()
     {
         PauseMenueUI.SetActive(false);
