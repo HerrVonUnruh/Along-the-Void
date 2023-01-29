@@ -15,11 +15,23 @@ public class Surprise : MonoBehaviour
     public FairyHUDManager redFairyHUDManager;
     public FairyHUDManager greenFairyHUDManager;
     public bool canMove = false;
+    public GameObject[] cameraList;
+    private int currentCamera;
+    public PlayerController playerController;
 
 
     void Start()
     {
         Fairy = GetComponent<Rigidbody2D>();
+        currentCamera = 0;
+        for (int i = 0; i < cameraList.Length; i++)
+        {
+        }
+
+        if (cameraList.Length > 0)
+        {
+            cameraList[0].gameObject.SetActive(true);
+        }
 
     }
 
@@ -40,8 +52,18 @@ public class Surprise : MonoBehaviour
             redFairyHUDManager.enabled = true;
             greenFairyHUDManager.enabled = true;
             canMove = false;
-            
+            currentCamera++;
+            if (currentCamera < cameraList.Length)
+            {
+                cameraList[currentCamera - 1].gameObject.SetActive(false);
+                cameraList[currentCamera].gameObject.SetActive(true);
+            }
+
         }
+      
+        MovementController();
+        FarCam();
+        
         Movement();
         //    if (Direction > 0f)
         //    {
@@ -92,6 +114,8 @@ public class Surprise : MonoBehaviour
                 redFairyHUDManager.enabled = false;
                 greenFairyHUDManager.enabled = false;
                 canMove = true;
+
+
             }
             if (canMove == true)
             {
@@ -129,9 +153,64 @@ public class Surprise : MonoBehaviour
                 Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
 
             }
-        }
+                if (Input.GetAxis("Left Trigger") > 0f && canMove)
+                {
+                    currentCamera = 3;
+                    cameraList[currentCamera - 3].gameObject.SetActive(false);
+                    cameraList[currentCamera - 2].gameObject.SetActive(false);
+                    cameraList[currentCamera - 1].gameObject.SetActive(false);
+                    cameraList[currentCamera + 1].gameObject.SetActive(false);
+                    cameraList[currentCamera].gameObject.SetActive(true);
+                }
+            }
+                if ((Input.GetAxis("Left Trigger") < 1f && canMove))
+                {
+                    currentCamera = 0;
+                    cameraList[currentCamera + 1].gameObject.SetActive(false);
+                    cameraList[currentCamera + 2].gameObject.SetActive(false);
+                    cameraList[currentCamera + 3].gameObject.SetActive(false);
+                    cameraList[currentCamera + 4].gameObject.SetActive(false);
+                    cameraList[currentCamera].gameObject.SetActive(true);
+                }
         }
 
+        
+        void MovementController()
+        {
+            if (playerController.Geschwindigkeit > 20f && !canMove)
+            {
+               
+                currentCamera = 2;
+                cameraList[currentCamera + 2].gameObject.SetActive(false);
+                cameraList[currentCamera + 1].gameObject.SetActive(false);
+                cameraList[currentCamera - 2].gameObject.SetActive(false);
+                cameraList[currentCamera - 1].gameObject.SetActive(false);
+                cameraList[currentCamera].gameObject.SetActive(true);
+               
+            }
+            if(playerController.Geschwindigkeit < 20f && !canMove)
+            {
+                currentCamera = 1;
+                cameraList[currentCamera + 3].gameObject.SetActive(false);
+                cameraList[currentCamera + 2].gameObject.SetActive(false);
+                cameraList[currentCamera + 1].gameObject.SetActive(false);
+                cameraList[currentCamera - 1].gameObject.SetActive(false);
+                cameraList[currentCamera].gameObject.SetActive(true);
+            }
+           
+        }
+        void FarCam()
+        {
+            if (Input.GetAxis("Left Trigger") > 0f && !canMove)
+            {
+                currentCamera = 4;
+                cameraList[currentCamera - 4].gameObject.SetActive(false);
+                cameraList[currentCamera - 3].gameObject.SetActive(false);
+                cameraList[currentCamera - 2].gameObject.SetActive(false);
+                cameraList[currentCamera - 1].gameObject.SetActive(false);
+                cameraList[currentCamera].gameObject.SetActive(true);
+            }
+        }
     }
 
 }

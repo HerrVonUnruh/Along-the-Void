@@ -252,15 +252,15 @@ public class PlayerController : MonoBehaviour
 
         // JUMP
         // ______________________________________________________________________________________________________
-        if (Input.GetAxis("Left Trigger") > 0f)
-        {
-            Player.velocity = new Vector2(Player.velocity.x, SprungGeschwindigkeit);
-        }
+        //if (Input.GetAxis("Left Trigger") > 0f)
+        //{
+        //    Player.velocity = new Vector2(Player.velocity.x, SprungGeschwindigkeit);
+        //}
 
-        if (Input.GetAxis("Left Trigger") > 0f && Player.velocity.y > 0f)
-        {
-            Player.velocity = new Vector2(Player.velocity.x, Player.velocity.y * 0.5f);
-        }
+        //if (Input.GetAxis("Left Trigger") > 0f && Player.velocity.y > 0f)
+        //{
+        //    Player.velocity = new Vector2(Player.velocity.x, Player.velocity.y * 0.5f);
+        //}
 
 
 
