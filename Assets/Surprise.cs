@@ -60,10 +60,10 @@ public class Surprise : MonoBehaviour
             }
 
         }
-      
+
         MovementController();
         FarCam();
-        
+
         Movement();
         //    if (Direction > 0f)
         //    {
@@ -119,40 +119,40 @@ public class Surprise : MonoBehaviour
             }
             if (canMove == true)
             {
-            if (Direction > 0f)
-            {
-                Fairy.velocity = new Vector2(Direction * Geschwindigkeit, Fairy.velocity.y);
-            }
+                if (Direction > 0f)
+                {
+                    Fairy.velocity = new Vector2(Direction * Geschwindigkeit, Fairy.velocity.y);
+                }
 
 
-            if (Direction < 0f)
-            {
-                //yellowFairyHUDManager.enabled = false;
-                //blueFairyHUDManager.enabled = false;
-                //redFairyHUDManager.enabled = false;
-                //greenFairyHUDManager.enabled = false;
-                Fairy.velocity = new Vector2(Direction * Geschwindigkeit, Fairy.velocity.y);
+                if (Direction < 0f)
+                {
+                    //yellowFairyHUDManager.enabled = false;
+                    //blueFairyHUDManager.enabled = false;
+                    //redFairyHUDManager.enabled = false;
+                    //greenFairyHUDManager.enabled = false;
+                    Fairy.velocity = new Vector2(Direction * Geschwindigkeit, Fairy.velocity.y);
 
-            }
-            if (DirectionVertical > 0f)
-            {
-                //yellowFairyHUDManager.enabled = false;
-                //blueFairyHUDManager.enabled = false;
-                //redFairyHUDManager.enabled = false;
-                //greenFairyHUDManager.enabled = false;
-                Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
-            }
+                }
+                if (DirectionVertical > 0f)
+                {
+                    //yellowFairyHUDManager.enabled = false;
+                    //blueFairyHUDManager.enabled = false;
+                    //redFairyHUDManager.enabled = false;
+                    //greenFairyHUDManager.enabled = false;
+                    Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
+                }
 
 
-            if (DirectionVertical < 0f)
-            {
-                //yellowFairyHUDManager.enabled = false;
-                //blueFairyHUDManager.enabled = false;
-                //redFairyHUDManager.enabled = false;
-                //greenFairyHUDManager.enabled = false;
-                Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
+                if (DirectionVertical < 0f)
+                {
+                    //yellowFairyHUDManager.enabled = false;
+                    //blueFairyHUDManager.enabled = false;
+                    //redFairyHUDManager.enabled = false;
+                    //greenFairyHUDManager.enabled = false;
+                    Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
 
-            }
+                }
                 if (Input.GetAxis("Left Trigger") > 0f && canMove)
                 {
                     currentCamera = 3;
@@ -160,58 +160,77 @@ public class Surprise : MonoBehaviour
                     cameraList[currentCamera - 2].gameObject.SetActive(false);
                     cameraList[currentCamera - 1].gameObject.SetActive(false);
                     cameraList[currentCamera + 1].gameObject.SetActive(false);
+                    cameraList[currentCamera + 2].gameObject.SetActive(false);
                     cameraList[currentCamera].gameObject.SetActive(true);
                 }
             }
-                if ((Input.GetAxis("Left Trigger") < 1f && canMove))
-                {
-                    currentCamera = 0;
-                    cameraList[currentCamera + 1].gameObject.SetActive(false);
-                    cameraList[currentCamera + 2].gameObject.SetActive(false);
-                    cameraList[currentCamera + 3].gameObject.SetActive(false);
-                    cameraList[currentCamera + 4].gameObject.SetActive(false);
-                    cameraList[currentCamera].gameObject.SetActive(true);
-                }
+            if ((Input.GetAxis("Left Trigger") < 1f && canMove))
+            {
+                currentCamera = 0;
+                cameraList[currentCamera + 1].gameObject.SetActive(false);
+                cameraList[currentCamera + 2].gameObject.SetActive(false);
+                cameraList[currentCamera + 3].gameObject.SetActive(false);
+                cameraList[currentCamera + 4].gameObject.SetActive(false);
+                cameraList[currentCamera + 5].gameObject.SetActive(false);
+                cameraList[currentCamera].gameObject.SetActive(true);
+            }
         }
 
-        
+
         void MovementController()
         {
-            if (playerController.Geschwindigkeit > 20f && !canMove)
+            if (playerController.Geschwindigkeit > 20f && !canMove && playerController.Direction > 0f)
             {
-               
+
                 currentCamera = 2;
+                cameraList[currentCamera + 3].gameObject.SetActive(false);
                 cameraList[currentCamera + 2].gameObject.SetActive(false);
                 cameraList[currentCamera + 1].gameObject.SetActive(false);
                 cameraList[currentCamera - 2].gameObject.SetActive(false);
                 cameraList[currentCamera - 1].gameObject.SetActive(false);
                 cameraList[currentCamera].gameObject.SetActive(true);
-               
+
             }
-            if(playerController.Geschwindigkeit < 20f && !canMove)
+            if (playerController.Geschwindigkeit > 20f && !canMove && playerController.Direction < 0f)
             {
-                currentCamera = 1;
-                cameraList[currentCamera + 3].gameObject.SetActive(false);
-                cameraList[currentCamera + 2].gameObject.SetActive(false);
-                cameraList[currentCamera + 1].gameObject.SetActive(false);
-                cameraList[currentCamera - 1].gameObject.SetActive(false);
-                cameraList[currentCamera].gameObject.SetActive(true);
-            }
-           
-        }
-        void FarCam()
-        {
-            if (Input.GetAxis("Left Trigger") > 0f && !canMove)
-            {
-                currentCamera = 4;
+                currentCamera = 5;
+                cameraList[currentCamera - 5].gameObject.SetActive(false);
                 cameraList[currentCamera - 4].gameObject.SetActive(false);
                 cameraList[currentCamera - 3].gameObject.SetActive(false);
                 cameraList[currentCamera - 2].gameObject.SetActive(false);
                 cameraList[currentCamera - 1].gameObject.SetActive(false);
                 cameraList[currentCamera].gameObject.SetActive(true);
             }
+
+                if (playerController.Geschwindigkeit < 20f && !canMove)
+                {
+                    currentCamera = 1;
+                    cameraList[currentCamera + 4].gameObject.SetActive(false);
+                    cameraList[currentCamera + 3].gameObject.SetActive(false);
+                    cameraList[currentCamera + 2].gameObject.SetActive(false);
+                    cameraList[currentCamera + 1].gameObject.SetActive(false);
+                    cameraList[currentCamera - 1].gameObject.SetActive(false);
+                    cameraList[currentCamera].gameObject.SetActive(true);
+
+
+                }
+
+            }
+            void FarCam()
+            {
+                if (Input.GetAxis("Left Trigger") > 0f && !canMove)
+                {
+                    currentCamera = 4;
+                    cameraList[currentCamera - 4].gameObject.SetActive(false);
+                    cameraList[currentCamera - 3].gameObject.SetActive(false);
+                    cameraList[currentCamera - 2].gameObject.SetActive(false);
+                    cameraList[currentCamera - 1].gameObject.SetActive(false);
+                    cameraList[currentCamera + 1].gameObject.SetActive(false);
+                    cameraList[currentCamera].gameObject.SetActive(true);
+                }
+            }
         }
+
     }
 
-}
 
