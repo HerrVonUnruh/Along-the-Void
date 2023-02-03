@@ -76,7 +76,7 @@ public class RoterSkill : MonoBehaviour
             this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             if (REDSkill != null)
             {
-                REDSkill.enabled = true;
+                REDSkill.enabled = false;
             }
             if (REDSkill2 != null)
             {
@@ -114,20 +114,25 @@ public class RoterSkill : MonoBehaviour
 
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
         
-        if (collision.gameObject.tag == "ColorDetector" && !Red.redIsActive || 
-            collision.gameObject.tag == "ColorDetector" && Red.redIsActive)
-        {
+    //    if (collision.gameObject.tag == "ColorDetector" && !Red.redIsActive || 
+    //        collision.gameObject.tag == "ColorDetector" && Red.redIsActive)
+    //    {
             
-            isRedShining = true;
+    //        isRedShining = true;
             
-        }
-    }
+    //    }
+    //}
+
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-
+        if (collision.CompareTag("NotColorSwitch"))
+        {
+            isRedShining = false;
+        }
         if (collision.gameObject.tag == "ColorDetector" && !Red.redIsActive ||
             collision.gameObject.tag == "ColorDetector" && Red.redIsActive)
         {

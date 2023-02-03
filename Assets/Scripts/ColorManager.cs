@@ -11,7 +11,7 @@ public class ColorManager : MonoBehaviour
 
     public PlayerController Size;
     public NotColorSwitch ncs;
-    public NotColourManager ncm;
+    //public NotColourManager ncm;
 
     public bool greenIsActive = false;
     public bool redIsActive = false;
@@ -39,10 +39,7 @@ public class ColorManager : MonoBehaviour
     public GameObject Object16;
     public GameObject Object17;
     public GameObject Object18;
-    public GameObject Object19;
-    public GameObject Object20;
-    public GameObject Object21;
-    public GameObject Object22;
+  
 
     void Start()
     {
@@ -53,7 +50,7 @@ public class ColorManager : MonoBehaviour
     }
     public void Green()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded && !ncm.ncsIsTrue || Input.GetKey("j") && !Size.isRedGrounded && !ncm.ncsIsTrue)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded /*&& !ncm.ncsIsTrue*/ || Input.GetKey("j") && !Size.isRedGrounded/* && !ncm.ncsIsTrue*/)
         {
             redIsActive = false;
             //blueIsActive = false;
@@ -63,7 +60,7 @@ public class ColorManager : MonoBehaviour
     }
     public void Red()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !ncm.ncsIsTrue || Input.GetKey("k") && !ncm.ncsIsTrue)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1)/* && !ncm.ncsIsTrue */|| Input.GetKey("k")/* && !ncm.ncsIsTrue*/)
         {
             greenIsActive = false;
             //blueIsActive = false;
@@ -128,10 +125,7 @@ public class ColorManager : MonoBehaviour
             Object16.GetComponent<Renderer>().material = Material[0];
             Object17.GetComponent<Renderer>().material = Material[0];
             Object18.GetComponent<Renderer>().material = Material[0];
-            Object19.GetComponent<Renderer>().material = Material[0];
-            Object20.GetComponent<Renderer>().material = Material[0];
-            Object21.GetComponent<Renderer>().material = Material[0];
-            Object22.GetComponent<Renderer>().material = Material[0];
+           
 
         }
         if (redIsActive)
@@ -155,10 +149,7 @@ public class ColorManager : MonoBehaviour
             Object16.GetComponent<Renderer>().material = Material[1];
             Object17.GetComponent<Renderer>().material = Material[1];
             Object18.GetComponent<Renderer>().material = Material[1];
-            Object19.GetComponent<Renderer>().material = Material[1];
-            Object20.GetComponent<Renderer>().material = Material[1];
-            Object21.GetComponent<Renderer>().material = Material[1];
-            Object22.GetComponent<Renderer>().material = Material[1];
+           
 
         }
         //if (blueIsActive)
@@ -182,10 +173,7 @@ public class ColorManager : MonoBehaviour
         //    Object16.GetComponent<Renderer>().material = Material[2];
         //    Object17.GetComponent<Renderer>().material = Material[2];
         //    Object18.GetComponent<Renderer>().material = Material[2];
-        //    Object19.GetComponent<Renderer>().material = Material[2];
-        //    Object20.GetComponent<Renderer>().material = Material[2];
-        //    Object21.GetComponent<Renderer>().material = Material[2];
-        //    Object22.GetComponent<Renderer>().material = Material[2];
+        
 
         //}
         //if (yellowIsActive)
@@ -209,10 +197,7 @@ public class ColorManager : MonoBehaviour
         //    Object16.GetComponent<Renderer>().material = Material[3];
         //    Object17.GetComponent<Renderer>().material = Material[3];
         //    Object18.GetComponent<Renderer>().material = Material[3];
-        //    Object19.GetComponent<Renderer>().material = Material[3];
-        //    Object20.GetComponent<Renderer>().material = Material[3];
-        //    Object21.GetComponent<Renderer>().material = Material[3];
-        //    Object22.GetComponent<Renderer>().material = Material[3];
+      
 
         //}
 
