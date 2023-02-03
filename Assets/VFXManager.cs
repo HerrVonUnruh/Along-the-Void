@@ -18,11 +18,11 @@ public class VFXManager : MonoBehaviour
 
     public void Green()
     {
-        if (colorVFXAnimator.greenIsActive)
+        if (colorVFXAnimator.greenIsActive && !speedVFXAnimator.isRedGrounded)
         {
             hasCoolDownRed = false;
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && hasCoolDownGreen == false)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && hasCoolDownGreen == false && !speedVFXAnimator.isRedGrounded)
         {
             StartCoroutine("WaitGreen");
         }
