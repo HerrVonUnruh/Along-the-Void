@@ -689,6 +689,8 @@ MonoBehaviour:
   dashingPower: 70
   dashingTime: 0.2
   dashingCooldown: 1
+  notGroundDash: 1
+  animator: {fileID: 0}
   rb: {fileID: 2177532152017982084}
   tr: {fileID: 2177532152017982082}
 --- !u!50 &2177532152017982084
@@ -731,20 +733,45 @@ MonoBehaviour:
   flipSteigerung: 10
   Direction: 0
   DirectionVertical: 0
-  redSize: {x: 0.1, y: 0.1, z: 1}
+  GroundCheckRadius: 0.2
+  ShroomCheckRadius: 0.2
+  RedGroundCheckRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  shroomLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  redgroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isRedGrounded: 0
+  isGrounded: 0
+  GroundCheckCollider: {fileID: 0}
+  isJumping: 0
+  ShroomCheckCollider: {fileID: 0}
+  RedGroundCheckCollider: {fileID: 0}
   killSpawn: {fileID: 0}
   isDead: 0
   waitAtSpawn: 2
-  material:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: -876546973899608171, guid: 2a25a1ad266a9644eb9f21c6931b697e, type: 3}
-  - {fileID: -876546973899608171, guid: 5e6e07cb6a3307549be46d9671a0b0b1, type: 3}
-  - {fileID: -876546973899608171, guid: 8e5816c14b7c26e4394a9a0551833288, type: 3}
   spawnPoint: {fileID: 0}
   onSpawn: 0
   isFacingRight: 1
   Player: {fileID: 2177532152017982084}
   animator: {fileID: 0}
+  OnJumpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGravityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  colorManager: {fileID: 0}
+  dash: {fileID: 0}
+  gravityVFX: {fileID: 0}
+  SprungGeschwindigkeit: 50
+  walkingSound: {fileID: 0}
+  anlaufSound: {fileID: 0}
+  pauseMenue: {fileID: 0}
 --- !u!96 &2177532152017982082
 TrailRenderer:
   serializedVersion: 3

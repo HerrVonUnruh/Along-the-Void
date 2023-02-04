@@ -313,4 +313,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193d5ad06e73e1d4babbfb03092d81c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounce: 60
+  Player: {fileID: 0}
+  Green: {fileID: 0}
+  greySprite: {fileID: 0}
+  greenSprite: {fileID: 0}
+  material: []
+  isGreenShining: 0
+  pauseMenue: {fileID: 0}
