@@ -7,6 +7,10 @@ TagManager:
   - Trigger
   - Ground
   - Star
+  - ColorDetector
+  - Teleporter
+  - NotColorSwitch
+  - TeleportCollision
   layers:
   - Default
   - TransparentFX
@@ -58,4 +62,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 2565774957
+    locked: 0
+  - name: HUD
+    uniqueID: 3011890113
     locked: 0

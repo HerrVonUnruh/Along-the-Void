@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     public ColorManager colorManager;
     public DashScript dash;
     public VFXManager gravityVFX;
+    public Surprise surprise;
 
     //[SerializeField] PauseMenue pauseMenue;
 
@@ -110,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-       
+
         if (pauseMenue.GameIsPaused)
         {
             return;
@@ -123,99 +124,7 @@ public class PlayerController : MonoBehaviour
         Direction = Input.GetAxis("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
         DirectionVertical = Input.GetAxis("Vertical");
 
-        if (Direction == 0f)
-        {
-            Geschwindigkeit = Geschwindigkeit - GeschwindigkeitsAbfall * Time.deltaTime;
-
-            if (Geschwindigkeit <= 20f)
-            { Geschwindigkeit = StandartGeschwindigkeit; }
-
-        }
-
-
-
-
-        if (Direction > 0f) // wenn die Richtung der gedrückten Tasten ( a oder d ) auf der Y Achse über 0 sind
-        {
-            Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
-            if (Geschwindigkeit < maxSpeed)
-            {
-                Geschwindigkeit += flipSteigerung * Time.deltaTime;
-
-
-                if (Geschwindigkeit > 20f && Geschwindigkeit < 21f && dash.isDashing == false && dash.canDash == true)
-                {
-                    anlaufSound.Play();
-                }
-            }
-        }
-
-        else if (Direction < 0f) // wenn die Richtung der gedrückten Tasten(a oder d ) auf der Y Achse unter 0 sind
-        {
-            Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
-            if (Geschwindigkeit < maxSpeed)
-            {
-                Geschwindigkeit += flipSteigerung * Time.deltaTime;
-
-              
-
-                if (Geschwindigkeit > 20f && Geschwindigkeit < 21f && dash.isDashing == false && dash.canDash == true)
-                {
-                    anlaufSound.Play();
-                }
-            }
-        }
-        else // "Andernfalls", also wenn gar keine Taste A oder D gedrückt wird, dann bedeutet das, dass auf der X Achse 0 Bewegung stattfindet!
-        {
-            Player.velocity = new Vector2(0, Player.velocity.y);
-        }
-
-
-
-
-        if (Input.GetKeyDown(KeyCode.S) && !isGrounded/* && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive */||
-            Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded/* && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive*/)
-        {
-            Player.gravityScale = 70f;
-            GravityControl = true;
-        }
-        if (Input.GetKeyUp(KeyCode.Joystick1Button4) || Input.GetKeyUp("s"))
-        {
-            Player.gravityScale = 7f;
-            GravityControl = false;
-        }
-        if (GravityControl == true)
-        {
-            animator.SetBool("IsGravityControl", true);
-            gravityVFX.Gravity();
-
-        }
-        if (isGrounded == true)
-        {
-            animator.SetBool("IsGravityControl", false);
-            gravityVFX.animator.SetBool("IsGravityControlVFX", false);
-        }
-
-        //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f ||
-        //    Input.GetKeyDown(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction > 0f)
-        //{
-
-        //    Player.gravityScale = 0f;
-        //    Player.velocity = new Vector2(yellowRocket, 0f);
-        //}
-        //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction < 0f ||
-        //    Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction < 0f)
-        //{
-        //    Player.gravityScale = 0f;
-        //    Player.velocity = new Vector2(-yellowRocket, 0f);
-        //}
-        //if ((Input.GetKeyUp(KeyCode.S) && isGrounded && colorManager.yellowIsActive ||
-        //    Input.GetKeyUp(KeyCode.Joystick1Button4) && isGrounded && colorManager.yellowIsActive)
-        //    || colorManager.blueIsActive || colorManager.redIsActive)
-        //{
-        //    Player.gravityScale = 7f;
-
-        //}
+        Movement();
 
 
 
@@ -240,7 +149,7 @@ public class PlayerController : MonoBehaviour
         Spawn();
         if (onSpawn == true)
         {
-            
+
             Geschwindigkeit = 0f;
             //dash.canDash = false;
         }
@@ -264,24 +173,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        animator.SetFloat("Speed", (Geschwindigkeit));
 
-
-        if (isGrounded)
-        {
-            animator.SetBool("IsGrounded", true);
-            animator.SetBool("IsJumping", false);
-        }
-        else
-        {
-            animator.SetBool("IsGrounded", false);
-        }
-
-
-        if (isJumping)
-        {
-            animator.SetBool("IsJumping", true);
-        }
     }
 
     public void FixedUpdate()
@@ -333,6 +225,124 @@ public class PlayerController : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    void Movement()
+    {
+
+        if (Direction == 0f)
+        {
+            Geschwindigkeit = Geschwindigkeit - GeschwindigkeitsAbfall * Time.deltaTime;
+
+            if (Geschwindigkeit <= 20f)
+            { Geschwindigkeit = StandartGeschwindigkeit; }
+
+        }
+
+
+
+
+        if (Direction > 0f) // wenn die Richtung der gedrückten Tasten ( a oder d ) auf der Y Achse über 0 sind
+        {
+            Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
+            if (Geschwindigkeit < maxSpeed)
+            {
+                Geschwindigkeit += flipSteigerung * Time.deltaTime;
+
+
+                if (Geschwindigkeit > 20f && Geschwindigkeit < 21f && dash.isDashing == false && dash.canDash == true)
+                {
+                    anlaufSound.Play();
+                }
+            }
+        }
+
+        else if (Direction < 0f) // wenn die Richtung der gedrückten Tasten(a oder d ) auf der Y Achse unter 0 sind
+        {
+            Player.velocity = new Vector2(Direction * Geschwindigkeit, Player.velocity.y);
+            if (Geschwindigkeit < maxSpeed)
+            {
+                Geschwindigkeit += flipSteigerung * Time.deltaTime;
+
+
+
+                if (Geschwindigkeit > 20f && Geschwindigkeit < 21f && dash.isDashing == false && dash.canDash == true)
+                {
+                    anlaufSound.Play();
+                }
+            }
+        }
+        else // "Andernfalls", also wenn gar keine Taste A oder D gedrückt wird, dann bedeutet das, dass auf der X Achse 0 Bewegung stattfindet!
+        {
+            Player.velocity = new Vector2(0, Player.velocity.y);
+        }
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.S) && !isGrounded/* && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive */||
+            Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded/* && !colorManager.blueIsActive && !colorManager.yellowIsActive && !colorManager.redIsActive*/)
+        {
+            Player.gravityScale = 70f;
+            GravityControl = true;
+        }
+        if (Input.GetKeyUp(KeyCode.Joystick1Button4) || Input.GetKeyUp("s"))
+        {
+            Player.gravityScale = 7f;
+            GravityControl = false;
+        }
+        if (GravityControl == true)
+        {
+            animator.SetBool("IsGravityControl", true);
+            gravityVFX.Gravity();
+
+        }
+        if (isGrounded == true)
+        {
+            animator.SetBool("IsGravityControl", false);
+            gravityVFX.animator.SetBool("IsGravityControlVFX", false);
+        }
+
+        animator.SetFloat("Speed", (Geschwindigkeit));
+
+
+        if (isGrounded)
+        {
+            animator.SetBool("IsGrounded", true);
+            animator.SetBool("IsJumping", false);
+        }
+        else
+        {
+            animator.SetBool("IsGrounded", false);
+        }
+
+
+        if (isJumping)
+        {
+            animator.SetBool("IsJumping", true);
+        }
+
+        //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f ||
+        //    Input.GetKeyDown(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction > 0f)
+        //{
+
+        //    Player.gravityScale = 0f;
+        //    Player.velocity = new Vector2(yellowRocket, 0f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction < 0f ||
+        //    Input.GetKey(KeyCode.Joystick1Button4) && !isGrounded && colorManager.yellowIsActive && Direction < 0f)
+        //{
+        //    Player.gravityScale = 0f;
+        //    Player.velocity = new Vector2(-yellowRocket, 0f);
+        //}
+        //if ((Input.GetKeyUp(KeyCode.S) && isGrounded && colorManager.yellowIsActive ||
+        //    Input.GetKeyUp(KeyCode.Joystick1Button4) && isGrounded && colorManager.yellowIsActive)
+        //    || colorManager.blueIsActive || colorManager.redIsActive)
+        //{
+        //    Player.gravityScale = 7f;
+
+        //}
+
     }
 
 

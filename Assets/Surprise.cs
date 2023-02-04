@@ -14,10 +14,12 @@ public class Surprise : MonoBehaviour
     public FairyHUDManager blueFairyHUDManager;
     public FairyHUDManager redFairyHUDManager;
     public FairyHUDManager greenFairyHUDManager;
-    public bool canMove = false;
+    public bool canMoveKeyboard = false;
+    public bool canMoveController = false;
     public GameObject[] cameraList;
     private int currentCamera;
     public PlayerController playerController;
+    public DashScript dashScript;
 
 
     void Start()
@@ -43,15 +45,18 @@ public class Surprise : MonoBehaviour
         Direction = Input.GetAxis("Fairy Horizontal");
         DirectionVertical = Input.GetAxis("Fairy Vertical");
         RightTrigger = Input.GetAxis("Right Trigger");
-        //RightStickButton = Input.GetAxis("Right Stick Button");
 
-        if (Input.GetAxis("Right Trigger") > 0f)
+
+        if (Input.GetAxis("Right Trigger") > 0f || Input.GetKeyDown("g"))
         {
             yellowFairyHUDManager.enabled = true;
             blueFairyHUDManager.enabled = true;
             redFairyHUDManager.enabled = true;
             greenFairyHUDManager.enabled = true;
-            canMove = false;
+            canMoveKeyboard = false;
+            canMoveController = false;
+            playerController.enabled = true;
+            dashScript.enabled = true;
             currentCamera++;
             if (currentCamera < cameraList.Length)
             {
@@ -109,15 +114,32 @@ public class Surprise : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Joystick1Button9))
             {
+                canMoveController = true;
+                canMoveKeyboard = false;
                 yellowFairyHUDManager.enabled = false;
                 blueFairyHUDManager.enabled = false;
                 redFairyHUDManager.enabled = false;
                 greenFairyHUDManager.enabled = false;
-                canMove = true;
-
-
+                playerController.enabled = false;
+                dashScript.enabled = false;
             }
-            if (canMove == true)
+
+            if (Input.GetKeyDown("f"))
+            {
+                canMoveKeyboard = true;
+                canMoveController = false;
+                yellowFairyHUDManager.enabled = false;
+                blueFairyHUDManager.enabled = false;
+                redFairyHUDManager.enabled = false;
+                greenFairyHUDManager.enabled = false;
+                playerController.enabled = false;
+                dashScript.enabled = false;
+            }
+
+
+
+
+            if (canMoveKeyboard == true || canMoveController == true)
             {
                 if (Direction > 0f)
                 {
@@ -153,8 +175,13 @@ public class Surprise : MonoBehaviour
                     Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
 
                 }
-                if (Input.GetAxis("Left Trigger") > 0f && canMove)
+                if (Direction == 0f && DirectionVertical == 0f)
                 {
+                    Fairy.velocity = new Vector2(0f, 0f);
+                }
+                if (Input.GetAxis("Left Trigger") > 0f && canMoveController && !canMoveKeyboard || Input.GetKey("q") && canMoveKeyboard && !canMoveController)
+                {
+                    Debug.Log("Jawohl");
                     currentCamera = 3;
                     cameraList[currentCamera - 3].gameObject.SetActive(false);
                     cameraList[currentCamera - 2].gameObject.SetActive(false);
@@ -164,8 +191,9 @@ public class Surprise : MonoBehaviour
                     cameraList[currentCamera].gameObject.SetActive(true);
                 }
             }
-            if ((Input.GetAxis("Left Trigger") < 1f && canMove))
+            if ((Input.GetAxis("Left Trigger") < 1f && canMoveController) && !canMoveKeyboard || !Input.GetKey("q") && canMoveKeyboard && !canMoveController)
             {
+                Debug.Log("YES");
                 currentCamera = 0;
                 cameraList[currentCamera + 1].gameObject.SetActive(false);
                 cameraList[currentCamera + 2].gameObject.SetActive(false);
@@ -179,7 +207,7 @@ public class Surprise : MonoBehaviour
 
         void MovementController()
         {
-            if (playerController.Geschwindigkeit > 20f && !canMove && playerController.Direction > 0f)
+            if (playerController.Geschwindigkeit > 20f && !canMoveController && playerController.Direction > 0f && !canMoveKeyboard)
             {
 
                 currentCamera = 2;
@@ -191,7 +219,7 @@ public class Surprise : MonoBehaviour
                 cameraList[currentCamera].gameObject.SetActive(true);
 
             }
-            if (playerController.Geschwindigkeit > 20f && !canMove && playerController.Direction < 0f)
+            if (playerController.Geschwindigkeit > 20f && !canMoveController && playerController.Direction < 0f && !canMoveKeyboard)
             {
                 currentCamera = 5;
                 cameraList[currentCamera - 5].gameObject.SetActive(false);
@@ -202,35 +230,33 @@ public class Surprise : MonoBehaviour
                 cameraList[currentCamera].gameObject.SetActive(true);
             }
 
-                if (playerController.Geschwindigkeit < 20f && !canMove)
-                {
-                    currentCamera = 1;
-                    cameraList[currentCamera + 4].gameObject.SetActive(false);
-                    cameraList[currentCamera + 3].gameObject.SetActive(false);
-                    cameraList[currentCamera + 2].gameObject.SetActive(false);
-                    cameraList[currentCamera + 1].gameObject.SetActive(false);
-                    cameraList[currentCamera - 1].gameObject.SetActive(false);
-                    cameraList[currentCamera].gameObject.SetActive(true);
+            if (playerController.Geschwindigkeit < 20f && !canMoveController && !canMoveKeyboard && playerController.isGrounded)
+            {
+                currentCamera = 1;
+                cameraList[currentCamera + 4].gameObject.SetActive(false);
+                cameraList[currentCamera + 3].gameObject.SetActive(false);
+                cameraList[currentCamera + 2].gameObject.SetActive(false);
+                cameraList[currentCamera + 1].gameObject.SetActive(false);
+                cameraList[currentCamera - 1].gameObject.SetActive(false);
+                cameraList[currentCamera].gameObject.SetActive(true);
 
-
-                }
 
             }
-            void FarCam()
+
+        }
+        void FarCam()
+        {
+            if (Input.GetAxis("Left Trigger") > 0f && !canMoveController && !canMoveKeyboard || Input.GetKey("q") && !canMoveController && !canMoveKeyboard || !playerController.isGrounded && playerController.Direction == 0f && dashScript.canDash == true)
             {
-                if (Input.GetAxis("Left Trigger") > 0f && !canMove)
-                {
-                    currentCamera = 4;
-                    cameraList[currentCamera - 4].gameObject.SetActive(false);
-                    cameraList[currentCamera - 3].gameObject.SetActive(false);
-                    cameraList[currentCamera - 2].gameObject.SetActive(false);
-                    cameraList[currentCamera - 1].gameObject.SetActive(false);
-                    cameraList[currentCamera + 1].gameObject.SetActive(false);
-                    cameraList[currentCamera].gameObject.SetActive(true);
-                }
+                currentCamera = 4;
+                cameraList[currentCamera - 4].gameObject.SetActive(false);
+                cameraList[currentCamera - 3].gameObject.SetActive(false);
+                cameraList[currentCamera - 2].gameObject.SetActive(false);
+                cameraList[currentCamera - 1].gameObject.SetActive(false);
+                cameraList[currentCamera + 1].gameObject.SetActive(false);
+                cameraList[currentCamera].gameObject.SetActive(true);
             }
         }
-
     }
 
-
+}
