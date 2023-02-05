@@ -9,8 +9,6 @@ public class GruenerSkill : MonoBehaviour
     private PolygonCollider2D GreenColliderSkill;
     private CapsuleCollider2D GreenCapsuleColliderSkill;
     private SpriteRenderer GreenSkill;
-    public Rigidbody2D Player;
-    public ColorManager Green;
     public Sprite greySprite;
     public Sprite greenSprite;
     public Material[] material;
@@ -24,8 +22,8 @@ public class GruenerSkill : MonoBehaviour
             isGreenShining = false;
         }
 
-        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
-            collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
+        if (collision.gameObject.tag == "ColorDetector" && !ColorManager.Instance.greenIsActive ||
+            collision.gameObject.tag == "ColorDetector" && ColorManager.Instance.greenIsActive)
         {
 
             isGreenShining = true;
@@ -37,24 +35,25 @@ public class GruenerSkill : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
-          collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
+        if (collision.gameObject.tag == "ColorDetector" && !ColorManager.Instance.greenIsActive ||
+          collision.gameObject.tag == "ColorDetector" && ColorManager.Instance.greenIsActive)
         {
 
             isGreenShining = false;
 
         }
     }
-
-
-
-    void Start()
+    private void Awake()
     {
         pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
         GreenSkill = GetComponent<SpriteRenderer>();
         GreenColliderSkill = GetComponent<PolygonCollider2D>();
         GreenCapsuleColliderSkill = GetComponent<CapsuleCollider2D>();
+      
     }
+
+
+ 
 
     void Update()
     {
@@ -63,14 +62,14 @@ public class GruenerSkill : MonoBehaviour
         {
             return;
         }
-        Green.Green();
-        Green.Red();
+        ColorManager.Instance.Green();
+        ColorManager.Instance.Red();
         //Green.Blue();
         //Green.Yellow();
 
 
 
-        if (Green.greenIsActive && isGreenShining)
+        if (ColorManager.Instance.greenIsActive && isGreenShining)
         {
             this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             if (GreenSkill != null)
@@ -87,7 +86,7 @@ public class GruenerSkill : MonoBehaviour
             }
         }
 
-        if (Green.greenIsActive && !isGreenShining)
+        if (ColorManager.Instance.greenIsActive && !isGreenShining)
         {
             this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             if (GreenSkill != null)
@@ -122,7 +121,7 @@ public class GruenerSkill : MonoBehaviour
                 GreenCapsuleColliderSkill.enabled = false;
             }
         }
-        if (!Green.greenIsActive && isGreenShining)
+        if (!ColorManager.Instance.greenIsActive && isGreenShining)
         {
             this.gameObject.GetComponent<SpriteRenderer>().material = material[0];
 

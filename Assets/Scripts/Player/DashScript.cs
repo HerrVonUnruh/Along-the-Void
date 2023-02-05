@@ -42,17 +42,18 @@ public class DashScript : MonoBehaviour
 
         }
     }
-    private IEnumerator Dash()
+
+
+
+    private IEnumerator DashDaniel(string animationName, Vector2 dashDirection)
     {
-        animator.SetTrigger("IsDashingAnimation");
+        animator.Play(animationName);
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         SoundManager.sndMan.PlayDashSound();
-        //rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        rb.AddForce(new Vector2(transform.localScale.x * dashingPower, 0f), ForceMode2D.Impulse);
-        //rb.AddForce(transform.right * dashingPower, ForceMode2D.Impulse);
+        rb.AddForce(dashDirection, ForceMode2D.Impulse);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
@@ -62,112 +63,6 @@ public class DashScript : MonoBehaviour
         canDash = true;
         notGroundDash = false;
     }
-
-    private IEnumerator DashVertical()
-    {
-
-        animator.SetTrigger("IsDashingVertical");
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        SoundManager.sndMan.PlayDashSound();
-        rb.AddForce(new Vector2(0f, transform.localScale.y * dashingPower), ForceMode2D.Impulse);
-        //rb.velocity = new Vector2(0f, transform.localScale.y * DashControll.Geschwindigkeit * 5f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-        notGroundDash = false;
-    }
-
-    private IEnumerator DashVerticalRechtsHoch()
-    {
-
-        animator.SetTrigger("IsDashingDiagonal");
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        SoundManager.sndMan.PlayDashSound();
-        rb.AddForce(new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * dashingPower), ForceMode2D.Impulse);
-        //rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-        notGroundDash = false;
-    }
-
-    private IEnumerator DashVerticalRechtsRunter()
-    {
-
-        animator.SetTrigger("IsDashingAnimation");
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        SoundManager.sndMan.PlayDashSound();
-        rb.AddForce(new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * -dashingPower), ForceMode2D.Impulse);
-        //rb.velocity = new Vector2(transform.localScale.x * DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-        notGroundDash = false;
-    }
-
-    private IEnumerator DashVerticalLinksHoch()
-    {
-
-        animator.SetTrigger("IsDashingDiagonal");
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        SoundManager.sndMan.PlayDashSound();
-        rb.AddForce(new Vector2(transform.localScale.x * -dashingPower, transform.localScale.y * dashingPower), ForceMode2D.Impulse);
-        //rb.velocity = new Vector2(transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * DashControll.Geschwindigkeit);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-        notGroundDash = false;
-    }
-
-    private IEnumerator DashVerticalLinksRunter()
-    {
-
-        animator.SetTrigger("IsDashing");
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        SoundManager.sndMan.PlayDashSound();
-        rb.AddForce(new Vector2(-transform.localScale.x * -dashingPower, transform.localScale.y * -dashingPower), ForceMode2D.Impulse);
-        //rb.velocity = new Vector2(-transform.localScale.x * -DashControll.Geschwindigkeit, transform.localScale.y * -DashControll.Geschwindigkeit);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-        notGroundDash = false;
-    }
-
 
     private void Update()
     {
@@ -186,36 +81,42 @@ public class DashScript : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction != 0f && DirectionVertical == 0f && notGroundDash || Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction != 0f && DirectionVertical == 0f && notGroundDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Direction != 0f && DirectionVertical == 0f && notGroundDash ||
+            Input.GetKeyDown(KeyCode.Joystick1Button5) && canDash && Direction != 0f && DirectionVertical == 0f && notGroundDash)
         {
             DashControll.Geschwindigkeit = DashControll.StandartGeschwindigkeit;
-            StartCoroutine(Dash());
+            StartCoroutine(DashDaniel("DashFbF", new Vector2(transform.localScale.x * dashingPower, 0f)));
         }
 
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction == 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction == 0f && notGroundDash/*|| Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction == 0f || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction == 0f*/)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction == 0f && notGroundDash ||
+            Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction == 0f && notGroundDash)
         {
-            StartCoroutine(DashVertical());
+            StartCoroutine(DashDaniel("DashFbFVertical", Vector2.up * dashingPower * 0.5f));
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction > 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction > 0f && notGroundDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction > 0f && notGroundDash ||
+            Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction > 0f && notGroundDash)
         {
-            StartCoroutine(DashVerticalRechtsHoch());
+            StartCoroutine(DashDaniel("DashFbFDiagonal", new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * dashingPower)));
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction > 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction > 0f && notGroundDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction > 0f && !notGroundDash ||
+            Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction > 0f && !notGroundDash)
         {
-            StartCoroutine(DashVerticalRechtsRunter());
+            StartCoroutine(DashDaniel("DashFbFDiagonalLeft", new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * -dashingPower)));
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction < 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction < 0f && notGroundDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical > 0f && Direction < 0f && notGroundDash ||
+            Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical > 0f && Direction < 0f && notGroundDash)
         {
-            StartCoroutine(DashVerticalLinksHoch());
+            StartCoroutine(DashDaniel("DashFbFDiagonalLeft", new Vector2(transform.localScale.x * -dashingPower, transform.localScale.y * dashingPower)));
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction < 0f && notGroundDash || Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction < 0f && notGroundDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && DirectionVertical < 0f && Direction < 0f && !notGroundDash ||
+            Input.GetKey(KeyCode.Joystick1Button5) && canDash && DirectionVertical < 0f && Direction < 0f && !notGroundDash)
         {
-            StartCoroutine(DashVerticalLinksRunter());
+            StartCoroutine(DashDaniel("DashFbFDiagonal", new Vector2(-transform.localScale.x * -dashingPower, transform.localScale.y * -dashingPower)));
         }
     }
 }

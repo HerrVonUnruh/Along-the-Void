@@ -5,7 +5,6 @@ using UnityEngine;
 public class VFXManager : MonoBehaviour
 {
     public Animator animator;
-    public ColorManager colorVFXAnimator;
     public PlayerController speedVFXAnimator;
     public DashScript dashVFXAnimator;
     public float waitTime = 0.5f;
@@ -16,9 +15,11 @@ public class VFXManager : MonoBehaviour
 
 
 
+
+
     public void Green()
     {
-        if (colorVFXAnimator.greenIsActive && !speedVFXAnimator.isRedGrounded)
+        if (ColorManager.Instance.greenIsActive && !speedVFXAnimator.isRedGrounded)
         {
             hasCoolDownRed = false;
         }
@@ -31,7 +32,7 @@ public class VFXManager : MonoBehaviour
 
     public void Red()
     {
-        if (colorVFXAnimator.redIsActive)
+        if (ColorManager.Instance.redIsActive)
         {
             hasCoolDownGreen = false;
         }

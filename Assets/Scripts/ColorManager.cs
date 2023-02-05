@@ -6,11 +6,13 @@ using UnityEngine.Events;
 
 public class ColorManager : MonoBehaviour
 {
+
+    private static ColorManager _instance;
+    public static ColorManager Instance { get => _instance; }
     [SerializeField] PauseMenue pauseMenue;
     public Material[] Material;
 
     public PlayerController Size;
-    public NotColorSwitch ncs;
     //public NotColourManager ncm;
 
     public bool greenIsActive = false;
@@ -40,6 +42,20 @@ public class ColorManager : MonoBehaviour
     public GameObject Object17;
     public GameObject Object18;
 
+
+
+    private void Awake()
+    {
+        if(_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
 
     void Start()
     {

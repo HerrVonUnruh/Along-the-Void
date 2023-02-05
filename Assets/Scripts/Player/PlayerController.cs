@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+       
         if (pauseMenue.GameIsPaused)
         {
             return;
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         Direction = Input.GetAxis("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
         DirectionVertical = Input.GetAxis("Vertical");
 
-
+        
         Movement();
 
 
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         Spawn();
         if (onSpawn == true)
         {
-
+            
             Geschwindigkeit = 0f;
             //dash.canDash = false;
         }
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-
+        
     }
 
     public void FixedUpdate()
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
 
-
+        
         if (Direction == 0f)
         {
             Geschwindigkeit = Geschwindigkeit - GeschwindigkeitsAbfall * Time.deltaTime;
@@ -344,7 +344,7 @@ public class PlayerController : MonoBehaviour
         //    Player.gravityScale = 7f;
 
         //}
-
+        
     }
 
 

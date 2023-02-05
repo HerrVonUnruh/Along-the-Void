@@ -20,6 +20,9 @@ public class Surprise : MonoBehaviour
     private int currentCamera;
     public PlayerController playerController;
     public DashScript dashScript;
+    [SerializeField] private Transform speedVFX;
+    Vector3 speedVFXSizeNormal;
+    [SerializeField] Vector3 increasedSpeedVFX;
 
 
     void Start()
@@ -34,6 +37,7 @@ public class Surprise : MonoBehaviour
         {
             cameraList[0].gameObject.SetActive(true);
         }
+        speedVFXSizeNormal = speedVFX.localScale;
 
     }
 
@@ -61,7 +65,6 @@ public class Surprise : MonoBehaviour
 
 
 
-        //Flip();
         Direction = Input.GetAxis("Fairy Horizontal");
         DirectionVertical = Input.GetAxis("Fairy Vertical");
         RightTrigger = Input.GetAxis("Right Trigger");
@@ -90,45 +93,6 @@ public class Surprise : MonoBehaviour
         FarCam();
 
         Movement();
-        //    if (Direction > 0f)
-        //    {
-        //        yellowFairyHUDManager.enabled = false;
-        //        blueFairyHUDManager.enabled = false;
-        //        redFairyHUDManager.enabled = false;
-        //        greenFairyHUDManager.enabled = false;
-        //        Fairy.velocity = new Vector2(Direction * Geschwindigkeit, Fairy.velocity.y);
-        //    }
-
-
-        //    if (Direction < 0f)
-        //    {
-        //        yellowFairyHUDManager.enabled = false;
-        //        blueFairyHUDManager.enabled = false;
-        //        redFairyHUDManager.enabled = false;
-        //        greenFairyHUDManager.enabled = false;
-        //        Fairy.velocity = new Vector2(Direction * Geschwindigkeit, Fairy.velocity.y);
-
-        //    }
-        //    if (DirectionVertical > 0f)
-        //    {
-        //        yellowFairyHUDManager.enabled = false;
-        //        blueFairyHUDManager.enabled = false;
-        //        redFairyHUDManager.enabled = false;
-        //        greenFairyHUDManager.enabled = false;
-        //        Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
-        //    }
-
-
-        //    if (DirectionVertical < 0f)
-        //    {
-        //        yellowFairyHUDManager.enabled = false;
-        //        blueFairyHUDManager.enabled = false;
-        //        redFairyHUDManager.enabled = false;
-        //        greenFairyHUDManager.enabled = false;
-        //        Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
-
-        //    }
-        //}
 
         void Movement()
         {
@@ -169,29 +133,20 @@ public class Surprise : MonoBehaviour
 
                 if (Direction < 0f)
                 {
-                    //yellowFairyHUDManager.enabled = false;
-                    //blueFairyHUDManager.enabled = false;
-                    //redFairyHUDManager.enabled = false;
-                    //greenFairyHUDManager.enabled = false;
+                  
                     Fairy.velocity = new Vector2(Direction * Geschwindigkeit, Fairy.velocity.y);
 
                 }
                 if (DirectionVertical > 0f)
                 {
-                    //yellowFairyHUDManager.enabled = false;
-                    //blueFairyHUDManager.enabled = false;
-                    //redFairyHUDManager.enabled = false;
-                    //greenFairyHUDManager.enabled = false;
+               
                     Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
                 }
 
 
                 if (DirectionVertical < 0f)
                 {
-                    //yellowFairyHUDManager.enabled = false;
-                    //blueFairyHUDManager.enabled = false;
-                    //redFairyHUDManager.enabled = false;
-                    //greenFairyHUDManager.enabled = false;
+    
                     Fairy.velocity = new Vector2(Fairy.velocity.x, -DirectionVertical * Geschwindigkeit);
 
                 }
@@ -202,6 +157,7 @@ public class Surprise : MonoBehaviour
                 if (Input.GetAxis("Left Trigger") > 0f && canMoveController && !canMoveKeyboard || Input.GetKey("q") && canMoveKeyboard && !canMoveController)
                 {
                     Debug.Log("Jawohl");
+                    speedVFX.localScale = speedVFXSizeNormal;
                     currentCamera = 3;
                     cameraList[currentCamera - 3].gameObject.SetActive(false);
                     cameraList[currentCamera - 2].gameObject.SetActive(false);
@@ -214,6 +170,7 @@ public class Surprise : MonoBehaviour
             if ((Input.GetAxis("Left Trigger") < 1f && canMoveController) && !canMoveKeyboard || !Input.GetKey("q") && canMoveKeyboard && !canMoveController)
             {
                 Debug.Log("YES");
+                speedVFX.localScale = speedVFXSizeNormal;
                 currentCamera = 0;
                 cameraList[currentCamera + 1].gameObject.SetActive(false);
                 cameraList[currentCamera + 2].gameObject.SetActive(false);
@@ -229,7 +186,7 @@ public class Surprise : MonoBehaviour
         {
             if (playerController.Geschwindigkeit > 20f && !canMoveController && playerController.Direction > 0f && !canMoveKeyboard)
             {
-
+                speedVFX.localScale = speedVFXSizeNormal;
                 currentCamera = 2;
                 cameraList[currentCamera + 3].gameObject.SetActive(false);
                 cameraList[currentCamera + 2].gameObject.SetActive(false);
@@ -241,6 +198,8 @@ public class Surprise : MonoBehaviour
             }
             if (playerController.Geschwindigkeit > 20f && !canMoveController && playerController.Direction < 0f && !canMoveKeyboard)
             {
+
+                speedVFX.localScale = speedVFXSizeNormal;
                 currentCamera = 5;
                 cameraList[currentCamera - 5].gameObject.SetActive(false);
                 cameraList[currentCamera - 4].gameObject.SetActive(false);
@@ -252,6 +211,7 @@ public class Surprise : MonoBehaviour
 
             if (playerController.Geschwindigkeit < 20f && !canMoveController && !canMoveKeyboard && playerController.isGrounded)
             {
+                speedVFX.localScale = speedVFXSizeNormal;
                 currentCamera = 1;
                 cameraList[currentCamera + 4].gameObject.SetActive(false);
                 cameraList[currentCamera + 3].gameObject.SetActive(false);
@@ -268,6 +228,7 @@ public class Surprise : MonoBehaviour
         {
             if (Input.GetAxis("Left Trigger") > 0f && !canMoveController && !canMoveKeyboard || Input.GetKey("q") && !canMoveController && !canMoveKeyboard || !playerController.isGrounded && playerController.Direction == 0f && dashScript.canDash == true)
             {
+                speedVFX.localScale = increasedSpeedVFX;
                 currentCamera = 4;
                 cameraList[currentCamera - 4].gameObject.SetActive(false);
                 cameraList[currentCamera - 3].gameObject.SetActive(false);
