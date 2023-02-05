@@ -7,14 +7,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] StarText starText;
-    [SerializeField] TextMeshProUGUI timer;
+    //public TextMeshProUGUI timer;
     [SerializeField] TextMeshProUGUI highScoreText;
-    int starCount;
+    public int starCount;
 
 
 
 
-   
+
 
     private void OnEnable()
     {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-      //  UpdateHighScoreText();
+        //  UpdateHighScoreText();
     }
 
     void HandleStarPickup()
