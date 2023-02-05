@@ -22,7 +22,8 @@ public class VFXManager : MonoBehaviour
         {
             hasCoolDownRed = false;
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && hasCoolDownGreen == false && !speedVFXAnimator.isRedGrounded)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && hasCoolDownGreen == false && !speedVFXAnimator.isRedGrounded ||
+            Input.GetKeyDown(KeyCode.DownArrow) && hasCoolDownGreen == false && !speedVFXAnimator.isRedGrounded)
         {
             StartCoroutine("WaitGreen");
         }
@@ -34,7 +35,8 @@ public class VFXManager : MonoBehaviour
         {
             hasCoolDownGreen = false;
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && hasCoolDownRed == false)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && hasCoolDownRed == false ||
+            Input.GetKeyDown(KeyCode.RightArrow) && hasCoolDownRed == false)
         {
             StartCoroutine("WaitRed");
         }

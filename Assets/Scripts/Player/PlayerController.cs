@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Joystick1Button4) || Input.GetKeyUp("s"))
         {
-            Player.gravityScale = 7f;
+            Player.gravityScale = 12f;
             GravityControl = false;
         }
         if (GravityControl == true)

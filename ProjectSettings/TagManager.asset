@@ -60,6 +60,9 @@ TagManager:
   - name: Level
     uniqueID: 813942151
     locked: 0
+  - name: Characters
+    uniqueID: 567050389
+    locked: 0
   - name: Foreground
     uniqueID: 2565774957
     locked: 0

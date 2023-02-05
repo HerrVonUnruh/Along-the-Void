@@ -39,18 +39,19 @@ public class ColorManager : MonoBehaviour
     public GameObject Object16;
     public GameObject Object17;
     public GameObject Object18;
-  
+
 
     void Start()
     {
         pauseMenue = GameObject.FindObjectOfType<PauseMenue>();
-        greenIsActive = true;      
+        greenIsActive = true;
 
 
     }
     public void Green()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded /*&& !ncm.ncsIsTrue*/ || Input.GetKey("j") && !Size.isRedGrounded/* && !ncm.ncsIsTrue*/)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded /*&& !ncm.ncsIsTrue*/ ||
+            Input.GetKey(KeyCode.DownArrow) && !Size.isRedGrounded/* && !ncm.ncsIsTrue*/)
         {
             redIsActive = false;
             //blueIsActive = false;
@@ -60,7 +61,8 @@ public class ColorManager : MonoBehaviour
     }
     public void Red()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1)/* && !ncm.ncsIsTrue */|| Input.GetKey("k")/* && !ncm.ncsIsTrue*/)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1)/* && !ncm.ncsIsTrue */||
+            Input.GetKey(KeyCode.RightArrow)/* && !ncm.ncsIsTrue*/)
         {
             greenIsActive = false;
             //blueIsActive = false;
@@ -125,7 +127,7 @@ public class ColorManager : MonoBehaviour
             Object16.GetComponent<Renderer>().material = Material[0];
             Object17.GetComponent<Renderer>().material = Material[0];
             Object18.GetComponent<Renderer>().material = Material[0];
-           
+
 
         }
         if (redIsActive)
@@ -149,7 +151,7 @@ public class ColorManager : MonoBehaviour
             Object16.GetComponent<Renderer>().material = Material[1];
             Object17.GetComponent<Renderer>().material = Material[1];
             Object18.GetComponent<Renderer>().material = Material[1];
-           
+
 
         }
         //if (blueIsActive)
@@ -173,7 +175,7 @@ public class ColorManager : MonoBehaviour
         //    Object16.GetComponent<Renderer>().material = Material[2];
         //    Object17.GetComponent<Renderer>().material = Material[2];
         //    Object18.GetComponent<Renderer>().material = Material[2];
-        
+
 
         //}
         //if (yellowIsActive)
@@ -197,7 +199,7 @@ public class ColorManager : MonoBehaviour
         //    Object16.GetComponent<Renderer>().material = Material[3];
         //    Object17.GetComponent<Renderer>().material = Material[3];
         //    Object18.GetComponent<Renderer>().material = Material[3];
-      
+
 
         //}
 
