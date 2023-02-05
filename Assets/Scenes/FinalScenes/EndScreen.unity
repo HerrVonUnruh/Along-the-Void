@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'Time:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: daf0817ee9da1d1468d791e04401e7e4, type: 2}
   m_sharedMaterial: {fileID: 1421559758659803533, guid: daf0817ee9da1d1468d791e04401e7e4, type: 2}
@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'Stars:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: daf0817ee9da1d1468d791e04401e7e4, type: 2}
   m_sharedMaterial: {fileID: 1421559758659803533, guid: daf0817ee9da1d1468d791e04401e7e4, type: 2}
