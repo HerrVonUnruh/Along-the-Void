@@ -41,6 +41,26 @@ public class Surprise : MonoBehaviour
     void Update()
     {
 
+        if (canMoveController && playerController.isGrounded || canMoveKeyboard && playerController.isGrounded)
+        {
+            playerController.Player.velocity = new Vector2(playerController.Player.velocity.x * 0.0001f, playerController.Player.velocity.y * 0.0001f);
+
+            playerController.Player.constraints = RigidbodyConstraints2D.FreezeAll;
+
+
+
+
+
+
+        }
+        else
+        {
+            playerController.Player.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+
+
+
         //Flip();
         Direction = Input.GetAxis("Fairy Horizontal");
         DirectionVertical = Input.GetAxis("Fairy Vertical");

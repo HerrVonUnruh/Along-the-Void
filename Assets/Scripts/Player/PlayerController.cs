@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour
         Direction = Input.GetAxis("Horizontal"); // schaltet den Unity Bezug der Tasteneingaben zu "Horizontal" Voreinstellung von Unity frei
         DirectionVertical = Input.GetAxis("Vertical");
 
+
         Movement();
 
 
@@ -230,6 +231,7 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
 
+
         if (Direction == 0f)
         {
             Geschwindigkeit = Geschwindigkeit - GeschwindigkeitsAbfall * Time.deltaTime;
@@ -288,7 +290,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Joystick1Button4) || Input.GetKeyUp("s"))
         {
-            Player.gravityScale = 12f;
+            Player.gravityScale = 7f;
             GravityControl = false;
         }
         if (GravityControl == true)

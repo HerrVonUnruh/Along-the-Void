@@ -67,7 +67,6 @@ public class DashScript : MonoBehaviour
     {
 
         animator.SetTrigger("IsDashingVertical");
-        rb.position = new Vector2(rb.position.x, rb.position.y + 5f);
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
