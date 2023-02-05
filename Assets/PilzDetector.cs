@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class PilzDetector : MonoBehaviour
 {
-    public ColorManager Green;
+    
     public bool isGreenShining;
     [SerializeField] PauseMenue pauseMenue;
+
+
+
 
 
     private void OnTriggerStay2D(Collider2D collision)
     {
 
 
-        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive && Green.redIsActive ||
-            collision.gameObject.tag == "ColorDetector" && Green.greenIsActive && !Green.redIsActive)
+        if (collision.gameObject.tag == "ColorDetector" && !ColorManager.Instance.greenIsActive && ColorManager.Instance.redIsActive ||
+            collision.gameObject.tag == "ColorDetector" && ColorManager.Instance.greenIsActive && !ColorManager.Instance.redIsActive)
         {
 
             isGreenShining = true;
@@ -24,8 +27,8 @@ public class PilzDetector : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "ColorDetector" && !Green.greenIsActive ||
-          collision.gameObject.tag == "ColorDetector" && Green.greenIsActive)
+        if (collision.gameObject.tag == "ColorDetector" && !ColorManager.Instance.greenIsActive ||
+          collision.gameObject.tag == "ColorDetector" && ColorManager.Instance.greenIsActive)
 
         {
             isGreenShining = false;
@@ -45,8 +48,8 @@ public class PilzDetector : MonoBehaviour
         {
             return;
         }
-        Green.Green();
-        Green.Red();
+        ColorManager.Instance.Green();
+        ColorManager.Instance.Red();
         //Green.Blue();
         //Green.Yellow();
     }

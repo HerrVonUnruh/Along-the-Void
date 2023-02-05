@@ -14,7 +14,6 @@ public class RoterSkill : MonoBehaviour
     public Sprite greySprite;
     public Sprite redSprite;
     public bool isRedShining;
-    public ColorManager Red;
     public Material[] material;
     [SerializeField] PauseMenue pauseMenue;
 
@@ -38,16 +37,16 @@ public class RoterSkill : MonoBehaviour
             return;
         }
 
-        Red.Green();
+        ColorManager.Instance.Green();
         //Red.Blue();
         //Red.Yellow();
-        Red.Red();
+        ColorManager.Instance.Red();
 
 
 
 
 
-        if (Red.redIsActive && isRedShining)
+        if (ColorManager.Instance.redIsActive && isRedShining)
         {
             this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             if (REDSkill != null)
@@ -71,7 +70,7 @@ public class RoterSkill : MonoBehaviour
 
         }
 
-        if (Red.redIsActive && !isRedShining)
+        if (ColorManager.Instance.redIsActive && !isRedShining)
         {
             this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             if (REDSkill != null)
@@ -97,7 +96,7 @@ public class RoterSkill : MonoBehaviour
                 this.gameObject.GetComponent<SpriteRenderer>().material = material[1];
             }
         }
-        if (!Red.redIsActive && isRedShining)
+        if (!ColorManager.Instance.redIsActive && isRedShining)
         {
             this.gameObject.GetComponent<SpriteRenderer>().material = material[0];
             this.gameObject.GetComponent<SpriteRenderer>().sprite = greySprite;
@@ -138,8 +137,8 @@ public class RoterSkill : MonoBehaviour
         {
             isRedShining = false;
         }
-        if (collision.gameObject.tag == "ColorDetector" && !Red.redIsActive ||
-            collision.gameObject.tag == "ColorDetector" && Red.redIsActive)
+        if (collision.gameObject.tag == "ColorDetector" && !ColorManager.Instance.redIsActive ||
+            collision.gameObject.tag == "ColorDetector" && ColorManager.Instance.redIsActive)
         {
 
             isRedShining = true;
@@ -149,8 +148,8 @@ public class RoterSkill : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "ColorDetector" && !Red.redIsActive ||
-            collision.gameObject.tag == "ColorDetector" && Red.redIsActive)
+        if (collision.gameObject.tag == "ColorDetector" && !ColorManager.Instance.redIsActive ||
+            collision.gameObject.tag == "ColorDetector" && ColorManager.Instance.redIsActive)
         {
 
             isRedShining = false;
