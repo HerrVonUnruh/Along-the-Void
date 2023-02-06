@@ -24,6 +24,6 @@ public class Checkpoint : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         CheckpointIsActive = true;
-        animator.SetBool("CheckpointIsActiveAnimation", false);
+        animator.Play("SafePointIdleFBF");
     }
 }
