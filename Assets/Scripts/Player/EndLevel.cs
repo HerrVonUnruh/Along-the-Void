@@ -13,7 +13,7 @@ public class EndLevel : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player") && timer.timeValue < 600f)
+        if (collision.transform.CompareTag("Player") && timer.timeValue < 420f)
         {
             StateName.stars = gameManager.starCount.ToString();
             StateName.difficulty = timer.timeValue.ToString();
@@ -21,7 +21,7 @@ public class EndLevel : MonoBehaviour
             SceneManager.LoadScene("EndScreen");
         }
 
-        if (collision.transform.CompareTag("Player") && timer.timeValue >= 600f)
+        if (collision.transform.CompareTag("Player") && timer.timeValue >= 420f)
         {
             SceneManager.LoadScene("GameOver");
         }

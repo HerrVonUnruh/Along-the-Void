@@ -8,11 +8,21 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager sndMan;
 
-    private AudioSource audioSrc;
+    public AudioSource audioSrc;
+
+    public AudioSource audioSrc2;
 
     private AudioClip[] dashSounds;
 
     private int randomDashSound;
+
+    private AudioClip[] dashDashSounds;
+
+    private int randomDashDashSound;
+
+    private AudioClip[] shroomSounds;
+
+    private int randomShroomSound;
 
     private AudioClip[] sprungSounds;
 
@@ -33,12 +43,15 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         sndMan = this;
-        audioSrc = GetComponent<AudioSource>();
+        //audioSrc = GetComponent<AudioSource>();
+        //audioSrc2 = GetComponent<AudioSource>();
         dashSounds = Resources.LoadAll<AudioClip>("DashSounds");
+        dashDashSounds = Resources.LoadAll<AudioClip>("DashDashSounds");
         sprungSounds = Resources.LoadAll<AudioClip>("SprungSounds");
         deathSounds = Resources.LoadAll<AudioClip>("DeathSounds");
         respawnSounds = Resources.LoadAll<AudioClip>("SpawnSounds");
         collectedSounds = Resources.LoadAll<AudioClip>("CollectingSounds");
+        shroomSounds = Resources.LoadAll<AudioClip>("ShroomSounds");
     }
 
     public void PlayDashSound()
@@ -65,5 +78,15 @@ public class SoundManager : MonoBehaviour
     {
         randomCollectedSound = Random.Range(0, 7);
         audioSrc.PlayOneShot(collectedSounds[randomCollectedSound]);
+    }
+    public void PlayShroomSound()
+    {
+        randomShroomSound = Random.Range(0, 2);
+        audioSrc2.PlayOneShot(shroomSounds[randomShroomSound]);
+    }
+    public void PlayDashDashSound()
+    {
+        randomDashDashSound = Random.Range(0, 2);
+        audioSrc2.PlayOneShot(dashDashSounds[randomDashDashSound]);
     }
 }

@@ -53,6 +53,7 @@ public class DashScript : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         SoundManager.sndMan.PlayDashSound();
+        SoundManager.sndMan.PlayDashDashSound();
         rb.AddForce(dashDirection, ForceMode2D.Impulse);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);

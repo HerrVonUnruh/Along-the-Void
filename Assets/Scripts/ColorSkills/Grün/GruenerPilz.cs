@@ -50,6 +50,7 @@ public class GruenerPilz : MonoBehaviour
         {
             SoundManager.sndMan.PlaySprungSound();
             animator.SetBool("PlayerIsJumping", false);
+            SoundManager.sndMan.PlayShroomSound();
         }
     }
 
