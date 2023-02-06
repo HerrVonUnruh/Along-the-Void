@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour
 
         if (isJumping)
         {
-            animator.SetBool("IsJumping", true);
+            animator.Play("jump");
         }
 
         //if (Input.GetKeyDown(KeyCode.S) && !isGrounded && colorManager.yellowIsActive && Direction > 0f ||
@@ -351,7 +351,7 @@ public class PlayerController : MonoBehaviour
     public void Spawn()
     { //SPAWN mit eigener Tastenbelegung
         //______________________________________________________       
-        if (Input.GetKeyUp(KeyCode.P) || Input.GetKeyDown(KeyCode.Joystick1Button6))
+        if (Input.GetKeyUp(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button6))
         {
             StartCoroutine(SpawnPause());
             Debug.Log("Test1");
