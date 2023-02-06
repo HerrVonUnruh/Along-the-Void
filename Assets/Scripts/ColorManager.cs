@@ -46,7 +46,7 @@ public class ColorManager : MonoBehaviour
 
     private void Awake()
     {
-        if(_instance != null && _instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -69,6 +69,7 @@ public class ColorManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !Size.isRedGrounded /*&& !ncm.ncsIsTrue*/ ||
             Input.GetKey(KeyCode.DownArrow) && !Size.isRedGrounded/* && !ncm.ncsIsTrue*/)
         {
+            SoundManager.sndMan.PlayColorSound();
             redIsActive = false;
             //blueIsActive = false;
             //yellowIsActive = false;
@@ -80,6 +81,7 @@ public class ColorManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1)/* && !ncm.ncsIsTrue */||
             Input.GetKey(KeyCode.RightArrow)/* && !ncm.ncsIsTrue*/)
         {
+            SoundManager.sndMan.PlayColorSound();
             greenIsActive = false;
             //blueIsActive = false;
             //yellowIsActive = false;

@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
     private AudioClip[] sprungSounds;
 
     private int randomSprungSound;
-    
+
     private AudioClip[] deathSounds;
 
     private int randomDeathSound;
@@ -39,6 +39,10 @@ public class SoundManager : MonoBehaviour
     private AudioClip[] collectedSounds;
 
     private int randomCollectedSound;
+
+    private AudioClip[] colorSounds;
+
+    private int randomColorSound;
 
     void Start()
     {
@@ -52,6 +56,7 @@ public class SoundManager : MonoBehaviour
         respawnSounds = Resources.LoadAll<AudioClip>("SpawnSounds");
         collectedSounds = Resources.LoadAll<AudioClip>("CollectingSounds");
         shroomSounds = Resources.LoadAll<AudioClip>("ShroomSounds");
+        colorSounds = Resources.LoadAll<AudioClip>("ColorSounds");
     }
 
     public void PlayDashSound()
@@ -71,7 +76,7 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayRespawnSound()
     {
-        randomRespawnSound = Random.Range(0,0);
+        randomRespawnSound = Random.Range(0, 0);
         audioSrc.PlayOneShot(respawnSounds[randomRespawnSound]);
     }
     public void PlayCollectedSound()
@@ -88,5 +93,11 @@ public class SoundManager : MonoBehaviour
     {
         randomDashDashSound = Random.Range(0, 2);
         audioSrc2.PlayOneShot(dashDashSounds[randomDashDashSound]);
+    }
+
+    public void PlayColorSound()
+    {
+        randomColorSound = Random.Range(0, 1);
+        audioSrc2.PlayOneShot(colorSounds[randomColorSound]);
     }
 }
